@@ -20,8 +20,9 @@
                     </div>
                 </div>
                 <a href="index.html" class="logo-area">
-                    <div class="logo-img">🎾</div>
-                    <span>TK Slatina</span>
+                   <!--     <div class="logo-img">🎾</div>-->
+					 <img src="Slike/logo.png" alt="TK Slatina Logo" class="logo-img">
+			     <span>TK Slatina</span>
                 </a>
             </div>
         </div>
@@ -36,45 +37,22 @@
                 <select id="odabirKola" class="tournament-select" onchange="ucitajPodatkeIzDatoteke()">
                     <option value="kolo1">1. Kolo</option>
                     <option value="kolo2">2. Kolo</option>
+                    <option value="kolo3">3. Kolo</option>
                 </select>
             </div>
             
             <p style="margin-bottom: 30px;">Odaberite željeno kolo iz izbornika kako biste vidjeli raspored igrača i rezultate odigranih mečeva.</p>
 
- <!-- TABLICA 1: RASPORED -->
-            <div>
-                <h3 style="color: #2c3e50;">📋 Raspored igrača</h3>
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Poz.</th>
-                                <th>Igrač</th>
-                                <th>Red</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tablicaRasporeda"></tbody>
-                    </table>
-                </div>
-            </div>
+<!-- Tablica za raspored -->
+<table>
+    <tbody id="tablicaRasporeda"></tbody>
+</table>
+
 <!-- Tablica za rezultate -->
- <div>
-                <h3 style="color: #2c3e50;">🏆 Rezultati mečeva</h3>
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Igrač 1</th>
-                                <th>Igrač 2</th>
-                                <th>Rezultat</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tablicaRezultata"></tbody>
-                    </table>
+<table>
+    <tbody id="tablicaRezultata"></tbody>
+</table>
                 </div>
-            </div>                </div>
             </div>
         </section>
     </main>
