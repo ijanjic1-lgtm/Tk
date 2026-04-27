@@ -71,8 +71,8 @@
     {
       "igrac1": "Tomljanović Ivan",
       "igrac2": "Roštaš Hrvoje",
-      "rezultat": "",
-      "status": ""
+      "rezultat": "3:6 6:2 5:10",
+      "status": "Završeno"
     },
     {
       "igrac1": "Karl Vlatko",
@@ -113,20 +113,20 @@
     {
       "igrac1": "Kolarić Miran",
       "igrac2": "Manceta Igor",
-      "rezultat": "",
-      "status": ""
+      "rezultat": "BB - pobjeda Kolarić Miran",
+      "status": "Završeno"
     },
     {
       "igrac1": "Jambrešić David",
       "igrac2": "Vujić Antun",
-      "rezultat": "",
-      "status": ""
+      "rezultat": "BB - pobjeda Jambrešić David",
+      "status": "Završeno"
     },
     {
       "igrac1": "Hetrih Josip",
       "igrac2": "Medved Daniel",
-      "rezultat": "",
-      "status": ""
+      "rezultat": "6:1 6:2",
+      "status": "Završeno"
     },
     {
       "igrac1": "Cerovski Dalibor",
@@ -167,8 +167,8 @@
     {
       "igrac1": "Drokan Ivan",
       "igrac2": "Hranić Milan",
-      "rezultat": "",
-      "status": ""
+      "rezultat": "6:4 3:6 7:5",
+      "status": "Završeno"
     }
 ]
 }
