@@ -1,0 +1,9 @@
+{
+  "raspored": [
+    { "pozicija": 1, "igrac": "Ivan Ivić", "red": "1" },
+    { "pozicija": 2, "igrac": "Pero Perić", "red": "2" }
+  ],
+  "rezultati": [
+    { "igrac1": "Ivan Ivić", "igrac2": "Marko Marić", "rezultat": "6:2, 6:4", "status": "Završeno" }
+  ]
+}
