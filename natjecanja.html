@@ -36,7 +36,6 @@
                 <select id="odabirKola" class="tournament-select" onchange="ucitajPodatkeIzDatoteke()">
                     <option value="kolo1">1. Kolo</option>
                     <option value="kolo2">2. Kolo</option>
-                    <option value="kolo3">3. Kolo</option>
                 </select>
             </div>
             
@@ -48,10 +47,23 @@
 </table>
 
 <!-- Tablica za rezultate -->
-<table>
-    <tbody id="tablicaRezultata"></tbody>
-</table>
+ <div>
+                <h3 style="color: #2c3e50;">🏆 Rezultati mečeva</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Igrač 1</th>
+                                <th>Igrač 2</th>
+                                <th>Rezultat</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablicaRezultata"></tbody>
+                    </table>
                 </div>
+            </div>                </div>
             </div>
         </section>
     </main>
