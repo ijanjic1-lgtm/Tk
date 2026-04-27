@@ -1,9 +1,135 @@
 {
-  "raspored": [
-    { "pozicija": 1, "igrac": "Ivan Ivić", "red": "1" },
-    { "pozicija": 2, "igrac": "Pero Perić", "red": "2" }
+	"raspored": [
+    { "pozicija": 1, "igrac": "Ivan Horvat", "red": "1. Red" },
+    { "pozicija": 2, "igrac": "Marko Kovačić", "red": "1. Red" },
+    { "pozicija": 3, "igrac": "Luka Marić", "red": "2. Red" }
   ],
-  "rezultati": [
-    { "igrac1": "Ivan Ivić", "igrac2": "Marko Marić", "rezultat": "6:2, 6:4", "status": "Završeno" }
-  ]
+    "rezultati": [
+	{
+      "igrac1": "Ostojić Dragan ",
+      "igrac2": "Vurdelja Denis",
+      "rezultat": "4:6 2:6",
+      "status": "Završeno"
+    },
+    {
+      "igrac1": "Ostojić Bojan ",
+      "igrac2": "Petrak Kristijan",
+      "rezultat": "4:6 6:4 10:6",
+      "status": "Završeno"
+    },
+    {
+      "igrac1": "Janjić Ivan",
+      "igrac2": "Samir Klement",
+      "rezultat": "2:6 6:3 7:10",
+      "status": "Završeno"
+    },
+    {
+      "igrac1": "Kelava Lolić Božidar",
+      "igrac2": "Vida Mario",
+      "rezultat": "",
+      "status": ""
+    },
+    {
+      "igrac1": "Tomljanović Ivan",
+      "igrac2": "Roštaš Hrvoje",
+      "rezultat": "",
+      "status": ""
+    },
+    {
+      "igrac1": "Karl Vlatko",
+      "igrac2": "Oskomić Zvonko",
+      "rezultat": "6:3 6:4",
+      "status": "Završeno"
+    },
+    {
+      "igrac1": "Vučeta Mario",
+      "igrac2": "Cvjetković Miloš",
+      "rezultat": "",
+      "status": ""
+    },
+    {
+      "igrac1": "Ostojić Milan",
+      "igrac2": "Ćurić Borna",
+      "rezultat": "2:6 1:6",
+      "status": "Završeno"
+    },
+    {
+      "igrac1": "Dunković Igor",
+      "igrac2": "Mikić Mario",
+      "rezultat": "BB",
+      "status": "Završeno"
+    },
+    {
+      "igrac1": "Telišman Marko",
+      "igrac2": "Pavlinić Denis",
+      "rezultat": "",
+      "status": ""
+    },
+    {
+      "igrac1": "Majačić Mario",
+      "igrac2": "Makar Marijan",
+      "rezultat": "",
+      "status": ""
+    },
+    {
+      "igrac1": "Kolarić Miran",
+      "igrac2": "Manceta Igor",
+      "rezultat": "",
+      "status": ""
+    },
+    {
+      "igrac1": "Jambrešić David",
+      "igrac2": "Vujić Antun",
+      "rezultat": "",
+      "status": ""
+    },
+    {
+      "igrac1": "Hetrih Josip",
+      "igrac2": "Medved Daniel",
+      "rezultat": "",
+      "status": ""
+    },
+    {
+      "igrac1": "Cerovski Dalibor",
+      "igrac2": "Marošević Danijel",
+      "rezultat": "3:6 1:6",
+      "status": "Završeno"
+    },
+    {
+      "igrac1": "Srednoselac Ivica",
+      "igrac2": "Slavko Madarić",
+      "rezultat": "0:6 1:6",
+      "status": "Završeno"
+    },
+    {
+      "igrac1": "Štampar Milan",
+      "igrac2": "Kligl Matej ",
+      "rezultat": "BB",
+      "status": "Završeno"
+    },
+    {
+      "igrac1": "Kokorić Marijo",
+      "igrac2": "Marković Filip",
+      "rezultat": "6:1 6:0",
+      "status": "Završeno"
+    },
+    {
+      "igrac1": "Hmelik Zlatko",
+      "igrac2": "Ostojić Nikola",
+      "rezultat": "5:7 6:4 10:3",
+      "status": "Završeno"
+    },
+    {
+      "igrac1": "Randelj Marko",
+      "igrac2": "Tepeš Boris",
+      "rezultat": "6:7 5:7",
+      "status": "Završeno"
+    },
+    {
+      "igrac1": "Drokan Ivan",
+      "igrac2": "Hranić Milan",
+      "rezultat": "",
+      "status": ""
+    }
+]
 }
