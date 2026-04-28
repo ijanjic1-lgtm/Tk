@@ -116,66 +116,57 @@ function ucitajPodatkeIzDatoteke() {
 function prikaziRaspored(igraci) {
     const tbodyRaspored = document.getElementById("tablicaRasporeda");
     tbodyRaspored.innerHTML = "";
-
     if (!igraci) return;
 
     igraci.forEach((stavka, index) => {
         const redTablice = document.createElement("tr");
-
-        // Logika za bojanje:
-        // Math.floor(index / 4) daje:
-        // 0 za prva četiri (0,1,2,3)
-        // 1 za iduća četiri (4,5,6,7)
-        // 2 za iduća četiri...
         const brojGrupe = Math.floor(index / 4);
         
-        // Ako je grupa parna (0, 2, 4...) stavi jednu boju, ako je neparna drugu
         if (brojGrupe % 2 === 0) {
-            redTablice.style.backgroundColor = "#f9f9f9"; // Svijetlo siva/bijela
+            redTablice.style.backgroundColor = "#ffffff";
         } else {
-            redTablice.style.backgroundColor = "#e8f0fe"; // Lagana plavkasta (možeš staviti bilo koju boju)
+            redTablice.style.backgroundColor = "#f2f7f4"; // Lagana zelena za grupu
         }
 
         redTablice.innerHTML = `
-            <td>${stavka.pozicija}.</td>
-            <td><strong>${stavka.igrac}</strong></td>
-            <td>${stavka.red}</td>
-            <td>${stavka.bodovi}</td>
+            <td data-label="Poz.">${stavka.pozicija}.</td>
+            <td data-label="Igrač"><strong>${stavka.igrac}</strong></td>
+            <td data-label="Red">${stavka.red}</td>
+            <td data-label="Bodovi">${stavka.bodovi}</td>
         `;
         tbodyRaspored.appendChild(redTablice);
     });
 }
 
 
+
         // Funkcija za ispis rezultata
-        function prikaziRezultate(mecevi) {
-            const tbodyRezultati = document.getElementById("tablicaRezultata");
-            tbodyRezultati.innerHTML = "";
+       function prikaziRezultate(mecevi) {
+    const tbodyRezultati = document.getElementById("tablicaRezultata");
+    tbodyRezultati.innerHTML = "";
+    if (!mecevi) return;
 
-            if (!mecevi) return;
+    mecevi.forEach((mec, index) => {
+        const redTablice = document.createElement("tr");
 
-            mecevi.forEach((mec, index) => {
-                const redTablice = document.createElement("tr");
-
-                let statusBoja = "#2c3531";
-                if(mec.status === "Završeno") statusBoja = "#3b604b";
-                if(mec.status === "Odgođeno") statusBoja = "#e67e22";
+        let statusBoja = "#2c3531";
+        if(mec.status === "Završeno") statusBoja = "#3b604b";
+        if(mec.status === "Odgođeno") statusBoja = "#e67e22";
 			
-				// Provjera pobjednika za svakog igrača
-    			const stilIgrac1 = mec.pobjednik === mec.igrac1 ? 'style="background-color: #d4edda; color: #155724;"' : '';
-    			const stilIgrac2 = mec.pobjednik === mec.igrac2 ? 'style="background-color: #d4edda; color: #155724;"' : '';
+        const stilIgrac1 = mec.pobjednik === mec.igrac1 ? 'style="background-color: #d4edda; color: #155724; padding: 5px; border-radius: 4px;"' : '';
+        const stilIgrac2 = mec.pobjednik === mec.igrac2 ? 'style="background-color: #d4edda; color: #155724; padding: 5px; border-radius: 4px;"' : '';
 
-				
-                redTablice.innerHTML = `
-                    <td>${index + 1}.</td>
-                    <td ${stilIgrac1}><strong>${mec.igrac1}</strong></td>
-        			<td ${stilIgrac2}><strong>${mec.igrac2}</strong></td>
-       				<td><strong>${mec.rezultat}</strong></td>
-                    <td style="color: ${statusBoja}; font-weight: bold;">${mec.status}</td>
-                `;
-                tbodyRezultati.appendChild(redTablice);
-            });
-        }
+        redTablice.innerHTML = `
+            <td data-label="#">${index + 1}.</td>
+            <td data-label="Igrač 1"><span ${stilIgrac1}><strong>${mec.igrac1}</strong></span></td>
+            <td data-label="Igrač 2"><span ${stilIgrac2}><strong>${mec.igrac2}</strong></span></td>
+            <td data-label="Rezultat"><strong>${mec.rezultat}</strong></td>
+            <td data-label="Status" style="color: ${statusBoja}; font-weight: bold;">${mec.status}</td>
+        `;
+        tbodyRezultati.appendChild(redTablice);
+    });
+}
+
 
         // Pokreni učitavanje prve datoteke odmah po dolasku na stranicu
         window.onload = ucitajPodatkeIzDatoteke;
