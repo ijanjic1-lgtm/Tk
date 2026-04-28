@@ -144,6 +144,7 @@ function ucitajPodatkeIzDatoteke() {
                 let statusBoja = "#2c3531";
                 if(mec.status === "Završeno") statusBoja = "#3b604b";
                 if(mec.status === "Odgođeno") statusBoja = "#e67e22";
+				if(mec.pobjednik === mec.igrac2) statusBoja = "#00CC00";
 
                 redTablice.innerHTML = `
                     <td>${index + 1}.</td>
