@@ -144,12 +144,17 @@ function ucitajPodatkeIzDatoteke() {
                 let statusBoja = "#2c3531";
                 if(mec.status === "Završeno") statusBoja = "#3b604b";
                 if(mec.status === "Odgođeno") statusBoja = "#e67e22";
+			
+				// Provjera pobjednika za svakog igrača
+    			const stilIgrac1 = mec.pobjednik === mec.igrac1 ? 'style="background-color: #d4edda; color: #155724;"' : '';
+    			const stilIgrac2 = mec.pobjednik === mec.igrac2 ? 'style="background-color: #d4edda; color: #155724;"' : '';
 
+				
                 redTablice.innerHTML = `
                     <td>${index + 1}.</td>
-                    <td><strong>${mec.igrac1}</strong></td>
-                    <td><strong>${mec.igrac2}</strong></td>
-                    <td>${mec.rezultat}</td>
+                    <td ${stilIgrac1}><strong>${mec.igrac1}</strong></td>
+        			<td ${stilIgrac2}><strong>${mec.igrac2}</strong></td>
+       				<td><strong>${mec.rezultat}</strong></td>
                     <td style="color: ${statusBoja}; font-weight: bold;">${mec.status}</td>
                 `;
                 tbodyRezultati.appendChild(redTablice);
