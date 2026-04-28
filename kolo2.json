@@ -48,133 +48,155 @@
 					"igrac1": "Vurdelja Denis",
 					"igrac2": "Samir Klement",
 					"rezultat": "",
-					"status": "U najavi"
+					"status": "U najavi",
+					"pobjednik": ""
 					},
 					{
 					"igrac1": "Ostojić Bojan",
 					"igrac2": "Karl Vlatko",
 					"rezultat": "",
-					"status": "U najavi"
+					"status": "U najavi",
+					"pobjednik": ""
 					},
 					{
 					"igrac1": "Petrak Kristijan",
 					"igrac2": "Vida Mario",
 					"rezultat": "",
-					"status": "U najavi"
+					"status": "U najavi",
+					"pobjednik": ""
 					},
 					{
 					"igrac1": "Kelava Lolić Božidar",
 					"igrac2": "Cvjetković Miloš",
-					"rezultat": "BB - pobjeda Cvjetković Miloš",
-					"status": "Završeno"
+					"rezultat": "BB",
+					"status": "Završeno",
+					"pobjednik": "Cvjetković Miloš"
 					},
 					{
 					"igrac1": "Oskomić Zvonko",
 					"igrac2": "Mikić Mario",
 					"rezultat": "",
-					"status": "U najavi"
+					"status": "U najavi",
+					"pobjednik": ""
 					},
 					{
 					"igrac1": "Tomljanović Ivan",
 					"igrac2": "Ćurić Borna",
 					"rezultat": "",
-					"status": "U najavi"
+					"status": "U najavi",
+					"pobjednik": ""
 					},
 					{
 					"igrac1": "Janjić Ivan",
 					"igrac2": "Pavlinić Denis",
 					"rezultat": "",
-					"status": "U najavi"
+					"status": "U najavi",
+					"pobjednik": ""
 					},
 					{
 					"igrac1": "Janjić Ivan",
 					"igrac2": "Pavlinić Denis",
 					"rezultat": "",
-					"status": "U najavi"
+					"status": "U najavi",
+					"pobjednik": ""
 					},
 					{
 					"igrac1": "Telišman Marko",
 					"igrac2": "Kolarić Miran",
 					"rezultat": "",
-					"status": "U najavi"
+					"status": "U najavi",
+					"pobjednik": ""
 					},
 					{
 					"igrac1": "Ostojić Milan",
 					"igrac2": "Majačić Mario",
 					"rezultat": "",
-					"status": "U najavi"
+					"status": "U najavi",
+					"pobjednik": ""
 					},
 					{
 					"igrac1": "Vučeta Mario",
 					"igrac2": "Jambrešić David",
 					"rezultat": "",
-					"status": "U najavi"
+					"status": "U najavi",
+					"pobjednik": ""
 					},
 					{
 					"igrac1": "Vučeta Mario",
 					"igrac2": "Jambrešić David",
 					"rezultat": "",
-					"status": "U najavi"
+					"status": "U najavi",
+					"pobjednik": ""
 					},
 					{
 					"igrac1": "Igor Miklošević",
 					"igrac2": "Hetrih Josip",
 					"rezultat": "",
-					"status": "U najavi"
+					"status": "U najavi",
+					"pobjednik": ""
 					},
 					{
 					"igrac1": "Manceta Igor",
 					"igrac2": "Marošević Danijel",
 					"rezultat": "",
-					"status": "U najavi"
+					"status": "U najavi",
+					"pobjednik": ""
 					},
 					{
 					"igrac1": "Vujić Antun",
 					"igrac2": "Kligl Matej",
 					"rezultat": "",
-					"status": "U najavi"
+					"status": "U najavi",
+					"pobjednik": ""
 					},
 					{
 					"igrac1": "Medved Daniel",
 					"igrac2": "Kokorić Marijo",
 					"rezultat": "",
-					"status": "U najavi"
+					"status": "U najavi",
+					"pobjednik": ""
 					},
 					{
 					"igrac1": "Makar Marijan",
 					"igrac2": "Slavko Mađarić",
 					"rezultat": "2:6 4:6",
-					"status": "Završeno"
+					"status": "Završeno",
+					"pobjednik": ""
 					},
 					{
 					"igrac1": "Cerovski Dalibor",
 					"igrac2": "Ostojić Nikola",
 					"rezultat": "3:6 0:6",
-					"status": "Završeno"
+					"status": "Završeno",
+					"pobjednik": "Ostojić Nikola"
 					},
 					{
 					"igrac1": "Srednoselac Ivica",
 					"igrac2": "Tepeš Boris",
 					"rezultat": "",
-					"status": "U najavi"
+					"status": "U najavi",
+					"pobjednik": ""
 					},
 					{
 					"igrac1": "Marković Filip",
 					"igrac2": "Drokan Ivan",
 					"rezultat": "2:6 3:6",
-					"status": "Završeno"
+					"status": "Završeno",
+					"pobjednik": "Drokan Ivan"
 					},
 					{
 					"igrac1": "Štampar Milan",
 					"igrac2": "Hmelik Zlatko",
 					"rezultat": "",
-					"status": "U najavi"
+					"status": "U najavi",
+					"pobjednik": ""
 					},
 					{
 					"igrac1": "Randelj Marko",
 					"igrac2": "Hranić Milan",
 					"rezultat": "",
-					"status": "U najavi"
+					"status": "U najavi",
+					"pobjednik": ""
 					}
 ]
 }
