@@ -311,59 +311,51 @@ footer {
 }
 
 /* --- PRILAGODBA ZA MOBITELE --- */
-@media (max-width: 768px) {
-    /* Povećavamo visinu navigacije za lakše klikanje */
-    .navbar {
-        padding: 10px 15px;
+@media (max-width: 600px) {
+    .navbar { padding: 10px; }
+    .hero h1 { font-size: 28px; }
+    .tournaments-header { flex-direction: column; align-items: flex-start; }
+    .tournament-select { width: 100%; }
+
+    /* --- RESPONSIVE TABLE (CARD LAYOUT) --- */
+    table thead {
+        display: none; /* Sakrij zaglavlje na mobitelu */
     }
 
-    /* Gumb izbornika radimo većim */
-    .menu-btn {
-        padding: 12px 20px;
-        font-size: 16px;
-    }
-
-    /* Padajući izbornik preko cijele širine na mobitelu */
-    .dropdown-content {
-        position: fixed; /* Fiksiramo ga preko ekrana */
-        top: 60px;
-        left: 0;
+    table, table tbody, table tr, table td {
+        display: block;
         width: 100%;
-        border-radius: 0;
-        border: none;
-        border-bottom: 2px solid var(--accent);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
     }
 
-    .dropdown-content a {
-        padding: 16px 20px; /* Veći prostor za dodir prstom */
-        font-size: 16px;
-        border-bottom: 1px solid #f5f5f5;
+    table tr {
+        margin-bottom: 15px;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        background: #fff;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
 
-    /* Uklanjamo hover efekte za otvaranje (jer na mobitelu nema miša) */
-    .menu-btn:hover + .dropdown-content,
-    .dropdown-content:hover {
-        display: none;
+    table td {
+        text-align: right;
+        padding: 10px 15px;
+        position: relative;
+        border-bottom: 1px solid #f9f9f9;
+        min-height: 40px;
     }
 
-    /* Ova klasa će se dodavati preko JS-a kada korisnik klikne */
-    .dropdown-content.prikazi {
-        display: block !important;
+    /* Labela koja se pojavljuje s lijeve strane (uzima tekst iz data-label) */
+    table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        width: 45%;
+        text-align: left;
+        font-weight: bold;
+        color: var(--primary);
     }
 
-    /* Smanjujemo Hero natpis da ne zauzima cijeli ekran */
-    .hero {
-        padding: 40px 20px;
+    table td:last-child {
+        border-bottom: none;
     }
-
-    .hero h1 {
-        font-size: 24px;
-    }
-
-    /* Kartice vijesti idu jedna ispod druge */
-    .news-grid {
-        grid-template-columns: 1fr;
-    }
-	
 }
+
