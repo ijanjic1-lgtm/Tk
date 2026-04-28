@@ -52,124 +52,147 @@
 	  "pobjednik": "Vurdelja Denis"
     },
     {
-      "igrac1": "Ostojić Bojan ",
+      "igrac1": "Ostojić Bojan",
       "igrac2": "Petrak Kristijan",
       "rezultat": "4:6 6:4 10:6",
-      "status": "Završeno"
+      "status": "Završeno",
+	  "pobjednik": "Ostojić Bojan"
     },
     {
       "igrac1": "Janjić Ivan",
-      "igrac2": "Samir Klement",
+      "igrac2": "Klement Samir",
       "rezultat": "2:6 6:3 7:10",
-      "status": "Završeno"
+      "status": "Završeno",
+	  "pobjednik": "Klement Samir"
     },
     {
       "igrac1": "Kelava Lolić Božidar",
       "igrac2": "Vida Mario",
-      "rezultat": "BB - pobjeda Vida Mario",
-      "status": "Završeno"
+      "rezultat": "BB",
+      "status": "Završeno",
+	  "pobjednik": "Vida Mario"
     },
     {
       "igrac1": "Tomljanović Ivan",
       "igrac2": "Roštaš Hrvoje",
       "rezultat": "3:6 6:2 5:10",
-      "status": "Završeno"
+      "status": "Završeno",
+	  "pobjednik": "Roštaš Hrvoje"
     },
     {
       "igrac1": "Karl Vlatko",
       "igrac2": "Oskomić Zvonko",
       "rezultat": "6:3 6:4",
-      "status": "Završeno"
+      "status": "Završeno",
+	  "pobjednik": "Karl Vlatko"
     },
     {
       "igrac1": "Vučeta Mario",
       "igrac2": "Cvjetković Miloš",
-      "rezultat": "BB - pobjeda Cvjetković Miloš",
-      "status": "Završeno"
+      "rezultat": "BB",
+      "status": "Završeno",
+	  "pobjednik": "Cvjetković Miloš"
+
     },
     {
       "igrac1": "Ostojić Milan",
       "igrac2": "Ćurić Borna",
       "rezultat": "2:6 1:6",
-      "status": "Završeno"
+      "status": "Završeno",
+	  "pobjednik": "Ćurić Borna"
     },
     {
       "igrac1": "Dunković Igor",
       "igrac2": "Mikić Mario",
-      "rezultat": "BB - pobjeda Mikić Mario",
-      "status": "Završeno"
+      "rezultat": "BB",
+      "status": "Završeno",
+	  "pobjednik": "Mikić Mario"
+
     },
     {
       "igrac1": "Telišman Marko",
       "igrac2": "Pavlinić Denis",
       "rezultat": "1:6 5:7",
-      "status": "Završeno"
+      "status": "Završeno",
+	  "pobjednik": "Pavlinić Denis"
     },
     {
       "igrac1": "Majačić Mario",
       "igrac2": "Makar Marijan",
       "rezultat": "6:2 6:2",
-      "status": "Završeno"
+      "status": "Završeno",
+	  "pobjednik": "Majačić Mario"
     },
     {
       "igrac1": "Kolarić Miran",
       "igrac2": "Manceta Igor",
-      "rezultat": "BB - pobjeda Kolarić Miran",
-      "status": "Završeno"
+      "rezultat": "BB",
+      "status": "Završeno",
+	  "pobjednik": "Kolarić Miran"
     },
     {
       "igrac1": "Jambrešić David",
       "igrac2": "Vujić Antun",
-      "rezultat": "BB - pobjeda Jambrešić David",
-      "status": "Završeno"
+      "rezultat": "BB",
+      "status": "Završeno",
+	  "pobjednik": "Jambrešić David"
     },
     {
       "igrac1": "Hetrih Josip",
       "igrac2": "Medved Daniel",
       "rezultat": "6:1 6:2",
-      "status": "Završeno"
+      "status": "Završeno",
+	  "pobjednik": "Hetrih Josip"
     },
     {
       "igrac1": "Cerovski Dalibor",
       "igrac2": "Marošević Danijel",
       "rezultat": "3:6 1:6",
-      "status": "Završeno"
+      "status": "Završeno",
+	  "pobjednik": "Marošević Danijel"
     },
     {
       "igrac1": "Srednoselac Ivica",
-      "igrac2": "Slavko Madarić",
+      "igrac2": "Madarić Slavko",
       "rezultat": "0:6 1:6",
-      "status": "Završeno"
+      "status": "Završeno",
+	  "pobjednik": "Madarić Slavko"
     },
     {
       "igrac1": "Štampar Milan",
       "igrac2": "Kligl Matej",
-      "rezultat": "BB - pobjeda Kligl Matej",
-      "status": "Završeno"
+      "rezultat": "BB",
+      "status": "Završeno",
+	  "pobjednik": "Kligl Matej"
     },
     {
       "igrac1": "Kokorić Marijo",
       "igrac2": "Marković Filip",
       "rezultat": "6:1 6:0",
-      "status": "Završeno"
+      "status": "Završeno",
+	  "pobjednik": "Kokorić Marijo"
     },
     {
       "igrac1": "Hmelik Zlatko",
       "igrac2": "Ostojić Nikola",
       "rezultat": "5:7 6:4 10:3",
-      "status": "Završeno"
+      "status": "Završeno",
+	  "pobjednik": "Hmelik Zlatko"
     },
     {
       "igrac1": "Randelj Marko",
       "igrac2": "Tepeš Boris",
       "rezultat": "6:7 5:7",
-      "status": "Završeno"
+      "status": "Završeno",
+	  "pobjednik": "Tepeš Boris"
     },
     {
       "igrac1": "Drokan Ivan",
       "igrac2": "Hranić Milan",
       "rezultat": "6:4 3:6 7:5",
-      "status": "Završeno"
+      "status": "Završeno",
+	  "pobjednik": "Drokan Ivan"
+
     }
 ]
 }
