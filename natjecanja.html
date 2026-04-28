@@ -112,24 +112,40 @@ function ucitajPodatkeIzDatoteke() {
 }
 
 
-        // Funkcija za ispis rasporeda
-        function prikaziRaspored(igraci) {
-            const tbodyRaspored = document.getElementById("tablicaRasporeda");
-            tbodyRaspored.innerHTML = "";
+       // Funkcija za ispis rasporeda s grupiranjem boja svaka 4 retka
+function prikaziRaspored(igraci) {
+    const tbodyRaspored = document.getElementById("tablicaRasporeda");
+    tbodyRaspored.innerHTML = "";
 
-            if (!igraci) return;
+    if (!igraci) return;
 
-            igraci.forEach(stavka => {
-                const redTablice = document.createElement("tr");
-                redTablice.innerHTML = `
-                    <td>${stavka.pozicija}.</td>
-                    <td><strong>${stavka.igrac}</strong></td>
-                    <td>${stavka.red}</td>
-					<td>${stavka.bodovi}</td>
-                `;
-                tbodyRaspored.appendChild(redTablice);
-            });
+    igraci.forEach((stavka, index) => {
+        const redTablice = document.createElement("tr");
+
+        // Logika za bojanje:
+        // Math.floor(index / 4) daje:
+        // 0 za prva četiri (0,1,2,3)
+        // 1 za iduća četiri (4,5,6,7)
+        // 2 za iduća četiri...
+        const brojGrupe = Math.floor(index / 4);
+        
+        // Ako je grupa parna (0, 2, 4...) stavi jednu boju, ako je neparna drugu
+        if (brojGrupe % 2 === 0) {
+            redTablice.style.backgroundColor = "#f9f9f9"; // Svijetlo siva/bijela
+        } else {
+            redTablice.style.backgroundColor = "#e8f0fe"; // Lagana plavkasta (možeš staviti bilo koju boju)
         }
+
+        redTablice.innerHTML = `
+            <td>${stavka.pozicija}.</td>
+            <td><strong>${stavka.igrac}</strong></td>
+            <td>${stavka.red}</td>
+            <td>${stavka.bodovi}</td>
+        `;
+        tbodyRaspored.appendChild(redTablice);
+    });
+}
+
 
         // Funkcija za ispis rezultata
         function prikaziRezultate(mecevi) {
