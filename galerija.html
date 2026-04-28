@@ -43,5 +43,23 @@
     <footer>
         <p>&copy; 2026 Teniski klub Slatina. Sva prava pridržana.</p>
     </footer>
+	    <!-- SKRIPTA ZA MOBILNI MENU -->
+    <script>
+        const menuBtn = document.querySelector('.menu-btn');
+        const dropdownContent = document.querySelector('.dropdown-content');
+
+        // Otvaranje/Zatvaranje na klik
+        menuBtn.addEventListener('click', function(e) {
+            e.stopPropagation(); // Zaustavlja zatvaranje odmah nakon klika
+            dropdownContent.classList.toggle('prikazi');
+        });
+
+        // Zatvori izbornik ako korisnik klikne bilo gdje izvan njega
+        document.addEventListener('click', function(e) {
+            if (!dropdownContent.contains(e.target) && !menuBtn.contains(e.target)) {
+                dropdownContent.classList.remove('prikazi');
+            }
+        });
+    </script>
 </body>
 </html>
