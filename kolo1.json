@@ -1,6 +1,6 @@
 {
 	"raspored": [
-				{ "pozicija": 1, "igrac": "Ostojić Dragan", "red": "1" },
+				{ "pozicija": 1, "igrac": "Ostojić Dragan", "red": "1", "bodovi":"0" },
 				{ "pozicija": 2, "igrac": "Vurdelja Denis", "red": "1" },
 				{ "pozicija": 3, "igrac": "Ostojić Bojan", "red": "1" },
 				{ "pozicija": 4, "igrac": "Petrak Kristijan", "red": "1" },
