@@ -309,6 +309,12 @@ footer {
     .hero h1 { font-size: 28px; }
     .tournaments-header { flex-direction: column; align-items: flex-start; }
     .tournament-select { width: 100%; }
+	table {
+    font-size: 10px; /* Smanjuje općeniti font tablice */
+	}
+	th, td {
+    padding: 4px; /* Smanjuje razmake u ćelijama kako bi više stalo */
+	}
 }
 
 /* --- PRILAGODBA ZA MOBITELE --- */
