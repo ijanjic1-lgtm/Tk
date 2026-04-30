@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TK Slatina - Početna</title>
+    <link rel="stylesheet" href="stil.css">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="nav-left">
+                <div class="menu-dropdown">
+                    <button class="menu-btn">☰ Izbornik</button>
+                    <div class="dropdown-content">
+                        <a href="index.html">Početna</a>
+                        <a href="galerija.html">Galerija slika</a>
+                        <a href="natjecanja.html">Natjecanja</a>
+                        <a href="o-klubu.html">O klubu / Kontakt</a>
+                    </div>
+                </div>
+                <a href="index.html" class="logo-area">
+   				 <img src="./Slike/logo.png" alt="TK Slatina Logo" class="logo-img">
+                    <span>TK Slatina</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="hero">
+            <h1>Dobrodošli u TK Slatina</h1>
+            <p>Uživajte u tenisu na vrhunskim terenima u srcu Slatine.</p>
+        </div>
+
+        <section class="section">
+            <h2>O Klubu</h2>
+            <p>Teniski klub Slatina je mjesto okupljanja svih zaljubljenika u tenis, od mlađih članova do iskusnih rekreativaca i natjecatelja. Klub raspolaže s tri vrhunski održavana terena, klupskom kućicom i svakodnevnom dobrom atmosferom.</p>
+        </section>
+
+        <section class="section">
+            <h2>Zadnje Novosti</h2>
+            <div class="news-grid">
+                <!--<div class="news-card">
+                    <div class="img-placeholder">📷 Slika Vijesti</div>
+                    <div class="news-content">
+                        <div class="news-date">20. Travanj 2026.</div>
+                        <h3>Upisi u školu tenisa</h3>
+                        <p>Krenuli su upisi za proljetni ciklus škole tenisa za djecu i odrasle...</p>
+                    </div>
+                </div>-->
+                <div class="news-card">
+                     <div class="gallery-item"><img src="./Slike/slika1.jpg" alt="Atmosfera 1"></div>
+                    <div class="news-content">
+                        <div class="news-date">25. Travanj 2026.</div>
+                        <h3>Otvorenje sezone</h3>
+                        <p>Atraktivni mečevi parova koji su žarili i palili cijeli dan na terenima teniskog kluba...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Teniski klub Slatina. Sva prava pridržana.</p>
+    </footer>
+	    <!-- SKRIPTA ZA MOBILNI MENU -->
+    <script>
+        const menuBtn = document.querySelector('.menu-btn');
+        const dropdownContent = document.querySelector('.dropdown-content');
+
+        // Otvaranje/Zatvaranje na klik
+        menuBtn.addEventListener('click', function(e) {
+            e.stopPropagation(); // Zaustavlja zatvaranje odmah nakon klika
+            dropdownContent.classList.toggle('prikazi');
+        });
+
+        // Zatvori izbornik ako korisnik klikne bilo gdje izvan njega
+        document.addEventListener('click', function(e) {
+            if (!dropdownContent.contains(e.target) && !menuBtn.contains(e.target)) {
+                dropdownContent.classList.remove('prikazi');
+            }
+        });
+    </script>
+
+</body>
+</html>
