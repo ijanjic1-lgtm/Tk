@@ -36,7 +36,7 @@
                 <!-- Ovdje sami definirate koja kola imate. Value mora odgovarati nazivu .json datoteke! -->
                 <select id="odabirKola" class="tournament-select" onchange="ucitajPodatkeIzDatoteke()">
                     <option value="kolo1">1. Kolo</option>
-                    <option value="kolo2" selected>2. Kolo</option>
+                    <option value="kolo2">2. Kolo</option>
                 </select>
             </div>
             
@@ -89,6 +89,15 @@
 
     <!-- JAVASCRIPT ZA DOHVAĆANJE VANJSKIH DATOTEKA -->
     <script>
+window.onload = function() {
+    var select = document.getElementById("odabirKola");
+    
+    // Postavlja indeks na zadnju dostupnu opciju
+    select.selectedIndex = select.options.length - 1;
+    
+    // Ručno pokreni funkciju da se odmah učitaju podaci za to zadnje kolo
+    ucitajPodatkeIzDatoteke();
+};
 
 
 function ucitajPodatkeIzDatoteke() {
