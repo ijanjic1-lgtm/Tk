@@ -115,13 +115,6 @@
 					"pobjednik": ""
 					},
 					{
-					"igrac1": "Vučeta Mario",
-					"igrac2": "Jambrešić David",
-					"rezultat": "",
-					"status": "U najavi",
-					"pobjednik": ""
-					},
-					{
 					"igrac1": "Igor Miklošević",
 					"igrac2": "Hetrih Josip",
 					"rezultat": "3:6 6:0 3:10",
@@ -138,9 +131,9 @@
 					{
 					"igrac1": "Vujić Antun",
 					"igrac2": "Kligl Matej",
-					"rezultat": "",
-					"status": "U najavi",
-					"pobjednik": ""
+					"rezultat": "1:6 4:6",
+					"status": "Završeno",
+					"pobjednik": "Kligl Matej"
 					},
 					{
 					"igrac1": "Medved Daniel",
