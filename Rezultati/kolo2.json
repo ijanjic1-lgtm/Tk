@@ -44,7 +44,14 @@
 					{ "pozicija":42, "igrac": "Hranić Milan", "red": "11", "bodovi": 0 }
                 ],
     "rezultati": [
-	{
+					{
+					"igrac1": "Ostojić Dragan",
+					"igrac2": "Roštaš Hrvoje",
+					"rezultat": "",
+					"status": "U najavi",
+					"pobjednik": ""
+					},
+					{
 					"igrac1": "Vurdelja Denis",
 					"igrac2": "Samir Klement",
 					"rezultat": "",
