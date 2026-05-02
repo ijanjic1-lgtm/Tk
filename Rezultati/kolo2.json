@@ -117,9 +117,9 @@
 					{
 					"igrac1": "Vučeta Mario",
 					"igrac2": "Jambrešić David",
-					"rezultat": "",
-					"status": "U najavi",
-					"pobjednik": ""
+					"rezultat": "6:2 7:6",
+					"status": "Završeno",
+					"pobjednik": "Vučeta Mario"
 					},
 					{
 					"igrac1": "Igor Miklošević",
@@ -145,9 +145,9 @@
 					{
 					"igrac1": "Medved Daniel",
 					"igrac2": "Kokorić Marijo",
-					"rezultat": "",
-					"status": "U najavi",
-					"pobjednik": ""
+					"rezultat": "3:6 2:6",
+					"status": "Završeno",
+					"pobjednik": "Kokorić Marijo"
 					},
 					{
 					"igrac1": "Makar Marijan",
@@ -187,9 +187,9 @@
 					{
 					"igrac1": "Randelj Marko",
 					"igrac2": "Hranić Milan",
-					"rezultat": "",
-					"status": "U najavi",
-					"pobjednik": ""
+					"rezultat": "BB",
+					"status": "Završeno",
+					"pobjednik": "Hranić Milan"
 					}
 ]
 }
