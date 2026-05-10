@@ -43,5 +43,145 @@
 					{ "pozicija":41, "igrac": "Randelj Marko", "red": "11", "bodovi": 0  }
                 ],
     "rezultati": [
+		{
+					"igrac1": "Vurdelja Denis",
+					"igrac2": "Cvjetković Miloš",
+					"rezultat": "",
+					"status": "U najavi",
+					"pobjednik": ""
+					},
+					{
+					"igrac1": "Ostojić Bojan",
+					"igrac2": "Mikić Mario",
+					"rezultat": "",
+					"status": "U najavi",
+					"pobjednik": ""
+					},
+					{
+					"igrac1": "Karl Vlatko",
+					"igrac2": "Petrak Kristijan",
+					"rezultat": "",
+					"status": "U najavi",
+					"pobjednik": ""
+					},
+					{
+					"igrac1": "Ostojić Dragan",
+					"igrac2": "Klement Samir/Ćurić Borna",
+					"rezultat": "",
+					"status": "U najavi",
+					"pobjednik": ""
+					},
+					{
+					"igrac1": "Janjić Ivan",
+					"igrac2": "Tomaljanović Ivan",
+					"rezultat": "",
+					"status": "U najavi",
+					"pobjednik": ""
+					},
+					{
+					"igrac1": "Roštaš Hrvoje",
+					"igrac2": "Oskomić Zvonko",
+					"rezultat": "",
+					"status": "U najavi",
+					"pobjednik": ""
+					},
+					{
+					"igrac1": "Vučeta Mario",
+					"igrac2": "Vida Mario",
+					"rezultat": "",
+					"status": "U najavi",
+					"pobjednik": ""
+					},
+					{
+					"igrac1": "Klement Samir/Ćurić Borna",
+					"igrac2": "Pavlinić Denis",
+					"rezultat": "",
+					"status": "U najavi",
+					"pobjednik": ""
+					},
+					{
+					"igrac1": "Telišman Marko",
+					"igrac2": "Majačić Mario",
+					"rezultat": "",
+					"status": "U najavi",
+					"pobjednik": ""
+					},
+					{
+					"igrac1": "Manceta Igor",
+					"igrac2": "Ostojić Milan",
+					"rezultat": "",
+					"status": "U najavi",
+					"pobjednik": ""
+					},
+					{
+					"igrac1": "Kokorić Marijo",
+					"igrac2": "Kolarić Miran",
+					"rezultat": "",
+					"status": "U najavi",
+					"pobjednik": ""
+					},
+					{
+					"igrac1": "Kligl Matej",
+					"igrac2": "Hetrih Josip",
+					"rezultat": "",
+					"status": "U najavi",
+					"pobjednik": ""
+					},
+					{
+					"igrac1": "Makar Marijan",
+					"igrac2": "Marošević Danijel",
+					"rezultat": "",
+					"status": "U najavi",
+					"pobjednik": ""
+					},
+					{
+					"igrac1": "Hmelik Zlatko",
+					"igrac2": "Marošević Igor",
+					"rezultat": "",
+					"status": "U najavi",
+					"pobjednik": ""
+					},
+					{
+					"igrac1": "Tepeš Boris",
+					"igrac2": "Mađarić Slavko",
+					"rezultat": "",
+					"status": "U najavi",
+					"pobjednik": ""
+					},
+					{
+					"igrac1": "Ostojić Nikola",
+					"igrac2": "Jambrešić David",
+					"rezultat": "",
+					"status": "U najavi",
+					"pobjednik": ""
+					},
+					{
+					"igrac1": "Marković Filip",
+					"igrac2": "Drokan Ivan",
+					"rezultat": "",
+					"status": "U najavi",
+					"pobjednik": ""
+					},
+					{
+					"igrac1": "Štampar Milan/Srednosleac Ivica",
+					"igrac2": "Cerovski Dalibor",
+					"rezultat": "",
+					"status": "U najavi",
+					"pobjednik": ""
+					},
+					{
+					"igrac1": "Štampar Milan/Srednosleac Ivica",
+					"igrac2": "Vujić Antun",
+					"rezultat": "",
+					"status": "U najavi",
+					"pobjednik": ""
+					},
+					{
+					"igrac1": "Hranić Milan",
+					"igrac2": "Medved Daniel",
+					"rezultat": "",
+					"status": "U najavi",
+					"pobjednik": ""
+					}
 	]
 }
