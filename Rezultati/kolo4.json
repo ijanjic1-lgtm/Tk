@@ -37,8 +37,8 @@
 					{ "pozicija":35, "igrac": "Drokan Ivan", "red": "9", "bodovi": 13  },
 					{ "pozicija":36, "igrac": "Cerovski Dalibor", "red": "9", "bodovi": 13  },
 					{ "pozicija":37, "igrac": "Marković Filip", "red": "10", "bodovi": 26  },
-					{ "pozicija":38, "igrac": "Štampar Milan", "red": "10", "bodovi": 0  },
-					{ "pozicija":39, "igrac": "Srednoselac Ivica", "red": "10", "bodovi": 0  },
+					{ "pozicija":38, "igrac": "Štampar Milan", "red": "10", "bodovi": 26 },
+					{ "pozicija":39, "igrac": "Srednoselac Ivica", "red": "10", "bodovi": 9  },
 					{ "pozicija":40, "igrac": "Hranić Milan", "red": "10", "bodovi": 9  },
 					{ "pozicija":41, "igrac": "Randelj Marko", "red": "11", "bodovi": 0  }
                 ],
@@ -157,21 +157,21 @@
 					},
 					{
 					"igrac1": "Marković Filip",
-					"igrac2": "Drokan Ivan",
+					"igrac2": "Vujić Antun",
 					"rezultat": "",
 					"status": "U najavi",
 					"pobjednik": ""
 					},
 					{
-					"igrac1": "Štampar Milan/Srednosleac Ivica",
+					"igrac1": "Srednosleac Ivica",
 					"igrac2": "Cerovski Dalibor",
 					"rezultat": "",
 					"status": "U najavi",
 					"pobjednik": ""
 					},
 					{
-					"igrac1": "Štampar Milan/Srednosleac Ivica",
-					"igrac2": "Vujić Antun",
+					"igrac1": "Štampar Milan",
+					"igrac2": "Drokan Ivan",
 					"rezultat": "",
 					"status": "U najavi",
 					"pobjednik": ""
