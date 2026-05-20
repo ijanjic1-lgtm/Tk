@@ -46,9 +46,9 @@
 		{
 					"igrac1": "Vurdelja Denis",
 					"igrac2": "Cvjetković Miloš",
-					"rezultat": "",
-					"status": "U najavi",
-					"pobjednik": ""
+					"rezultat": "6:0 6:4",
+					"status": "Završeno",
+					"pobjednik": "Vurdelja Denis"
 					},
 					{
 					"igrac1": "Ostojić Bojan",
@@ -81,9 +81,9 @@
 					{
 					"igrac1": "Roštaš Hrvoje",
 					"igrac2": "Oskomić Zvonko",
-					"rezultat": "",
-					"status": "U najavi",
-					"pobjednik": ""
+					"rezultat": "6:3 3:6 2:10",
+					"status": "Završeno",
+					"pobjednik": "Oskomić Zvonko"
 					},
 					{
 					"igrac1": "Vučeta Mario",
@@ -109,16 +109,16 @@
 					{
 					"igrac1": "Manceta Igor",
 					"igrac2": "Ostojić Milan",
-					"rezultat": "",
-					"status": "U najavi",
-					"pobjednik": ""
+					"rezultat": "6:7 3:6",
+					"status": "Završeno",
+					"pobjednik": "Ostojić Milan"
 					},
 					{
 					"igrac1": "Kokorić Marijo",
 					"igrac2": "Kolarić Miran",
-					"rezultat": "",
-					"status": "U najavi",
-					"pobjednik": ""
+					"rezultat": "6:1 5:7 10:5",
+					"status": "Završeno",
+					"pobjednik": "Kokorić Marijo"
 					},
 					{
 					"igrac1": "Kligl Matej",
@@ -172,9 +172,9 @@
 					{
 					"igrac1": "Štampar Milan",
 					"igrac2": "Drokan Ivan",
-					"rezultat": "",
-					"status": "U najavi",
-					"pobjednik": ""
+					"rezultat": "1:6 4:6",
+					"status": "Završeno",
+					"pobjednik": "Drokan Ivan"
 					},
 					{
 					"igrac1": "Hranić Milan",
