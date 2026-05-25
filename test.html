@@ -1,1 +1,213 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TK Slatina - Natjecanja</title>
+    <link rel="stylesheet" href="stil.css">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="nav-left">
+                <div class="menu-dropdown">
+                    <button class="menu-btn">☰ Izbornik</button>
+                    <div class="dropdown-content">
+                        <a href="index.html">Početna</a>
+                        <a href="galerija.html">Galerija slika</a>
+                        <a href="natjecanja.html">Natjecanja</a>
+                    </div>
+                </div>
+                <a href="index.html" class="logo-area">
+                   <!--     <div class="logo-img">🎾</div>-->
+					 <img src="./Slike/logo.png" alt="TK Slatina Logo" class="logo-img">
+			     <span>TK Slatina</span>
+                </a>
+            </div>
+        </div>
+    </header>
 
+    <main>
+        <section class="section">
+            <div class="tournaments-header">
+                <h2>Piramida Slatina 2026</h2>
+                
+                <!-- Ovdje sami definirate koja kola imate. Value mora odgovarati nazivu .json datoteke! -->
+                <select id="odabirKola" class="tournament-select" onchange="ucitajPodatkeIzDatoteke()">
+                    <option value="kolo1">1. Kolo</option>
+                    <option value="kolo2">2. Kolo</option>
+					<option value="kolo3">3. Kolo</option>
+					<option value="kolo4">4. Kolo</option>
+					<option value="kolo5" selected>5. Kolo</option>
+                </select>
+            </div>
+            
+            <p style="margin-bottom: 30px;">Odaberite željeno kolo iz izbornika kako biste vidjeli raspored igrača i rezultate odigranih mečeva.</p>
+
+  <!-- TABLICA 1: RASPORED -->
+            <div>
+                <h3 style="color: #2c3e50;">📋 Ljestvica igrača za odabrano kolo</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Poz.</th>
+                                <th>Igrač</th>
+                								<th>Bodovi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablicaRasporeda"></tbody>
+                    </table>
+                </div>
+            </div>
+			<div>
+			<p style="margin-bottom: 30px;"> </p>
+			</div>
+            <!-- TABLICA 2: REZULTATI -->
+            <div>
+                <h3 style="color: #2c3e50;">🏆 Rezultati mečeva odabranog kola</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Igrač 1</th>
+                                <th>Igrač 2</th>
+                                <th>Rezultat</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablicaRezultata"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Teniski klub Slatina. Sva prava pridržana.</p>
+    </footer>
+
+    <!-- JAVASCRIPT ZA DOHVAĆANJE VANJSKIH DATOTEKA -->
+    <script>
+window.onload = function() {
+    var select = document.getElementById("odabirKola");
+    
+    // Postavlja indeks na zadnju dostupnu opciju
+    select.selectedIndex = select.options.length - 1;
+    
+    // Ručno pokreni funkciju da se odmah učitaju podaci za to zadnje kolo
+    ucitajPodatkeIzDatoteke();
+};
+
+
+function ucitajPodatkeIzDatoteke() {
+    const selectElement = document.getElementById("odabirKola"); // Pomaknuto unutra
+    const odabranoKolo = selectElement.value;
+    const putanja = `./Rezultati/${odabranoKolo}.json`;
+
+    console.log("Pokušavam učitati:", putanja); // Provjeri u konzoli (F12) što piše
+
+    fetch(putanja)
+        .then(response => {
+            if (!response.ok) throw new Error(`Datoteka ${putanja} nije pronađena.`);
+            return response.json();
+        })
+        .then(podaci => {
+            prikaziRaspored(podaci.raspored);
+            prikaziRezultate(podaci.rezultati);
+        })
+        .catch(error => {
+            console.error("Greška detaljno:", error);
+            alert("Greška: " + error.message);
+        });
+}
+
+
+       // Funkcija za ispis rasporeda s grupiranjem boja svaka 4 retka
+function prikaziRaspored(igraci) {
+    const tbodyRaspored = document.getElementById("tablicaRasporeda");
+    tbodyRaspored.innerHTML = "";
+
+    if (!igraci) return;
+
+    igraci.forEach((stavka, index) => {
+        const redTablice = document.createElement("tr");
+
+        // Logika za bojanje:
+        // Math.floor(index / 4) daje:
+        // 0 za prva četiri (0,1,2,3)
+        // 1 za iduća četiri (4,5,6,7)
+        // 2 za iduća četiri...
+        const brojGrupe = Math.floor(index / 4);
+        
+        // Ako je grupa parna (0, 2, 4...) stavi jednu boju, ako je neparna drugu
+        if (brojGrupe % 2 === 0) {
+            redTablice.style.backgroundColor = "#f9f9f9"; // Svijetlo siva/bijela
+        } else {
+            redTablice.style.backgroundColor = "#e8f0fe"; // Lagana plavkasta (možeš staviti bilo koju boju)
+        }
+
+        redTablice.innerHTML = `
+            <td>${stavka.pozicija}.</td>
+            <td><strong>${stavka.igrac}</strong></td>
+            <td>${stavka.red}</td>
+            <td>${stavka.bodovi}</td>
+        `;
+        tbodyRaspored.appendChild(redTablice);
+    });
+}
+
+
+        // Funkcija za ispis rezultata
+        function prikaziRezultate(mecevi) {
+            const tbodyRezultati = document.getElementById("tablicaRezultata");
+            tbodyRezultati.innerHTML = "";
+
+            if (!mecevi) return;
+
+            mecevi.forEach((mec, index) => {
+                const redTablice = document.createElement("tr");
+
+                let statusBoja = "#2c3531";
+                if(mec.status === "Završeno") statusBoja = "#3b604b";
+                if(mec.status === "Odgođeno") statusBoja = "#e67e22";
+			
+				// Provjera pobjednika za svakog igrača
+    			const stilIgrac1 = mec.pobjednik === mec.igrac1 ? 'style="background-color: #d4edda; color: #155724;"' : '';
+    			const stilIgrac2 = mec.pobjednik === mec.igrac2 ? 'style="background-color: #d4edda; color: #155724;"' : '';
+
+				
+                redTablice.innerHTML = `
+                    <td>${index + 1}.</td>
+                    <td ${stilIgrac1}><strong>${mec.igrac1}</strong></td>
+        			<td ${stilIgrac2}><strong>${mec.igrac2}</strong></td>
+       				<td><strong>${mec.rezultat}</strong></td>
+                    <td style="color: ${statusBoja}; font-weight: bold;">${mec.status}</td>
+                `;
+                tbodyRezultati.appendChild(redTablice);
+            });
+        }
+
+        // Pokreni učitavanje prve datoteke odmah po dolasku na stranicu
+        window.onload = ucitajPodatkeIzDatoteke;
+    </script>
+
+    <!-- SKRIPTA ZA MOBILNI MENU -->
+    <script>
+        const menuBtn = document.querySelector('.menu-btn');
+        const dropdownContent = document.querySelector('.dropdown-content');
+
+        menuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            dropdownContent.classList.toggle('prikazi');
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!dropdownContent.contains(e.target) && !menuBtn.contains(e.target)) {
+                dropdownContent.classList.remove('prikazi');
+            }
+        });
+    </script>
+</body>
+</html>
