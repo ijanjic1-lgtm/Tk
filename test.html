@@ -126,36 +126,94 @@ function ucitajPodatkeIzDatoteke() {
 
        // Funkcija za ispis rasporeda s grupiranjem boja svaka 4 retka
 function prikaziRaspored(igraci) {
-    const tbodyRaspored = document.getElementById("tablicaRasporeda");
-    tbodyRaspored.innerHTML = "";
+    // Pronalazimo wrapper/kontejner u kojem se nalazi tablica
+    const wrapper = document.querySelector(".table-wrapper");
+    
+    // Potpuno praznimo cijeli wrapper kako bismo uklonili staru tablicu i stavili dropdown elemente
+    wrapper.innerHTML = "";
 
-    if (!igraci) return;
+    if (!igraci || igraci.length === 0) {
+        wrapper.innerHTML = "<p style='padding: 10px; color: red;'>Nema podataka za prikaz rasporeda.</p>";
+        return;
+    }
 
-    igraci.forEach((stavka, index) => {
-        const redTablice = document.createElement("tr");
+    // Grupiranje igrača u pakete od po 4 igrača
+    const velicinaGrupe = 4;
+    const brojGrupa = Math.ceil(igraci.length / velicinaGrupe);
 
-        // Logika za bojanje:
-        // Math.floor(index / 4) daje:
-        // 0 za prva četiri (0,1,2,3)
-        // 1 za iduća četiri (4,5,6,7)
-        // 2 za iduća četiri...
-        const brojGrupe = Math.floor(index / 4);
+    for (let i = 0; i < brojGrupa; i++) {
+        // Uzimamo točno 4 igrača za trenutnu grupu (npr. 0-3, 4-7, 8-11...)
+        const grupaIgraca = igraci.slice(i * velicinaGrupe, (i + 1) * velicinaGrupe);
         
-        // Ako je grupa parna (0, 2, 4...) stavi jednu boju, ako je neparna drugu
-        if (brojGrupe % 2 === 0) {
-            redTablice.style.backgroundColor = "#f9f9f9"; // Svijetlo siva/bijela
-        } else {
-            redTablice.style.backgroundColor = "#e8f0fe"; // Lagana plavkasta (možeš staviti bilo koju boju)
+        // Određivanje raspona pozicija za naslov (npr. "Pozicije 1. - 4.")
+        const odPozicije = i * velicinaGrupe + 1;
+        const doPozicije = Math.min((i + 1) * velicinaGrupe, igraci.length);
+
+        // Kreiranje glavnog rasklopnog elementa (<details>)
+        const detailsElement = document.createElement("details");
+        detailsElement.className = "piramida-dropdown";
+        
+        // Prvu grupu (prva 4 igrača) možemo ostaviti automatski otvorenom
+        if (i === 0) {
+            detailsElement.open = true;
         }
 
-        redTablice.innerHTML = `
-            <td>${stavka.pozicija}.</td>
-            <td><strong>${stavka.igrac}</strong></td>
-            <td>${stavka.red}</td>
-            <td>${stavka.bodovi}</td>
+        // Alternirajuće bojanje pozadine samog dropdown naslova (svaka iduća grupa mijenja boju)
+        const pozadinaNaslova = (i % 2 === 0) ? "#2c3e50" : "#34495e";
+
+        // Kreiranje naslova na koji se klikće (<summary>)
+        const summaryElement = document.createElement("summary");
+        summaryElement.style.backgroundColor = pozadinaNaslova;
+        summaryElement.style.color = "white";
+        summaryElement.style.padding = "12px 15px";
+        summaryElement.style.fontWeight = "bold";
+        summaryElement.style.cursor = "pointer";
+        summaryElement.style.borderRadius = "4px";
+        summaryElement.style.marginBottom = "5px";
+        summaryElement.style.display = "flex";
+        summaryElement.style.justifyContent = "space-between";
+        summaryElement.innerHTML = `<span>📋 Igrači od ${odPozicije}. do ${doPozicije}. mjesta</span> <span>▼</span>`;
+        
+        detailsElement.appendChild(summaryElement);
+
+        // Kreiranje mini tablice za ova 4 igrača unutar dropdowna
+        const tablica = document.createElement("table");
+        tablica.style.width = "100%";
+        tablica.style.borderCollapse = "collapse";
+        tablica.style.marginBottom = "15px";
+        tablica.style.backgroundColor = (i % 2 === 0) ? "#f9f9f9" : "#e8f0fe"; // Zadržano vaše alternirajuće bojanje za unutrašnjost
+
+        // Zaglavlje mini tablice
+        tablica.innerHTML = `
+            <thead>
+                <tr style="background-color: #f1f2f6; text-align: left;">
+                    <th style="padding: 10px; border: 1px solid #ddd;">Poz.</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Igrač</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Red</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Bodovi</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
         `;
-        tbodyRaspored.appendChild(redTablice);
-    });
+
+        const tbody = tablica.querySelector("tbody");
+
+        // Punjenje mini tablice s ta 4 igrača
+        grupaIgraca.forEach(stavka => {
+            const redTablice = document.createElement("tr");
+            redTablice.style.borderBottom = "1px solid #ddd";
+            redTablice.innerHTML = `
+                <td style="padding: 10px;">${stavka.pozicija}.</td>
+                <td style="padding: 10px;"><strong>${stavka.igrac}</strong></td>
+                <td style="padding: 10px;">${stavka.red}</td>
+                <td style="padding: 10px;">${stavka.bodovi}</td>
+            `;
+            tbody.appendChild(redTablice);
+        });
+
+        detailsElement.appendChild(tablica);
+        wrapper.appendChild(detailsElement);
+    }
 }
 
 
