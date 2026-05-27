@@ -19,9 +19,8 @@
                     </div>
                 </div>
                 <a href="index.html" class="logo-area">
-                   <!--     <div class="logo-img">🎾</div>-->
-					 <img src="./Slike/logo.png" alt="TK Slatina Logo" class="logo-img">
-			     <span>TK Slatina</span>
+                    <img src="./Slike/logo.png" alt="TK Slatina Logo" class="logo-img">
+                    <span>TK Slatina</span>
                 </a>
             </div>
         </div>
@@ -32,46 +31,49 @@
             <div class="tournaments-header">
                 <h2>Piramida Slatina 2026</h2>
                 
-                <!-- Ovdje sami definirate koja kola imate. Value mora odgovarati nazivu .json datoteke! -->
                 <select id="odabirKola" class="tournament-select" onchange="ucitajPodatkeIzDatoteke()">
                     <option value="kolo1">1. Kolo</option>
                     <option value="kolo2">2. Kolo</option>
-					<option value="kolo3">3. Kolo</option>
-					<option value="kolo4">4. Kolo</option>
-					<option value="kolo5" selected>5. Kolo</option>
+                    <option value="kolo3">3. Kolo</option>
+                    <option value="kolo4">4. Kolo</option>
+                    <option value="kolo5" selected>5. Kolo</option>
                 </select>
             </div>
             
             <p style="margin-bottom: 30px;">Odaberite željeno kolo iz izbornika kako biste vidjeli raspored igrača i rezultate odigranih mečeva.</p>
 
-  <!-- TABLICA 1: RASPORED -->
-            <div>
-                <h3 style="color: #2c3e50;">📋 Ljestvica igrača za odabrano kolo</h3>
+            <!-- DIO 1: STALNO VIDLJIVA LJESTVICA POREDKA -->
+            <div style="margin-bottom: 35px;">
+                <h3 style="color: #2c3e50;">📋 Trenutni poredak igrača (Stalno vidljivo)</h3>
                 <div class="table-wrapper">
                     <table>
                         <thead>
-                            <tr>
-                                <th>Poz.</th>
+                            <tr style="background-color: #f1f2f6; text-align: left;">
+                                <th style="width: 60px;">Poz.</th>
                                 <th>Igrač</th>
-								<th>Red</th>
-                				<th>Bodovi</th>
+                                <th style="width: 80px;">Red</th>
+                                <th style="width: 120px;">Bodovi</th>
                             </tr>
                         </thead>
-                        <tbody id="tablicaRasporeda"></tbody>
+                        <tbody id="tablicaStalnogPoretka"></tbody>
                     </table>
                 </div>
             </div>
-			<div>
-			<p style="margin-bottom: 30px;"> </p>
-			</div>
-            <!-- TABLICA 2: REZULTATI -->
-            <div>
+
+            <!-- DIO 2: DROPDOWN MENIJI GRUPIRANI PO REDOVIMA IZ PIRAMIDE -->
+            <div style="margin-bottom: 35px;">
+                <h3 style="color: #2c3e50;">🗂️ Pregled igrača po redovima piramide</h3>
+                <div id="kontejnerZaDropdownove"></div>
+            </div>
+
+            <!-- DIO 3: REZULTATI MEČEVA -->
+            <div style="margin-bottom: 35px;">
                 <h3 style="color: #2c3e50;">🏆 Rezultati mečeva odabranog kola</h3>
                 <div class="table-wrapper">
                     <table>
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th style="width: 50px;">#</th>
                                 <th>Igrač 1</th>
                                 <th>Igrač 2</th>
                                 <th>Rezultat</th>
@@ -82,6 +84,70 @@
                     </table>
                 </div>
             </div>
+
+            <!-- DIO 4: UPÚĆENI IZAZOVI -->
+            <div style="margin-bottom: 35px;">
+                <h3 style="color: #2c3e50;">⚔️ Upućeni izazovi u kolu</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;">#</th>
+                                <th>Izazivač</th>
+                                <th>Izazvani igrač</th>
+                                <th>Datum izazova</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablicaIzazova"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- DIO 5: NEDOLASCI -->
+            <div style="margin-bottom: 35px;">
+                <h3 style="color: #2c3e50;">💤 Igrači na čekanju / opravdani nedolasci</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;">#</th>
+                                <th>Igrač</th>
+                                <th>Razlog / Napomena</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablicaNedolazaka"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- DIO 6: TABLICA BODOVANJA (FIKSNA STRUKTURA) -->
+            <div style="margin-bottom: 35px;">
+                <h3 style="color: #2c3e50;">📊 Sustav bodovanja po redovima</h3>
+                <div class="table-wrapper" style="max-width: 400px;">
+                    <table>
+                        <thead>
+                            <tr style="background-color: #34495e; color: white;">
+                                <th style="text-align: center; padding: 10px;">Red</th>
+                                <th style="text-align: center; padding: 10px;">Pobjeda</th>
+                                <th style="text-align: center; padding: 10px;">Poraz</th>
+                            </tr>
+                        </thead>
+                        <tbody style="text-align: center;">
+                            <tr><td>1</td><td>1000</td><td>333</td></tr>
+                            <tr style="background-color: #f9f9f9;"><td>2</td><td>667</td><td>222</td></tr>
+                            <tr><td>3</td><td>445</td><td>148</td></tr>
+                            <tr style="background-color: #f9f9f9;"><td>4</td><td>297</td><td>99</td></tr>
+                            <tr><td>5</td><td>198</td><td>66</td></tr>
+                            <tr style="background-color: #f9f9f9;"><td>6</td><td>132</td><td>44</td></tr>
+                            <tr><td>7</td><td>88</td><td>29</td></tr>
+                            <tr style="background-color: #f9f9f9;"><td>8</td><td>59</td><td>19</td></tr>
+                            <tr><td>9</td><td>39</td><td>13</td></tr>
+                            <tr style="background-color: #f9f9f9;"><td>10</td><td>26</td><td>9</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </section>
     </main>
 
@@ -89,25 +155,19 @@
         <p>&copy; 2026 Teniski klub Slatina. Sva prava pridržana.</p>
     </footer>
 
-    <!-- JAVASCRIPT ZA DOHVAĆANJE VANJSKIH DATOTEKA -->
     <script>
 window.onload = function() {
     var select = document.getElementById("odabirKola");
-    
-    // Postavlja indeks na zadnju dostupnu opciju
     select.selectedIndex = select.options.length - 1;
-    
-    // Ručno pokreni funkciju da se odmah učitaju podaci za to zadnje kolo
     ucitajPodatkeIzDatoteke();
 };
 
-
 function ucitajPodatkeIzDatoteke() {
-    const selectElement = document.getElementById("odabirKola"); // Pomaknuto unutra
+    const selectElement = document.getElementById("odabirKola"); 
     const odabranoKolo = selectElement.value;
     const putanja = `./Rezultati/${odabranoKolo}.json`;
 
-    console.log("Pokušavam učitati:", putanja); // Provjeri u konzoli (F12) što piše
+    console.log("Pokušavam učitati:", putanja);
 
     fetch(putanja)
         .then(response => {
@@ -115,8 +175,15 @@ function ucitajPodatkeIzDatoteke() {
             return response.json();
         })
         .then(podaci => {
-            prikaziRaspored(podaci.raspored);
+            // Sortiranje radimo odmah na početku kako bi sve tablice koristile isti točan poredak
+            if(podaci.raspored) {
+                podaci.raspored.sort((a, b) => b.bodovi - a.bodovi);
+            }
+            prikaziStalniPoredak(podaci.raspored);
+            prikaziDropdownPoRedovima(podaci.raspored);
             prikaziRezultate(podaci.rezultati);
+            prikaziIzazove(podaci.izazovi);
+            prikaziNedolaske(podaci.nedolasci);
         })
         .catch(error => {
             console.error("Greška detaljno:", error);
@@ -124,149 +191,42 @@ function ucitajPodatkeIzDatoteke() {
         });
 }
 
-
-       // Funkcija za ispis rasporeda s grupiranjem boja svaka 4 retka
-function prikaziRaspored(igraci) {
-    // Pronalazimo wrapper/kontejner u kojem se nalazi tablica
-    const wrapper = document.querySelector(".table-wrapper");
-    
-    // Potpuno praznimo cijeli wrapper kako bismo uklonili staru tablicu i stavili dropdown elemente
-    wrapper.innerHTML = "";
+// 1. FUNKCIJA: PRIKAZ STALNO VIDLJIVE LJESTVICE (S OBOJENIM REDOVIMA)
+function prikaziStalniPoredak(igraci) {
+    const tBody = document.getElementById("tablicaStalnogPoretka");
+    tBody.innerHTML = "";
 
     if (!igraci || igraci.length === 0) {
-        wrapper.innerHTML = "<p style='padding: 10px; color: red;'>Nema podataka za prikaz rasporeda.</p>";
+        tBody.innerHTML = "<tr><td colspan='4' style='padding: 10px; color: red; text-align:center;'>Nema podataka za prikaz.</td></tr>";
         return;
     }
 
-    // Grupiranje igrača u pakete od po 4 igrača
-    const velicinaGrupe = 4;
-    const brojGrupa = Math.ceil(igraci.length / velicinaGrupe);
+    igraci.forEach((stavka, indeks) => {
+        const pozicija = indeks + 1;
+        const redTablice = document.createElement("tr");
+        redTablice.style.borderBottom = "1px solid #ddd";
 
-    for (let i = 0; i < brojGrupa; i++) {
-        // Uzimamo točno 4 igrača za trenutnu grupu (npr. 0-3, 4-7, 8-11...)
-        const grupaIgraca = igraci.slice(i * velicinaGrupe, (i + 1) * velicinaGrupe);
-        
-        // Određivanje raspona pozicija za naslov (npr. "Pozicije 1. - 4.")
-        const odPozicije = i * velicinaGrupe + 1;
-        const doPozicije = Math.min((i + 1) * velicinaGrupe, igraci.length);
-
-        // Kreiranje glavnog rasklopnog elementa (<details>)
-        const detailsElement = document.createElement("details");
-        detailsElement.className = "piramida-dropdown";
-        
-        // Prvu grupu (prva 4 igrača) možemo ostaviti automatski otvorenom
-        if (i === 0) {
-            detailsElement.open = true;
+        // Bojanje redova: Prvih 8 blago zeleno, drugih 8 blago narančasto
+        if (pozicija <= 8) {
+            redTablice.style.backgroundColor = "#e8f8f5"; // Blago zelena
+        } else if (pozicija > 8 && pozicija <= 16) {
+            redTablice.style.backgroundColor = "#fef9e7"; // Blago narančasta
         }
 
-        // Alternirajuće bojanje pozadine samog dropdown naslova (svaka iduća grupa mijenja boju)
-        const pozadinaNaslova = (i % 2 === 0) ? "#2c3e50" : "#34495e";
-
-        // Kreiranje naslova na koji se klikće (<summary>)
-        const summaryElement = document.createElement("summary");
-        summaryElement.style.backgroundColor = pozadinaNaslova;
-        summaryElement.style.color = "white";
-        summaryElement.style.padding = "12px 15px";
-        summaryElement.style.fontWeight = "bold";
-        summaryElement.style.cursor = "pointer";
-        summaryElement.style.borderRadius = "4px";
-        summaryElement.style.marginBottom = "5px";
-        summaryElement.style.display = "flex";
-        summaryElement.style.justifyContent = "space-between";
-        summaryElement.innerHTML = `<span>📋 Igrači od ${odPozicije}. do ${doPozicije}. mjesta</span> <span>▼</span>`;
-        
-        detailsElement.appendChild(summaryElement);
-
-        // Kreiranje mini tablice za ova 4 igrača unutar dropdowna
-        const tablica = document.createElement("table");
-        tablica.style.width = "100%";
-        tablica.style.borderCollapse = "collapse";
-        tablica.style.marginBottom = "15px";
-        tablica.style.backgroundColor = (i % 2 === 0) ? "#f9f9f9" : "#e8f0fe"; // Zadržano vaše alternirajuće bojanje za unutrašnjost
-
-        // Zaglavlje mini tablice
-        tablica.innerHTML = `
-            <thead>
-                <tr style="background-color: #f1f2f6; text-align: left;">
-                    <th style="padding: 10px; border: 1px solid #ddd;">Poz.</th>
-                    <th style="padding: 10px; border: 1px solid #ddd;">Igrač</th>
-                    <th style="padding: 10px; border: 1px solid #ddd;">Red</th>
-                    <th style="padding: 10px; border: 1px solid #ddd;">Bodovi</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
+        redTablice.innerHTML = `
+            <td style="padding: 10px; border: 1px solid #ddd;">${pozicija}.</td>
+            <td style="padding: 10px; border: 1px solid #ddd;"><strong>${stavka.igrac}</strong></td>
+            <td style="padding: 10px; border: 1px solid #ddd;">${stavka.red}. red</td>
+            <td style="padding: 10px; border: 1px solid #ddd;">${stavka.bodovi} bodova</td>
         `;
-
-        const tbody = tablica.querySelector("tbody");
-
-        // Punjenje mini tablice s ta 4 igrača
-        grupaIgraca.forEach(stavka => {
-            const redTablice = document.createElement("tr");
-            redTablice.style.borderBottom = "1px solid #ddd";
-            redTablice.innerHTML = `
-                <td style="padding: 10px;">${stavka.pozicija}.</td>
-                <td style="padding: 10px;"><strong>${stavka.igrac}</strong></td>
-                <td style="padding: 10px;">${stavka.red}</td>
-                <td style="padding: 10px;">${stavka.bodovi}</td>
-            `;
-            tbody.appendChild(redTablice);
-        });
-
-        detailsElement.appendChild(tablica);
-        wrapper.appendChild(detailsElement);
-    }
+        tBody.appendChild(redTablice);
+    });
 }
 
+// 2. FUNKCIJA: DROPDOWN IZRACI GRUPIRANI PREMA "RED" VRIJEDNOSTI IZ JSON-a
+function prikaziDropdownPoRedovima(igraci) {
+    const kontejner = document.getElementById("kontejnerZaDropdownove");
+    kontejner.innerHTML = "";
 
-        // Funkcija za ispis rezultata
-        function prikaziRezultate(mecevi) {
-            const tbodyRezultati = document.getElementById("tablicaRezultata");
-            tbodyRezultati.innerHTML = "";
+    if (!igraci || igraci.length === 0) return;
 
-            if (!mecevi) return;
-
-            mecevi.forEach((mec, index) => {
-                const redTablice = document.createElement("tr");
-
-                let statusBoja = "#2c3531";
-                if(mec.status === "Završeno") statusBoja = "#3b604b";
-                if(mec.status === "Odgođeno") statusBoja = "#e67e22";
-			
-				// Provjera pobjednika za svakog igrača
-    			const stilIgrac1 = mec.pobjednik === mec.igrac1 ? 'style="background-color: #d4edda; color: #155724;"' : '';
-    			const stilIgrac2 = mec.pobjednik === mec.igrac2 ? 'style="background-color: #d4edda; color: #155724;"' : '';
-
-				
-                redTablice.innerHTML = `
-                    <td>${index + 1}.</td>
-                    <td ${stilIgrac1}><strong>${mec.igrac1}</strong></td>
-        			<td ${stilIgrac2}><strong>${mec.igrac2}</strong></td>
-       				<td><strong>${mec.rezultat}</strong></td>
-                    <td style="color: ${statusBoja}; font-weight: bold;">${mec.status}</td>
-                `;
-                tbodyRezultati.appendChild(redTablice);
-            });
-        }
-
-        // Pokreni učitavanje prve datoteke odmah po dolasku na stranicu
-        window.onload = ucitajPodatkeIzDatoteke;
-    </script>
-
-    <!-- SKRIPTA ZA MOBILNI MENU -->
-    <script>
-        const menuBtn = document.querySelector('.menu-btn');
-        const dropdownContent = document.querySelector('.dropdown-content');
-
-        menuBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            dropdownContent.classList.toggle('prikazi');
-        });
-
-        document.addEventListener('click', function(e) {
-            if (!dropdownContent.contains(e.target) && !menuBtn.contains(e.target)) {
-                dropdownContent.classList.remove('prikazi');
-            }
-        });
-    </script>
-</body>
-</html>
