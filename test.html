@@ -120,7 +120,7 @@
                 </div>
             </div>
 
-            <!-- DIO 6: TABLICA BODOVANJA (FIKSNA STRUKTURA) -->
+            <!-- DIO 6: TABLICA BODOVANJA -->
             <div style="margin-bottom: 35px;">
                 <h3 style="color: #2c3e50;">📊 Sustav bodovanja po redovima</h3>
                 <div class="table-wrapper" style="max-width: 400px;">
@@ -175,29 +175,30 @@ function ucitajPodatkeIzDatoteke() {
             return response.json();
         })
         .then(podaci => {
-            // Sortiranje radimo odmah na početku kako bi sve tablice koristile isti točan poredak
-            if(podaci.raspored) {
-                podaci.raspored.sort((a, b) => b.bodovi - a.bodovi);
+            // Sigurno sortiranje: pretvaramo bodove u broj u slučaju da su u JSON-u zapisani kao tekst
+            if (podaci.raspored && Array.isArray(podaci.raspored)) {
+                podaci.raspored.sort((a, b) => Number(b.bodovi) - Number(a.bodovi));
             }
-            prikaziStalniPoredak(podaci.raspored);
-            prikaziDropdownPoRedovima(podaci.raspored);
-            prikaziRezultate(podaci.rezultati);
-            prikaziIzazove(podaci.izazovi);
-            prikaziNedolaske(podaci.nedolasci);
+            
+            // Pozivanje funkcija uz sigurnosnu provjeru da se izbjegne rušenje koda
+            prikaziStalniPoredak(podaci.raspored || []);
+            prikaziDropdownPoRedovima(podaci.raspored || []);
+            prikaziRezultate(podaci.rezultati || []);
+            prikaziIzazove(podaci.izazovi || []);
+            prikaziNedolaske(podaci.nedolasci || []);
         })
         .catch(error => {
             console.error("Greška detaljno:", error);
-            alert("Greška: " + error.message);
+            alert("Greška kod učitavanja podataka: " + error.message);
         });
 }
 
-// 1. FUNKCIJA: PRIKAZ STALNO VIDLJIVE LJESTVICE (S OBOJENIM REDOVIMA)
 function prikaziStalniPoredak(igraci) {
     const tBody = document.getElementById("tablicaStalnogPoretka");
     tBody.innerHTML = "";
 
-    if (!igraci || igraci.length === 0) {
-        tBody.innerHTML = "<tr><td colspan='4' style='padding: 10px; color: red; text-align:center;'>Nema podataka za prikaz.</td></tr>";
+    if (igraci.length === 0) {
+        tBody.innerHTML = "<tr><td colspan='4' style='padding: 15px; text-align:center; color: red;'>Nema podataka o rasporedu u JSON datoteci.</td></tr>";
         return;
     }
 
@@ -206,27 +207,26 @@ function prikaziStalniPoredak(igraci) {
         const redTablice = document.createElement("tr");
         redTablice.style.borderBottom = "1px solid #ddd";
 
-        // Bojanje redova: Prvih 8 blago zeleno, drugih 8 blago narančasto
+        // Bojanje: Prvih 8 blago zeleno, drugih 8 blago narančasto
         if (pozicija <= 8) {
-            redTablice.style.backgroundColor = "#e8f8f5"; // Blago zelena
+            redTablice.style.backgroundColor = "#e8f8f5"; 
         } else if (pozicija > 8 && pozicija <= 16) {
-            redTablice.style.backgroundColor = "#fef9e7"; // Blago narančasta
+            redTablice.style.backgroundColor = "#fef9e7"; 
         }
 
         redTablice.innerHTML = `
             <td style="padding: 10px; border: 1px solid #ddd;">${pozicija}.</td>
-            <td style="padding: 10px; border: 1px solid #ddd;"><strong>${stavka.igrac}</strong></td>
-            <td style="padding: 10px; border: 1px solid #ddd;">${stavka.red}. red</td>
-            <td style="padding: 10px; border: 1px solid #ddd;">${stavka.bodovi} bodova</td>
+            <td style="padding: 10px; border: 1px solid #ddd;"><strong>${stavka.igrac || 'Nepoznato'}</strong></td>
+            <td style="padding: 10px; border: 1px solid #ddd;">${stavka.red || '-'}. red</td>
+            <td style="padding: 10px; border: 1px solid #ddd;">${stavka.bodovi || 0} bodova</td>
         `;
         tBody.appendChild(redTablice);
     });
 }
 
-// 2. FUNKCIJA: DROPDOWN IZRACI GRUPIRANI PREMA "RED" VRIJEDNOSTI IZ JSON-a
 function prikaziDropdownPoRedovima(igraci) {
     const kontejner = document.getElementById("kontejnerZaDropdownove");
     kontejner.innerHTML = "";
 
-    if (!igraci || igraci.length === 0) return;
+    if (igraci.length === 0) return;
 
