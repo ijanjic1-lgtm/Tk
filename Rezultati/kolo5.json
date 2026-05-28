@@ -78,9 +78,9 @@
 		{
 		"igrac1": "Janjić Ivan",
 		"igrac2": "Mikić Mario",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "6:7 7:6 10:5",
+		"status": "Završeno",
+		"pobjednik": "Janjić Ivan"
 		},
 		{
 		"igrac1": "Ostojić Milan",
@@ -99,9 +99,9 @@
 		{
 		"igrac1": "Majačić Mario",
 		"igrac2": "Kligl Matej",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "6:1 5:7 10:3",
+		"status": "Završeno",
+		"pobjednik": "Majačić Mario"
 		},
 		{
 		"igrac1": "Manceta Igor",
@@ -169,9 +169,9 @@
 		{
 		"igrac1": "Medved Daniel",
 		"igrac2": "Srednoselac Ivica",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "6:3 6:0",
+		"status": "Završeno",
+		"pobjednik": "Medved Daniel"
 		}
 	]
 }
