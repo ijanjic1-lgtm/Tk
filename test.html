@@ -6,6 +6,19 @@
     <title>TK Slatina - Natjecanja</title>
     <link rel="stylesheet" href="stil.css">
     <style>
+		        /* Posebni stilovi za tablicu ozlijeđenih */
+        .tablica-ozlijedeni tbody tr {
+            background-color: #fdf2f2 !important; /* Blaga crvena/roza pozadina za suosjećanje */
+            border-bottom: 1px solid #f5c6cb;
+        }
+        .tablica-ozlijedeni tbody tr:hover {
+            background-color: #fbebeb !important;
+        }
+        .tablica-ozlijedeni th {
+            background-color: #cb4335 !important; /* Crvena boja zaglavlja umjesto standardne plave/tamne */
+            color: white;
+        }
+
 	    /* Stilovi za vizualni efekt piramide */
         #kontejnerZaRedove {
             display: flex;
@@ -200,6 +213,46 @@
                     </table>
                 </div>
             </div>
+		            <!-- TABLICA: POPIS OZLIJEĐENIH ČLANOVA (STATIČKA) -->
+            <div style="margin-bottom: 40px; margin-top: 40px;">
+                <h3 style="color: #2c3e50; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                    ❤️‍🩹 Brz oporavak paloj braći
+                </h3>
+                <p style="margin-bottom: 15px; font-size: 14px; color: #7f8c8d; font-style: italic;">
+                    Popis članova kluba koji su zbog ozljeda morali privremeno ili trajno napustiti ovogodišnju piramidu. Želimo im što brži povratak na terene!
+                </p>
+                
+                <div class="table-wrapper">
+                    <table class="tablica-ozlijedeni">
+                        <thead>
+                            <tr>
+                                <th style="width: 80px;">Status</th>
+                                <th>Igrač</th>
+                                <th>Napomena / Ozljeda</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center; font-size: 18px;">🤕</td>
+                                <td><strong>Božidar Kelava Lolić</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; font-size: 18px;">🩹</td>
+                                <td><strong>Marko Randelj</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; font-size: 18px;">🩼</td>
+                                <td><strong>Mario Vučeta</strong></td>
+                            </tr>
+							<tr>
+                                <td style="text-align: center; font-size: 18px;">🩹</td>
+                                <td><strong>Ivan Tomljanović</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </section>
     </main>
 
