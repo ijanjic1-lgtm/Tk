@@ -209,6 +209,9 @@
 
     <!-- JAVASCRIPT LOGIKA -->
 	<script>
+      // Globalna varijabla koja čuva interval brojača (kako bismo ga mogli resetirati pri promjeni kola)
+    let aktivniIntervalBrojaca;
+
     window.onload = function() {
         var select = document.getElementById("odabirKola");
         select.selectedIndex = select.options.length - 1;
@@ -230,13 +233,75 @@
             .then(podaci => {
                 prikaziRanglistu(podaci.raspored);
                 prikaziRezultate(podaci.rezultati);
-                prikaziPoRedovima(podaci.raspored); // NOVA LINIJA: Pokreće punjenje drop-down tablica
+                prikaziPoRedovima(podaci.raspored);
+                
+                // NOVA LOGIKA: Pokreće brojač s datumom iz JSON-a ako taj ključ postoji
+                if (podaci.krajKola) {
+                    pokreniBrojac(podaci.krajKola);
+                } else {
+                    document.getElementById("countdownNaslov").innerHTML = "Vrijeme za odigravanje mečeva";
+                    document.querySelector(".countdown-sat").innerHTML = "<span style='color: #cbd5e1; padding: 10px;'>Datum završetka nije definiran.</span>";
+                }
             })
             .catch(error => {
                 console.error("Greška detaljno:", error);
                 alert("Greška: " + error.message);
             });
     }
+
+    function pokreniBrojac(stringDatumaIzJsona) {
+        // Ako već radi brojač od prethodno odabranog kola, ugasit ćemo ga
+        if (aktivniIntervalBrojaca) {
+            clearInterval(aktivniIntervalBrojaca);
+        }
+
+        // Pretvaramo tekstualni datum iz JSON-a (npr. "2026-06-07T23:59:59") u milisekunde
+        const datumZavrsetka = new Date(stringDatumaIzJsona).getTime();
+
+        // Vraćamo zadani izgled sata ako je prethodno kolo bilo završeno
+        document.getElementById("countdownNaslov").innerHTML = "Vrijeme za odigravanje mečeva";
+        const satKontejner = document.querySelector(".countdown-sat");
+        
+        // Provjera drži li kontejner poruku o završetku; ako da, vraćamo originalnu HTML strukturu satova
+        if (satKontejner.querySelector('span[style*="color"]')) {
+            satKontejner.innerHTML = `
+                <div class="vrijeme-bloke"><span id="dani">00</span><label>Dana</label></div>
+                <div class="vrijeme-separator">:</div>
+                <div class="vrijeme-bloke"><span id="sati">00</span><label>Sati</label></div>
+                <div class="vrijeme-separator">:</div>
+                <div class="vrijeme-bloke"><span id="minute">00</span><label>Min.</label></div>
+                <div class="vrijeme-separator">:</div>
+                <div class="vrijeme-bloke"><span id="sekunde">00</span><label>Sek.</label></div>
+            `;
+        }
+
+        aktivniIntervalBrojaca = setInterval(function() {
+            const sada = new Date().getTime();
+            const razlika = datumZavrsetka - sada;
+
+            // Ako je odbrojavanje završilo
+            if (razlika < 0) {
+                clearInterval(aktivniIntervalBrojaca);
+                document.getElementById("countdownNaslov").innerHTML = "Kolo je završeno! 🏁";
+                document.querySelector(".countdown-sat").innerHTML = "<span style='color: #ef4444; font-weight: bold; padding: 10px;'>Čeka se unos novog kola...</span>";
+                return;
+            }
+
+            // Izračun dana, sati, minuta i sekundi
+            const dani = Math.floor(razlika / (1000 * 60 * 60 * 24));
+            const sati = Math.floor((razlika % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minute = Math.floor((razlika % (1000 * 60 * 60)) / (1000 * 60));
+            const sekunde = Math.floor((razlika % (1000 * 60)) / 1000);
+
+            // Prikaz rezultata u HTML elementima
+            document.getElementById("dani").innerHTML = dani < 10 ? "0" + dani : dani;
+            document.getElementById("sati").innerHTML = sati < 10 ? "0" + sati : sati;
+            document.getElementById("minute").innerHTML = minute < 10 ? "0" + minute : minute;
+            document.getElementById("sekunde").innerHTML = sekunde < 10 ? "0" + sekunde : sekunde;
+
+        }, 1000);
+    }
+
 
     function prikaziRanglistu(igraci) {
         const tbodyRanglista = document.getElementById("tablicaRangliste");
