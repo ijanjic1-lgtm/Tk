@@ -6,12 +6,13 @@
     <title>TK Slatina - Natjecanja</title>
     <link rel="stylesheet" href="stil.css">
     <style>
-	        /* Stilovi za drop-down po redovima */
+	         /* Stilovi za pojedinačne drop-down redove */
         .red-dropdown {
             background-color: #f8f9fa;
             border: 1px solid #e2e8f0;
             border-radius: 6px;
             padding: 10px;
+            margin-bottom: 8px;
             cursor: pointer;
         }
         .red-dropdown summary {
@@ -25,6 +26,7 @@
             border-bottom: 2px solid #3498db;
             color: #3498db;
         }
+
 		
         /* Stilovi za legendu iznad rangliste */
         .legend-container {
@@ -116,60 +118,12 @@
                 </div>
             </div>
 
-			 <!-- NOVO: DINAMIČKI DROP-DOWN PO REDOVIMA -->
+			<!-- SEKCIJA ZA DINAMIČKE DROP-DOWN MENIJE PO REDOVIMA -->
             <div style="margin-bottom: 40px;">
                 <h3 style="color: #2c3e50; margin-bottom: 15px;">📐 Pregled igrača po redovima piramide</h3>
-                
-                <!-- Grupa 1 -->
-                <details class="red-dropdown">
-                    <summary>🔽 Igrači iz 1., 2., 3. i 4. reda</summary>
-                    <div class="table-wrapper">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Pozicija</th>
-                                    <th>Igrač</th>
-                                    <th>Red</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tablicaRedovi1_4"></tbody>
-                        </table>
-                    </div>
-                </details>
+                <div id="kontejnerZaRedove"></div>
+            </div>
 
-                <!-- Grupa 2 -->
-                <details class="red-dropdown" style="margin-top: 10px;">
-                    <summary>🔽 Igrači iz 5., 6., 7. i 8. reda</summary>
-                    <div class="table-wrapper">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Pozicija</th>
-                                    <th>Igrač</th>
-                                    <th>Red</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tablicaRedovi5_8"></tbody>
-                        </table>
-                    </div>
-                </details>
-
-                <!-- Grupa 3 -->
-                <details class="red-dropdown" style="margin-top: 10px;">
-                    <summary>🔽 Igrači iz 9. i 10. reda</summary>
-                    <div class="table-wrapper">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Pozicija</th>
-                                    <th>Igrač</th>
-                                    <th>Red</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tablicaRedovi9_10"></tbody>
-                        </table>
-                    </div>
-                </details>
             </div>
 			
 			<!-- TABLICA 2: RASPORED I REZULTATI MEČEVA -->
@@ -326,41 +280,72 @@
         });
     }
 
-	function prikaziPoRedovima(igraci) {
-        // Dohvaćanje sva tri tbody elementa
-        const tbody1_4 = document.getElementById("tablicaRedovi1_4");
-        const tbody5_8 = document.getElementById("tablicaRedovi5_8");
-        const tbody9_10 = document.getElementById("tablicaRedovi9_10");
+	    function prikaziPoRedovima(igraci) {
+        const kontejner = document.getElementById("kontejnerZaRedove");
+        kontejner.innerHTML = ""; // Pražnjenje kontejnera prije novog punjenja
 
-        // Pražnjenje tablica prije novog punjenja
-        tbody1_4.innerHTML = "";
-        tbody5_8.innerHTML = "";
-        tbody9_10.innerHTML = "";
+        if (!igraci || igraci.length === 0) return;
 
-        if (!igraci) return;
-
-        // Ovdje NE sortiramo po bodovima, nego ostavljamo originalni redoslijed iz JSON-a (po pozicijama)
+        // 1. Grupiranje igrača po redovima (od 1 do 10)
+        const grupiraniPoRedovima = {};
+        
         igraci.forEach(stavka => {
-            const redTablice = document.createElement("tr");
-            
-            // Kreiranje sadržaja retka s traženim stupcima: Pozicija, Igrač, Red
-            redTablice.innerHTML = "<td>" + stavka.pozicija + ".</td>" +
-                                   "<td><strong>" + stavka.igrac + "</strong></td>" +
-                                   "<td>" + stavka.red + ". red</td>";
-
-            // Pretvaramo vrijednost 'red' u broj radi lakše provjere uvjeta
-            const brojReda = Number(stavka.red);
-
-            // Razvrstavanje u odgovarajući drop-down ovisno o redu
-            if (brojReda >= 1 && brojReda <= 4) {
-                tbody1_4.appendChild(redTablice);
-            } else if (brojReda >= 5 && brojReda <= 8) {
-                tbody5_8.appendChild(redTablice);
-            } else if (brojReda >= 9 && brojReda <= 10) {
-                tbody9_10.appendChild(redTablice);
+            const brojReda = stavka.red;
+            if (!grupiraniPoRedovima[brojReda]) {
+                grupiraniPoRedovima[brojReda] = [];
             }
+            grupiraniPoRedovima[brojReda].push(stavka);
+        });
+
+        // 2. Prolazak kroz svaki pronađeni red i kreiranje drop-down izbornika
+        // Sortiramo ključeve (brojeve redova) od manjeg prema većem (1, 2, 3...)
+        Object.keys(grupiraniPoRedovima).sort((a, b) => Number(a) - Number(b)).forEach(brojReda => {
+            const igraciURedu = grupiraniPoRedovima[brojReda];
+
+            // Kreiramo glavni <details> element (drop-down)
+            const detailsElement = document.createElement("details");
+            detailsElement.className = "red-dropdown";
+
+            // Kreiramo <summary> (naslov izbornika koji odgovara redu)
+            const summaryElement = document.createElement("summary");
+            summaryElement.innerHTML = "🔽 " + brojReda + ". Red Piramide";
+            detailsElement.appendChild(summaryElement);
+
+            // Kreiramo omotač za tablicu (table-wrapper) zbog responzivnosti na mobitelima
+            const tableWrapper = document.createElement("div");
+            tableWrapper.className = "table-wrapper";
+
+            // Kreiramo samu tablicu i njezino zaglavlje
+            const tablica = document.createElement("table");
+            tablica.innerHTML = 
+                "<thead>" +
+                    "<tr>" +
+                        "<th>Pozicija</th>" +
+                        "<th>Igrač</th>" +
+                        "<th>Red</th>" +
+                    "</tr>" +
+                "</thead>";
+
+            // Kreiramo tbody u koji ćemo staviti igrače tog specifičnog reda
+            const tbody = document.createElement("tbody");
+
+            // Punimo tbody igračima koji pripadaju ovom redu
+            igraciURedu.forEach(stavka => {
+                const redTablice = document.createElement("tr");
+                redTablice.innerHTML = "<td>" + stavka.pozicija + ".</td>" +
+                                       "<td><strong>" + stavka.igrac + "</strong></td>" +
+                                       "<td>" + stavka.red + ". red</td>";
+                tbody.appendChild(redTablice);
+            });
+
+            // Sklapamo sve elemente zajedno i dodajemo na stranicu
+            tablica.appendChild(tbody);
+            tableWrapper.appendChild(tablica);
+            detailsElement.appendChild(tableWrapper);
+            kontejner.appendChild(detailsElement);
         });
     }
+
 		
     // SKRIPTA ZA MOBILNI MENU
     const menuBtn = document.querySelector('.menu-btn');
