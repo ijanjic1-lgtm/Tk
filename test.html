@@ -6,6 +6,49 @@
     <title>TK Slatina - Natjecanja</title>
     <link rel="stylesheet" href="stil.css">
     <style>
+		/*Zajebancija sa rezultatima*/
+		        /* --- UKLANJANJE SKROLANJA ZA TABLICU REZULTATA NA MOBITELIMA --- */
+        
+        /* Ciljamo isključivo tablicu rezultata */
+        #tablicaRezultata, 
+        #tablicaRezultataContainer table {
+            table-layout: fixed !important; /* Prisiljava tablicu da poštuje zadane širine stupaca */
+            width: 100% !important;
+            white-space: normal !important; /* Dopušta prelamanje teksta (imena igrača) */
+        }
+
+        /* Precizno definiranje širine stupaca u postocima (ukupno 100%) */
+        #tablicaRezultataContainer th:nth-child(1), #tablicaRezultata td:nth-child(1) { width: 33%; } /* Igrač 1 */
+        #tablicaRezultataContainer th:nth-child(2), #tablicaRezultata td:nth-child(2) { width: 33%; } /* Igrač 2 */
+        #tablicaRezultataContainer th:nth-child(3), #tablicaRezultata td:nth-child(3) { width: 19%; } /* Rezultat */
+        #tablicaRezultataContainer th:nth-child(4), #tablicaRezultata td:nth-child(4) { width: 15%; } /* Status */
+
+        /* Prilagodba unutrašnjeg teksta za male ekrane mobitela */
+        #tablicaRezultata td, #tablicaRezultata th {
+            padding: 8px 4px !important; /* Uži razmak da sve stane bez skrolanja */
+            font-size: 13px !important;  /* Blago smanjen font samo za ovu tablicu na mobitelima */
+            white-space: normal !important; 
+            word-wrap: break-word;
+        }
+
+        /* Posebna prilagodba za brojeve setova (monospace tekst) */
+        #tablicaRezultata td[style*="font-family: monospace"] {
+            font-size: 12px !important;
+            line-height: 1.2;
+        }
+
+        /* Kada ekran postane širi (Desktop / Tablet), vraćamo standardnu veličinu fonta */
+        @media (min-width: 768px) {
+            #tablicaRezultata td, #tablicaRezultata th {
+                font-size: 16px !important;
+                padding: 12px 10px !important;
+            }
+            #tablicaRezultata td[style*="font-family: monospace"] {
+                font-size: 17px !important;
+            }
+        }
+
+		/*Kraj rezultata*/
         /* Globalno ujednačavanje i povećanje fonta u svim tablicama */
         .table-wrapper table {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -189,18 +232,20 @@
 
             </div>
 			
-			<!-- TABLICA 2: RASPORED I REZULTATI MEČEVA -->
+			            <!-- TABLICA 2: RASPORED I REZULTATI MEČEVA -->
             <div style="margin-bottom: 40px;">
                 <h3 style="color: #2c3e50; margin-bottom: 15px;">🎾 Raspored i rezultati mečeva</h3>
-                <div class="table-wrapper">
-                    <table>
+                <!-- DODAN ID NA OMOTAČ TABLICE REZULTATA -->
+                <div class="table-wrapper" id="tablicaRezultataContainer">
+                    <!-- DODAN ID I NA SAMU TABLICU -->
+                    <table id="tablicaRezultataTable">
                         <thead>
                             <tr>
                                 <th>Igrač 1</th>
                                 <th>Igrač 2</th>
- 								<th style="text-align: center;">Rezultat</th>
+                                <th style="text-align: center;">Rezultat</th>
                                 <th style="text-align: center;">Status</th>
-							</tr>
+                            </tr>
                         </thead>
                         <tbody id="tablicaRezultata"></tbody>
                     </table>
