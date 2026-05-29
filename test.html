@@ -6,6 +6,35 @@
     <title>TK Slatina - Natjecanja</title>
     <link rel="stylesheet" href="stil.css">
     <style>
+        /* Globalno ujednačavanje i povećanje fonta u svim tablicama */
+        .table-wrapper table {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-size: 16px; /* Povećana veličina teksta (standard je bio oko 14px) */
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        /* Povećanje naslova tablica (zaglavlja) */
+        .table-wrapper th {
+            font-size: 16px;
+            font-weight: 600;
+            padding: 12px 10px; /* Veći razmak za ugodniji izgled */
+        }
+
+        /* Povećanje i razmak za obične ćelije */
+        .table-wrapper td {
+            padding: 12px 10px; /* Veći okomiti razmak zbog većeg fonta */
+            vertical-align: middle; /* Centrira tekst i ikone po visini retka */
+        }
+
+        /* Prilagodba monospace fonta za rezultate da prati novu veličinu */
+        .table-wrapper td[style*="font-family: monospace"] {
+            font-family: 'Courier New', Courier, monospace !important;
+            font-size: 17px !important; 
+            font-weight: bold;
+        }
+
+		
 		        /* Posebni stilovi za tablicu ozlijeđenih */
         .tablica-ozlijedeni tbody tr {
             background-color: #fdf2f2 !important; /* Blaga crvena/roza pozadina za suosjećanje */
@@ -213,39 +242,34 @@
                     </table>
                 </div>
             </div>
-		            <!-- TABLICA: POPIS OZLIJEĐENIH ČLANOVA (STATIČKA) -->
+		               <!-- TABLICA: POPIS OZLIJEĐENIH ČLANOVA (STATIČKA) -->
             <div style="margin-bottom: 40px; margin-top: 40px;">
-                <h3 style="color: #2c3e50; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
-                    ❤️‍🩹 Brz oporavak paloj braći
-                </h3>
-                <p style="margin-bottom: 15px; font-size: 14px; color: #7f8c8d; font-style: italic;">
-                    Popis članova kluba koji su zbog ozljeda morali privremeno ili trajno napustiti ovogodišnju piramidu. Želimo im što brži povratak na terene!
-                </p>
+                <h3 style="color: #2c3e50; margin-bottom: 10px;">❤️‍🩹 Lista palih boraca...</h3>
+                <p style="margin-bottom: 15px;">Popis članova kluba koji su zbog ozljeda morali privremeno ili trajno napustiti ovogodišnju piramidu. Želimo im što brži povratak na terene!</p>
                 
                 <div class="table-wrapper">
-                    <table class="tablica-ozlijedeni">
+                    <table>
                         <thead>
                             <tr>
-                                <th style="width: 80px;">Status</th>
+                                <th style="width: 60px; text-align: center;">Status</th>
                                 <th>Igrač</th>
-                                <th>Napomena / Ozljeda</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td style="text-align: center; font-size: 18px;">🤕</td>
+                                <td style="text-align: center; font-size: 16px;">🩹</td>
                                 <td><strong>Božidar Kelava Lolić</strong></td>
                             </tr>
                             <tr>
-                                <td style="text-align: center; font-size: 18px;">🩹</td>
+                                <td style="text-align: center; font-size: 16px;">🩹</td>
                                 <td><strong>Marko Randelj</strong></td>
                             </tr>
                             <tr>
-                                <td style="text-align: center; font-size: 18px;">🩼</td>
+                                <td style="text-align: center; font-size: 16px;">🩼</td>
                                 <td><strong>Mario Vučeta</strong></td>
                             </tr>
 							<tr>
-                                <td style="text-align: center; font-size: 18px;">🩹</td>
+                                <td style="text-align: center; font-size: 16px;">🩹</td>
                                 <td><strong>Ivan Tomljanović</strong></td>
                             </tr>
                         </tbody>
