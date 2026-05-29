@@ -19,8 +19,9 @@
                     </div>
                 </div>
                 <a href="index.html" class="logo-area">
+                   <!--     <div class="logo-img">🎾</div>-->
 					 <img src="./Slike/logo.png" alt="TK Slatina Logo" class="logo-img">
-			         <span>TK Slatina</span>
+			     <span>TK Slatina</span>
                 </a>
             </div>
         </div>
@@ -31,7 +32,7 @@
             <div class="tournaments-header">
                 <h2>Piramida Slatina 2026</h2>
                 
-                <!-- Izbornik kola -->
+                <!-- Ovdje sami definirate koja kola imate. Value mora odgovarati nazivu .json datoteke! -->
                 <select id="odabirKola" class="tournament-select" onchange="ucitajPodatkeIzDatoteke()">
                     <option value="kolo1">1. Kolo</option>
                     <option value="kolo2">2. Kolo</option>
@@ -41,35 +42,17 @@
                 </select>
             </div>
             
-            <p style="margin-bottom: 30px;">Odaberite željeno kolo iz izbornika kako biste vidjeli raspored igrača, rezultate odigranih mečeva i trenutni rang.</p>
+            <p style="margin-bottom: 30px;">Odaberite željeno kolo iz izbornika kako biste vidjeli raspored igrača i rezultate odigranih mečeva.</p>
 
-            <!-- NOVA TABLICA: RANGLISTA PO BODOVIMA -->
-            <div style="margin-bottom: 40px;">
-                <h3 style="color: #2c3e50;">🥇 Ukupna ranglista igrača po bodovima</h3>
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Igrač</th>
-                                <th>Bodovi</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tablicaRangliste"></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- TABLICA 1: RASPORED -->
-            <div style="margin-bottom: 40px;">
-                <h3 style="color: #2c3e50;">📋 Ljestvica igrača po redovima za odabrano kolo</h3>
+  <!-- TABLICA 1: RASPORED -->
+            <div>
+                <h3 style="color: #2c3e50;">📋 Ljestvica igrača za odabrano kolo</h3>
                 <div class="table-wrapper">
                     <table>
                         <thead>
                             <tr>
                                 <th>Poz.</th>
                                 <th>Igrač</th>
-                                <th>Red</th>
 								<th>Bodovi</th>
                             </tr>
                         </thead>
@@ -77,9 +60,11 @@
                     </table>
                 </div>
             </div>
-
+			<div>
+			<p style="margin-bottom: 30px;"> </p>
+			</div>
             <!-- TABLICA 2: REZULTATI -->
-            <div style="margin-bottom: 40px;">
+            <div>
                 <h3 style="color: #2c3e50;">🏆 Rezultati mečeva odabranog kola</h3>
                 <div class="table-wrapper">
                     <table>
@@ -96,34 +81,6 @@
                     </table>
                 </div>
             </div>
-
-            <!-- TABLICA 3: SUSTAV BODOVANJA -->
-            <div style="margin-bottom: 20px;">
-                <h3 style="color: #2c3e50;">📊 Sustav bodovanja po redovima piramide</h3>
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Red</th>
-                                <th>Pobjeda</th>
-                                <th>Poraz</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>1</td><td><strong>1000</strong></td><td>333</td></tr>
-                            <tr><td>2</td><td><strong>667</strong></td><td>222</td></tr>
-                            <tr><td>3</td><td><strong>445</strong></td><td>148</td></tr>
-                            <tr><td>4</td><td><strong>297</strong></td><td>99</td></tr>
-                            <tr><td>5</td><td><strong>198</strong></td><td>66</td></tr>
-                            <tr><td>6</td><td><strong>132</strong></td><td>44</td></tr>
-                            <tr><td>7</td><td><strong>88</strong></td><td>29</td></tr>
-                            <tr><td>8</td><td><strong>59</strong></td><td>19</td></tr>
-                            <tr><td>9</td><td><strong>39</strong></td><td>13</td></tr>
-                            <tr><td>10</td><td><strong>26</strong></td><td>9</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
         </section>
     </main>
 
@@ -131,125 +88,125 @@
         <p>&copy; 2026 Teniski klub Slatina. Sva prava pridržana.</p>
     </footer>
 
-    <!-- JAVASCRIPT LOGIKA -->
+    <!-- JAVASCRIPT ZA DOHVAĆANJE VANJSKIH DATOTEKA -->
     <script>
-    window.onload = function() {
-        const select = document.getElementById("odabirKola");
-        select.selectedIndex = select.options.length - 1;
-        ucitajPodatkeIzDatoteke();
-    };
+window.onload = function() {
+    var select = document.getElementById("odabirKola");
+    
+    // Postavlja indeks na zadnju dostupnu opciju
+    select.selectedIndex = select.options.length - 1;
+    
+    // Ručno pokreni funkciju da se odmah učitaju podaci za to zadnje kolo
+    ucitajPodatkeIzDatoteke();
+};
 
-    function ucitajPodatkeIzDatoteke() {
-        const selectElement = document.getElementById("odabirKola");
-        const odabranoKolo = selectElement.value;
-        const putanja = `./Rezultati/${odabranoKolo}.json`;
 
-        console.log("Pokušavam učitati:", putanja);
+function ucitajPodatkeIzDatoteke() {
+    const selectElement = document.getElementById("odabirKola"); // Pomaknuto unutra
+    const odabranoKolo = selectElement.value;
+    const putanja = `./Rezultati/${odabranoKolo}.json`;
 
-        fetch(putanja)
-            .then(response => {
-                if (!response.ok) throw new Error(`Datoteka ${putanja} nije pronađena.`);
-                return response.json();
-            })
-            .then(podaci => {
-                prikaziRanglistu(podaci.raspored); // Nova funkcija za ranglistu
-                prikaziRaspored(podaci.raspored);
-                prikaziRezultate(podaci.rezultati);
-            })
-            .catch(error => {
-                console.error("Greška detaljno:", error);
-                alert("Greška: " + error.message);
+    console.log("Pokušavam učitati:", putanja); // Provjeri u konzoli (F12) što piše
+
+    fetch(putanja)
+        .then(response => {
+            if (!response.ok) throw new Error(`Datoteka ${putanja} nije pronađena.`);
+            return response.json();
+        })
+        .then(podaci => {
+            prikaziRaspored(podaci.raspored);
+            prikaziRezultate(podaci.rezultati);
+        })
+        .catch(error => {
+            console.error("Greška detaljno:", error);
+            alert("Greška: " + error.message);
+        });
+}
+
+
+       // Funkcija za ispis rasporeda s grupiranjem boja svaka 4 retka
+function prikaziRaspored(igraci) {
+    const tbodyRaspored = document.getElementById("tablicaRasporeda");
+    tbodyRaspored.innerHTML = "";
+
+    if (!igraci) return;
+
+    igraci.forEach((stavka, index) => {
+        const redTablice = document.createElement("tr");
+
+        // Logika za bojanje:
+        // Math.floor(index / 4) daje:
+        // 0 za prva četiri (0,1,2,3)
+        // 1 za iduća četiri (4,5,6,7)
+        // 2 za iduća četiri...
+        const brojGrupe = Math.floor(index / 4);
+        
+        // Ako je grupa parna (0, 2, 4...) stavi jednu boju, ako je neparna drugu
+        if (brojGrupe % 2 === 0) {
+            redTablice.style.backgroundColor = "#f9f9f9"; // Svijetlo siva/bijela
+        } else {
+            redTablice.style.backgroundColor = "#e8f0fe"; // Lagana plavkasta (možeš staviti bilo koju boju)
+        }
+
+        redTablice.innerHTML = `
+            <td>${stavka.pozicija}.</td>
+            <td><strong>${stavka.igrac}</strong></td>
+            <td>${stavka.bodovi}</td>
+        `;
+        tbodyRaspored.appendChild(redTablice);
+    });
+}
+
+
+        // Funkcija za ispis rezultata
+        function prikaziRezultate(mecevi) {
+            const tbodyRezultati = document.getElementById("tablicaRezultata");
+            tbodyRezultati.innerHTML = "";
+
+            if (!mecevi) return;
+
+            mecevi.forEach((mec, index) => {
+                const redTablice = document.createElement("tr");
+
+                let statusBoja = "#2c3531";
+                if(mec.status === "Završeno") statusBoja = "#3b604b";
+                if(mec.status === "Odgođeno") statusBoja = "#e67e22";
+			
+				// Provjera pobjednika za svakog igrača
+    			const stilIgrac1 = mec.pobjednik === mec.igrac1 ? 'style="background-color: #d4edda; color: #155724;"' : '';
+    			const stilIgrac2 = mec.pobjednik === mec.igrac2 ? 'style="background-color: #d4edda; color: #155724;"' : '';
+
+				
+                redTablice.innerHTML = `
+                    <td>${index + 1}.</td>
+                    <td ${stilIgrac1}><strong>${mec.igrac1}</strong></td>
+        			<td ${stilIgrac2}><strong>${mec.igrac2}</strong></td>
+       				<td><strong>${mec.rezultat}</strong></td>
+                    <td style="color: ${statusBoja}; font-weight: bold;">${mec.status}</td>
+                `;
+                tbodyRezultati.appendChild(redTablice);
             });
-    }
+        }
 
-    // NOVA FUNKCIJA: Sortiranje po bodovima (od najvećeg do najmanjeg) i prikaz
-    function prikaziRanglistu(igraci) {
-        const tbodyRanglista = document.getElementById("tablicaRangliste");
-        tbodyRanglista.innerHTML = "";
+        // Pokreni učitavanje prve datoteke odmah po dolasku na stranicu
+        window.onload = ucitajPodatkeIzDatoteke;
+    </script>
 
-        if (!igraci) return;
+    <!-- SKRIPTA ZA MOBILNI MENU -->
+    <script>
+        const menuBtn = document.querySelector('.menu-btn');
+        const dropdownContent = document.querySelector('.dropdown-content');
 
-        // Kreiranje kopije niza kako se ne bi poremetio raspored u drugoj tablici
-        const sortiraniIgraci = [...igraci];
-
-        // Sortiranje od najvećeg broja bodova prema najmanjem
-        sortiraniIgraci.sort((a, b) => Number(b.bodovi) - Number(a.bodovi));
-
-        sortiraniIgraci.forEach((stavka, index) => {
-            const redTablice = document.createElement("tr");
-
-            // Dodijeli zlatnu, srebrnu i brončanu boju za prva tri mjesta
-            if (index === 0) redTablice.style.backgroundColor = "#fff3cd"; // Zlato
-            else if (index === 1) redTablice.style.backgroundColor = "#e2e3e5"; // Srebro
-            else if (index === 2) redTablice.style.backgroundColor = "#f8d7da"; // Bronca
-            else if (index % 2 === 0) redTablice.style.backgroundColor = "#f9f9f9";
-
-            redTablice.innerHTML = `
-                <td><strong>${index + 1}.</strong></td>
-                <td><strong>${stavka.igrac}</strong></td>
-                <td>${stavka.bodovi}</td>
-            `;
-            tbodyRanglista.appendChild(redTablice);
+        menuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            dropdownContent.classList.toggle('prikazi');
         });
-    }
 
-    function prikaziRaspored(igraci) {
-        const tbodyRaspored = document.getElementById("tablicaRasporeda");
-        tbodyRaspored.innerHTML = "";
-
-        if (!igraci) return;
-
-        igraci.forEach((stavka, index) => {
-            const redTablice = document.createElement("tr");
-            const brojGrupe = Math.floor(index / 4);
-            
-            if (brojGrupe % 2 === 0) {
-                redTablice.style.backgroundColor = "#f9f9f9";
-            } else {
-                redTablice.style.backgroundColor = "#e8f0fe";
+        document.addEventListener('click', function(e) {
+            if (!dropdownContent.contains(e.target) && !menuBtn.contains(e.target)) {
+                dropdownContent.classList.remove('prikazi');
             }
-
-            redTablice.innerHTML = `
-                <td>${stavka.pozicija}.</td>
-                <td><strong>${stavka.igrac}</strong></td>
-                <td>${stavka.red}</td>
-                <td>${stavka.bodovi}</td>
-            `;
-            tbodyRaspored.appendChild(redTablice);
         });
-    }
-
-    function prikaziRezultate(mecevi) {
-        const tbodyRezultati = document.getElementById("tablicaRezultata");
-        tbodyRezultati.innerHTML = "";
-
-        if (!mecevi) return;
-
-        mecevi.forEach((mec, index) => {
-            const redTablice = document.createElement("tr");
-
-            let statusBoja = "#2c3531";
-            if(mec.status === "Završeno") statusBoja = "#3b604b";
-            if(mec.status === "Odgođeno") statusBoja = "#e67e22";
-		
-            const stilIgrac1 = mec.pobjednik === mec.igrac1 ? 'style="background-color: #d4edda; color: #155724;"' : '';
-            const stilIgrac2 = mec.pobjednik === mec.igrac2 ? 'style="background-color: #d4edda; color: #155724;"' : '';
-
-            redTablice.innerHTML = `
-                <td>${index + 1}.</td>
-                <td ${stilIgrac1}><strong>${mec.igrac1}</strong></td>
-                <td ${stilIgrac2}><strong>${mec.igrac2}</strong></td>
-                <td><strong>${mec.rezultat}</strong></td>
-                <td style="color: ${statusBoja}; font-weight: bold;">${mec.status}</td>
-            `;
-			tbodyRezultati.appendChild(redTablice);});
-	}
-// SKRIPTA ZA MOBILNI MENU
-const menuBtn = document.querySelector('.menu-btn');
-const dropdownContent = document.querySelector('.dropdown-content');
-	menuBtn.addEventListener('click', function(e) {
-		e.stopPropagation();
-		dropdownContent.classList.toggle('prikazi');
-	});
-	document.addEventListener('click', function(e) {
-		if (!dropdownContent.contains(e.target) && !menuBtn.contains(e.target)) {dropdownContent.classList.remove('prikazi');}});
+    </script>
+</body>
+</html>
