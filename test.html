@@ -9,7 +9,7 @@
         /* Globalno ujednačavanje i povećanje fonta u svim tablicama */
         .table-wrapper table {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            font-size: 16px; /* Povećana veličina teksta (standard je bio oko 14px) */
+            font-size: 15px; /* Povećana veličina teksta (standard je bio oko 14px) */
             border-collapse: collapse;
             width: 100%;
         }
@@ -32,20 +32,6 @@
             font-family: 'Courier New', Courier, monospace !important;
             font-size: 17px !important; 
             font-weight: bold;
-        }
-
-		
-		        /* Posebni stilovi za tablicu ozlijeđenih */
-        .tablica-ozlijedeni tbody tr {
-            background-color: #fdf2f2 !important; /* Blaga crvena/roza pozadina za suosjećanje */
-            border-bottom: 1px solid #f5c6cb;
-        }
-        .tablica-ozlijedeni tbody tr:hover {
-            background-color: #fbebeb !important;
-        }
-        .tablica-ozlijedeni th {
-            background-color: #cb4335 !important; /* Crvena boja zaglavlja umjesto standardne plave/tamne */
-            color: white;
         }
 
 	    /* Stilovi za vizualni efekt piramide */
@@ -217,7 +203,7 @@
                     <li><span class="broj-ikona"></span> U slučaju ozlijede igrača/odustajanja red se popunjava igračem iz prvog nižeg reda koji ima najviše bodova/pobjeda/najbolju gem-razliku.</li>
                     <li><span class="broj-ikona"></span> Igrači su obvezni poštivati pravila teniske igre i sportskog ponašanja na terenu i izvan njega.	</li>
                     <li><span class="broj-ikona"></span>  Igrač dobiva bodove iz onoga reda u kojem se nalazi nakon odigranog kola.</li>
-					<li><span class="broj-ikona"></span>  </li>
+					<p></p>
                 </ul>
                 <div class="table-wrapper">
                     <table>
@@ -387,7 +373,7 @@
         });
     }
 
-	      function prikaziPoRedovima(igraci) {
+    function prikaziPoRedovima(igraci) {
         const kontejner = document.getElementById("kontejnerZaRedove");
         kontejner.innerHTML = ""; // Pražnjenje kontejnera prije novog punjenja
 
@@ -413,16 +399,10 @@
             const detailsElement = document.createElement("details");
             detailsElement.className = "red-dropdown";
 
-            // --- NOVI PRILAGOĐENI IZRAČUN ZA MOBITELI + DESKTOP ---
-            // Počinjemo od 65% širine za 1. red, a svaki idući se širi za oko 3.8%
-            // Na ovaj način 10. red dolazi točno na 100% širine
+            // Izračun širine za oblik piramide
             let izracunataSirina = 65 + (trenutniRed - 1) * 3.8; 
             if (izracunataSirina > 100) izracunataSirina = 100;
-            
-            // Postavljanje širine elementa
             detailsElement.style.width = izracunataSirina + "%";
-            // Maknut je minWidth u pikselima koji je kočio mobitele
-            // -----------------------------------------------------
 
             // Kreiramo <summary> (naslov izbornika)
             const summaryElement = document.createElement("summary");
@@ -433,26 +413,24 @@
             const tableWrapper = document.createElement("div");
             tableWrapper.className = "table-wrapper";
 
-            // Kreiramo samu tablicu i njezino zaglavlje
+            // Kreiramo samu tablicu - IZBAČEN JE STUPAC "RED" IZ ZAGLAVLJA
             const tablica = document.createElement("table");
             tablica.innerHTML = 
                 "<thead>" +
                     "<tr>" +
-                        "<th>Pozicija</th>" +
+                        "<th style='width: 100px;'>Pozicija</th>" +
                         "<th>Igrač</th>" +
-                        "<th>Red</th>" +
                     "</tr>" +
                 "</thead>";
 
             // Kreiramo tbody u koji ćemo staviti igrače tog specifičnog reda
             const tbody = document.createElement("tbody");
 
-            // Punimo tbody igračima koji pripadaju ovom redu
+            // Punimo tbody igračima - IZBAČEN JE STUPAC "RED" IZ REDAKA
             igraciURedu.forEach(stavka => {
                 const redTablice = document.createElement("tr");
                 redTablice.innerHTML = "<td>" + stavka.pozicija + ".</td>" +
-                                       "<td><strong>" + stavka.igrac + "</strong></td>" +
-                                       "<td>" + stavka.red + ". red</td>";
+                                       "<td><strong>" + stavka.igrac + "</strong></td>";
                 tbody.appendChild(redTablice);
             });
 
@@ -460,7 +438,7 @@
             tablica.appendChild(tbody);
             tableWrapper.appendChild(tablica);
             detailsElement.appendChild(tableWrapper);
-            kontejner.appendChild(detailsElement);
+            contejner.appendChild(detailsElement);
         });
     }
 
