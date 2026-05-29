@@ -165,17 +165,17 @@
             <!-- TABLICA 3: TABLICA BODOVANJA NA DNU -->
             <div style="margin-bottom: 20px;">
                 <h3 style="color: #2c3e50;">📊 Sustav bodovanja i pravila</h3>
-				 <p style="margin-bottom: 30px;">
-					1. Piramidu organizira teniski klub Slatina.
-					2. Parove određuju organizatori.
-					3. Za svako sljedeće kolo igrači imaju po 7 dana za odigrati meč.
-					4.Igrači nakon odigranog meča moraju javiti rezultat u grupu na viberu.
-5.Susret se igra na dva dobivena seta (kod 1:1 u setovima kao treći set igra se tie-break do 10)
-6.Igrač koji je "izazivač" dužan je osigurati loptice za meč.
-7.U slučaju ozlijede igrača/odustajanja red se popunjava igračem iz prvog nižeg reda koji ima najviše bodova/pobjeda/najbolju gem-razliku.
-8.Igrači su obvezni poštivati pravila teniske igre i sportskog ponašanja na terenu i izvan njega.	 
-9. Igrač dobiva bodove iz onoga reda u kojem se nalazi nakon odigranog kola.
-				 </p>
+				<ul class="pravila-lista">
+                    <li><span class="broj-ikona">1</span> Piramidu organizira teniski klub Slatina.</li>
+                    <li><span class="broj-ikona">2</span> Parove određuju organizatori.</li>
+                    <li><span class="broj-ikona">3</span> Za svako sljedeće kolo igrači imaju po 7 dana za odigrati meč.</li>
+                    <li><span class="broj-ikona">4</span> Igrači nakon odigranog meča moraju javiti rezultat u grupu na viberu.</li>
+                    <li><span class="broj-ikona">5</span> Susret se igra na dva dobivena seta (kod 1:1 u setovima kao treći set igra se tie-break do 10)</li>
+                    <li><span class="broj-ikona">6</span> Igrač koji je "izazivač" dužan je osigurati loptice za meč.</li>
+                    <li><span class="broj-ikona">7</span> U slučaju ozlijede igrača/odustajanja red se popunjava igračem iz prvog nižeg reda koji ima najviše bodova/pobjeda/najbolju gem-razliku.</li>
+                    <li><span class="broj-ikona">8</span> Igrači su obvezni poštivati pravila teniske igre i sportskog ponašanja na terenu i izvan njega.	</li>
+                    <li><span class="broj-ikona">9</span>  Igrač dobiva bodove iz onoga reda u kojem se nalazi nakon odigranog kola.</li>
+                </ul>
                 <div class="table-wrapper">
                     <table>
                         <thead>
@@ -309,7 +309,7 @@
         });
     }
 
-	       function prikaziPoRedovima(igraci) {
+	      function prikaziPoRedovima(igraci) {
         const kontejner = document.getElementById("kontejnerZaRedove");
         kontejner.innerHTML = ""; // Pražnjenje kontejnera prije novog punjenja
 
@@ -335,17 +335,16 @@
             const detailsElement = document.createElement("details");
             detailsElement.className = "red-dropdown";
 
-            // --- LOGIKA ZA OBLIK PIRAMIDE ---
-            // Izračun širine: 1. red počinje od 40%, a svaki idući red je širi za 6%
-            // Na velikim ekranima daje lijep oblik piramide, a na mobitelima ide do max 100%
-            let izracunataSirina = 40 + (trenutniRed - 1) * 6; 
+            // --- NOVI PRILAGOĐENI IZRAČUN ZA MOBITELI + DESKTOP ---
+            // Počinjemo od 65% širine za 1. red, a svaki idući se širi za oko 3.8%
+            // Na ovaj način 10. red dolazi točno na 100% širine
+            let izracunataSirina = 65 + (trenutniRed - 1) * 3.8; 
             if (izracunataSirina > 100) izracunataSirina = 100;
             
-            // Postavljanje širine elementa (npr. "40%", "46%", "52%"...)
+            // Postavljanje širine elementa
             detailsElement.style.width = izracunataSirina + "%";
-            // Osiguravamo da na jako malim ekranima (mobitelima) tablice ne budu preuskre
-            detailsElement.style.minWidth = "280px"; 
-            // ---------------------------------
+            // Maknut je minWidth u pikselima koji je kočio mobitele
+            // -----------------------------------------------------
 
             // Kreiramo <summary> (naslov izbornika)
             const summaryElement = document.createElement("summary");
@@ -386,7 +385,6 @@
             kontejner.appendChild(detailsElement);
         });
     }
-
 
 		
     // SKRIPTA ZA MOBILNI MENU
