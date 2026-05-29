@@ -6,34 +6,6 @@
     <title>TK Slatina - Natjecanja</title>
     <link rel="stylesheet" href="stil.css">
     <style>
-
-		        /* --- POTPUNA FIKSIRANOST ZA TABLICU REZULTATA (3 STUPCA) --- */
-        #tablicaRezultataContainer table {
-            table-layout: fixed !important;
-            width: 100% !important;
-        }
-
-        /* Raspodjela širine: Igrač 1 (40%), Igrač 2 (40%), Rezultat (20%) */
-        #tablicaRezultataContainer th:nth-child(1), #tablicaRezultata td:nth-child(1) { width: 40%; }
-        #tablicaRezultataContainer th:nth-child(2), #tablicaRezultata td:nth-child(2) { width: 40%; }
-        #tablicaRezultataContainer th:nth-child(3), #tablicaRezultata td:nth-child(3) { width: 20%; }
-
-        #tablicaRezultataContainer td, #tablicaRezultataContainer th {
-            padding: 10px 6px !important;
-            font-size: 14px !important;
-            white-space: normal !important; /* Omogućuje prelamanje imena ako je usko */
-            word-wrap: break-word;
-            vertical-align: middle;
-        }
-
-        /* Na desktopu vraćamo punu veličinu fonta */
-        @media (min-width: 768px) {
-            #tablicaRezultataContainer td, #tablicaRezultataContainer th {
-                font-size: 16px !important;
-                padding: 12px 10px !important;
-            }
-        }
-
 		/*Zajebancija sa rezultatima*/
 		        /* --- UKLANJANJE SKROLANJA ZA TABLICU REZULTATA NA MOBITELIMA --- */
         
@@ -260,17 +232,19 @@
 
             </div>
 			
-			<!-- TABLICA 2: RASPORED I REZULTATI MEČEVA -->
-                        <!-- TABLICA 2: RASPORED I REZULTATI MEČEVA -->
+			            <!-- TABLICA 2: RASPORED I REZULTATI MEČEVA -->
             <div style="margin-bottom: 40px;">
                 <h3 style="color: #2c3e50; margin-bottom: 15px;">🎾 Raspored i rezultati mečeva</h3>
+                <!-- DODAN ID NA OMOTAČ TABLICE REZULTATA -->
                 <div class="table-wrapper" id="tablicaRezultataContainer">
-                    <table>
+                    <!-- DODAN ID I NA SAMU TABLICU -->
+                    <table id="tablicaRezultataTable">
                         <thead>
                             <tr>
                                 <th>Igrač 1</th>
                                 <th>Igrač 2</th>
                                 <th style="text-align: center;">Rezultat</th>
+                                <th style="text-align: center;">Status</th>
                             </tr>
                         </thead>
                         <tbody id="tablicaRezultata"></tbody>
@@ -417,45 +391,113 @@
         });
     }
 
-        function prikaziRezultate(rezultati) {
+    function prikaziRezultate(rezultati) {
         const tbodyRezultati = document.getElementById("tablicaRezultata");
         tbodyRezultati.innerHTML = "";
 
         if (!rezultati || rezultati.length === 0) {
-            tbodyRezultati.innerHTML = "<tr><td colspan='3' style='text-align:center;'>Nema unesenih mečeva za ovo kolo.</td></tr>";
+            tbodyRezultati.innerHTML = "<tr><td colspan='4' style='text-align:center;'>Nema unesenih mečeva za ovo kolo.</td></tr>";
             return;
         }
 
         rezultati.forEach(mec => {
             const redTablice = document.createElement("tr");
 
+            // Isticanje pobjednika podebljanim tekstom ako je meč završen
             let igrac1Prikaz = mec.igrac1;
             let igrac2Prikaz = mec.igrac2;
 
-            // Ako je meč završen, ističemo pobjednika zelenom bojom i peharom
             if (mec.status === "Završeno") {
                 if (mec.pobjednik === mec.igrac1) {
-                    igrac1Prikaz = "<span style='color: #27ae60;'><strong>🏆 " + mec.igrac1 + "</strong></span>";
+                    igrac1Prikaz = "<strong>🏆 " + mec.igrac1 + "</strong>";
                 } else if (mec.pobjednik === mec.igrac2) {
-                    igrac2Prikaz = "<span style='color: #27ae60;'><strong>🏆 " + mec.igrac2 + "</strong></span>";
+                    igrac2Prikaz = "<strong>🏆 " + mec.igrac2 + "</strong>";
                 }
+            }
+
+            // Određivanje boje/stila za status meča
+            let statusStil = "";
+            if (mec.status === "U najavi") {
+                statusStil = "<span style='color: #7f8c8d; font-style: italic;'>U najavi</span>";
             } else {
-                // Ako je meč u najavi, imena su blago siva radi vizualnog kontrasta
-                igrac1Prikaz = "<span style='color: #4a5568;'>" + mec.igrac1 + "</span>";
-                igrac2Prikaz = "<span style='color: #4a5568;'>" + mec.igrac2 + "</span>";
+                statusStil = "<span style='color: #27ae60; font-weight: bold;'>Završeno</span>";
             }
 
             // Ako nema rezultata (prazan string), stavljamo crticu
             let rezultatPrikaz = mec.rezultat ? mec.rezultat : "—";
 
-            // POPRAVLJENO: Tablica sada ima točno 3 stupca, a status je izbačen
             redTablice.innerHTML = "<td>" + igrac1Prikaz + "</td>" +
                                    "<td>" + igrac2Prikaz + "</td>" +
-                                   "<td style='font-family: monospace; font-size: 15px; text-align: center; font-weight: bold;'>" + rezultatPrikaz + "</td>";
+                                   "<td style='font-family: monospace; font-size: 15px;'>" + rezultatPrikaz + "</td>" +
+                                   "<td>" + statusStil + "</td>";
             
             tbodyRezultati.appendChild(redTablice);
         });
     }
+
+	    function prikaziPoRedovima(igraci) {
+        const kontejner = document.getElementById("kontejnerZaRedove");
+        kontejner.innerHTML = ""; // Pražnjenje kontejnera prije novog punjenja
+
+        if (!igraci || igraci.length === 0) return;
+
+        // 1. Grupiranje igrača po redovima (od 1 do 10)
+        const grupiraniPoRedovima = {};
+        
+        igraci.forEach(stavka => {
+            const brojReda = stavka.red;
+            if (!grupiraniPoRedovima[brojReda]) {
+                grupiraniPoRedovima[brojReda] = [];
+            }
+            grupiraniPoRedovima[brojReda].push(stavka);
+        });
+
+        // 2. Prolazak kroz svaki pronađeni red i kreiranje drop-down izbornika
+        Object.keys(grupiraniPoRedovima).sort((a, b) => Number(a) - Number(b)).forEach(brojReda => {
+            const igraciURedu = grupiraniPoRedovima[brojReda];
+
+            // Kreiramo glavni <details> element (drop-down koji automatski zauzima 100% širine)
+            const detailsElement = document.createElement("details");
+            detailsElement.className = "red-dropdown";
+
+            // Kreiramo <summary> (naslov izbornika)
+            const summaryElement = document.createElement("summary");
+            summaryElement.innerHTML = "🔽 Red " + brojReda;
+            detailsElement.appendChild(summaryElement);
+
+            // Kreiramo omotač za tablicu (table-wrapper) koji omogućuje skrolanje na mobitelima
+            const tableWrapper = document.createElement("div");
+            tableWrapper.className = "table-wrapper";
+
+            // Kreiramo samu tablicu s dva stupca (Pozicija i Igrač)
+            const tablica = document.createElement("table");
+            tablica.innerHTML = 
+                "<thead>" +
+                    "<tr>" +
+                        "<th style='width: 70px;'>Pozicija</th>" +
+                        "<th>Igrač</th>" +
+                    "</tr>" +
+                "</thead>";
+
+            // Kreiramo tbody u koji ćemo staviti igrače tog specifičnog reda
+            const tbody = document.createElement("tbody");
+
+            // Punimo tbody igračima
+            igraciURedu.forEach(stavka => {
+                const redTablice = document.createElement("tr");
+                redTablice.innerHTML = "<td>" + stavka.pozicija + ".</td>" +
+                                       "<td><strong>" + stavka.igrac + "</strong></td>";
+                tbody.appendChild(redTablice);
+            });
+
+            // Sklapamo sve elemente zajedno i dodajemo na stranicu
+            tablica.appendChild(tbody);
+            tableWrapper.appendChild(tablica);
+            detailsElement.appendChild(tableWrapper);
+            kontejner.appendChild(detailsElement);
+        });
+    }
+
 
 		
     // SKRIPTA ZA MOBILNI MENU
