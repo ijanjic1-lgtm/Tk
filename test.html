@@ -209,9 +209,6 @@
 
     <!-- JAVASCRIPT LOGIKA -->
 	<script>
-      // Globalna varijabla koja čuva interval brojača (kako bismo ga mogli resetirati pri promjeni kola)
-    let aktivniIntervalBrojaca;
-
     window.onload = function() {
         var select = document.getElementById("odabirKola");
         select.selectedIndex = select.options.length - 1;
@@ -233,82 +230,13 @@
             .then(podaci => {
                 prikaziRanglistu(podaci.raspored);
                 prikaziRezultate(podaci.rezultati);
-                prikaziPoRedovima(podaci.raspored);
-                
-                // NOVA LOGIKA: Pokreće brojač s datumom iz JSON-a ako taj ključ postoji
-                if (podaci.krajKola) {
-                    pokreniBrojac(podaci.krajKola);
-                } else {
-                    document.getElementById("countdownNaslov").innerHTML = "Vrijeme za odigravanje mečeva";
-                    document.querySelector(".countdown-sat").innerHTML = "<span style='color: #cbd5e1; padding: 10px;'>Datum završetka nije definiran.</span>";
-                }
+                prikaziPoRedovima(podaci.raspored); // NOVA LINIJA: Pokreće punjenje drop-down tablica
             })
             .catch(error => {
                 console.error("Greška detaljno:", error);
                 alert("Greška: " + error.message);
             });
     }
-
-        function pokreniBrojac(stringDatumaIzJsona) {
-        // Ako već radi brojač od prethodno odabranog kola, gasimo ga
-        if (aktivniIntervalBrojaca) {
-            clearInterval(aktivniIntervalBrojaca);
-        }
-
-        // Pretvaramo tekstualni datum iz JSON-a u milisekunde
-        const datumZavrsetka = new Date(stringDatumaIzJsona).getTime();
-        const satKontejner = document.querySelector(".countdown-sat");
-
-        // KLJUČNI POPRAVAK: Svaki put kada se brojač pokrene, ponovno stvaramo čistu HTML strukturu satova.
-        // Na ovaj način sprječavamo grešku "Cannot set properties of null" jer elementi sigurno postoje.
-        document.getElementById("countdownNaslov").innerHTML = "Vrijeme za odigravanje mečeva";
-        satKontejner.innerHTML = 
-            '<div class="vrijeme-bloke"><span id="dani">00</span><label>Dana</label></div>' +
-            '<div class="vrijeme-separator">:</div>' +
-            '<div class="vrijeme-bloke"><span id="sati">00</span><label>Sati</label></div>' +
-            '<div class="vrijeme-separator">:</div>' +
-            '<div class="vrijeme-bloke"><span id="minute">00</span><label>Min.</label></div>' +
-            '<div class="vrijeme-separator">:</div>' +
-            '<div class="vrijeme-bloke"><span id="sekunde">00</span><label>Sek.</label></div>';
-
-        // Funkcija koja odmah izračunava i prikazuje vrijeme (da izbjegnemo kašnjenje od 1 sekunde)
-        function azurirajVrijeme() {
-            const sada = new Date().getTime();
-            const razlika = datumZavrsetka - sada;
-
-            // Ako je odbrojavanje završilo
-            if (razlika < 0) {
-                clearInterval(aktivniIntervalBrojaca);
-                document.getElementById("countdownNaslov").innerHTML = "Kolo je završeno! 🏁";
-                satKontejner.innerHTML = "<span style='color: #ef4444; font-weight: bold; padding: 10px;'>Čeka se unos novog kola...</span>";
-                return;
-            }
-
-            // Izračun dana, sati, minuta i sekundi
-            const dani = Math.floor(razlika / (1000 * 60 * 60 * 24));
-            const sati = Math.floor((razlika % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minute = Math.floor((razlika % (1000 * 60 * 60)) / (1000 * 60));
-            const sekunde = Math.floor((razlika % (1000 * 60)) / 1000);
-
-            // Provjera postojanja elemenata prije upisa (dodatna dvostruka zaštita)
-            const elDani = document.getElementById("dani");
-            const elSati = document.getElementById("sati");
-            const elMinute = document.getElementById("minute");
-            const elSekunde = document.getElementById("sekunde");
-
-            if (elDani && elSati && elMinute && elSekunde) {
-                elDani.innerHTML = dani < 10 ? "0" + dani : dani;
-                elSati.innerHTML = sati < 10 ? "0" + sati : sati;
-                elMinute.innerHTML = minute < 10 ? "0" + minute : minute;
-                elSekunde.innerHTML = sekunde < 10 ? "0" + sekunde : sekunde;
-            }
-        }
-
-        // Pokrećemo izračun odmah, a zatim ga ponavljamo svake sekunde
-        azurirajVrijeme();
-        aktivniIntervalBrojaca = setInterval(azurirajVrijeme, 1000);
-    }
-
 
     function prikaziRanglistu(igraci) {
         const tbodyRanglista = document.getElementById("tablicaRangliste");
