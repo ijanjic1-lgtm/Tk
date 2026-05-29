@@ -6,6 +6,26 @@
     <title>TK Slatina - Natjecanja</title>
     <link rel="stylesheet" href="stil.css">
     <style>
+	        /* Stilovi za drop-down po redovima */
+        .red-dropdown {
+            background-color: #f8f9fa;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .red-dropdown summary {
+            font-weight: bold;
+            color: #2c3e50;
+            outline: none;
+            padding: 5px;
+        }
+        .red-dropdown[open] summary {
+            margin-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+            color: #3498db;
+        }
+		
         /* Stilovi za legendu iznad rangliste */
         .legend-container {
             display: flex;
@@ -96,6 +116,80 @@
                 </div>
             </div>
 
+			 <!-- NOVO: DINAMIČKI DROP-DOWN PO REDOVIMA -->
+            <div style="margin-bottom: 40px;">
+                <h3 style="color: #2c3e50; margin-bottom: 15px;">📐 Pregled igrača po redovima piramide</h3>
+                
+                <!-- Grupa 1 -->
+                <details class="red-dropdown">
+                    <summary>🔽 Igrači iz 1., 2., 3. i 4. reda</summary>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Pozicija</th>
+                                    <th>Igrač</th>
+                                    <th>Red</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablicaRedovi1_4"></tbody>
+                        </table>
+                    </div>
+                </details>
+
+                <!-- Grupa 2 -->
+                <details class="red-dropdown" style="margin-top: 10px;">
+                    <summary>🔽 Igrači iz 5., 6., 7. i 8. reda</summary>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Pozicija</th>
+                                    <th>Igrač</th>
+                                    <th>Red</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablicaRedovi5_8"></tbody>
+                        </table>
+                    </div>
+                </details>
+
+                <!-- Grupa 3 -->
+                <details class="red-dropdown" style="margin-top: 10px;">
+                    <summary>🔽 Igrači iz 9. i 10. reda</summary>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Pozicija</th>
+                                    <th>Igrač</th>
+                                    <th>Red</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablicaRedovi9_10"></tbody>
+                        </table>
+                    </div>
+                </details>
+            </div>
+			
+			<!-- TABLICA 2: RASPORED I REZULTATI MEČEVA -->
+            <div style="margin-bottom: 40px;">
+                <h3 style="color: #2c3e50; margin-bottom: 15px;">🎾 Raspored i rezultati mečeva</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Igrač 1</th>
+                                <th>Igrač 2</th>
+                                <th>Rezultat</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablicaRezultata"></tbody>
+                    </table>
+                </div>
+            </div>
+
             <!-- TABLICA 3: TABLICA BODOVANJA NA DNU -->
             <div style="margin-bottom: 20px;">
                 <h3 style="color: #2c3e50;">📊 Sustav bodovanja po redovima</h3>
@@ -131,7 +225,7 @@
     </footer>
 
     <!-- JAVASCRIPT LOGIKA -->
-    <script>
+	<script>
     window.onload = function() {
         var select = document.getElementById("odabirKola");
         select.selectedIndex = select.options.length - 1;
@@ -152,8 +246,8 @@
             })
             .then(podaci => {
                 prikaziRanglistu(podaci.raspored);
-                //prikaziRaspored(podaci.raspored);
-                //prikaziRezultate(podaci.rezultati);
+                prikaziRezultate(podaci.rezultati);
+                prikaziPoRedovima(podaci.raspored); // NOVA LINIJA: Pokreće punjenje drop-down tablica
             })
             .catch(error => {
                 console.error("Greška detaljno:", error);
@@ -174,9 +268,9 @@
             const redTablice = document.createElement("tr");
 
             if (index < 8) {
-                redTablice.style.backgroundColor = "#d4edda";
+                redTablice.style.backgroundColor = "#d4edda"; // Glavni masters
             } else if (index >= 8 && index < 16) {
-                redTablice.style.backgroundColor = "#ffe8cc";
+                redTablice.style.backgroundColor = "#ffe8cc"; // Utješni masters
             } else {
                 redTablice.style.backgroundColor = (index % 2 === 0) ? "#f9f9f9" : "#ffffff";
             }
@@ -188,15 +282,97 @@
         });
     }
 
-// SKRIPTA ZA MOBILNI MENU
-const menuBtn = document.querySelector('.menu-btn');
-const dropdownContent = document.querySelector('.dropdown-content');
-menuBtn.addEventListener('click', function(e) {
-e.stopPropagation();dropdownContent.classList.toggle('prikazi');
-});
-document.addEventListener('click', function(e) {
-if (!dropdownContent.contains(e.target) && !menuBtn.contains(e.target)) {
-dropdownContent.classList.remove('prikazi');
-}
-});
+    function prikaziRezultate(rezultati) {
+        const tbodyRezultati = document.getElementById("tablicaRezultata");
+        tbodyRezultati.innerHTML = "";
+
+        if (!rezultati || rezultati.length === 0) {
+            tbodyRezultati.innerHTML = "<tr><td colspan='4' style='text-align:center;'>Nema unesenih mečeva za ovo kolo.</td></tr>";
+            return;
+        }
+
+        rezultati.forEach(mec => {
+            const redTablice = document.createElement("tr");
+
+            // Isticanje pobjednika podebljanim tekstom ako je meč završen
+            let igrac1Prikaz = mec.igrac1;
+            let igrac2Prikaz = mec.igrac2;
+
+            if (mec.status === "Završeno") {
+                if (mec.pobjednik === mec.igrac1) {
+                    igrac1Prikaz = "<strong>🏆 " + mec.igrac1 + "</strong>";
+                } else if (mec.pobjednik === mec.igrac2) {
+                    igrac2Prikaz = "<strong>🏆 " + mec.igrac2 + "</strong>";
+                }
+            }
+
+            // Određivanje boje/stila za status meča
+            let statusStil = "";
+            if (mec.status === "U najavi") {
+                statusStil = "<span style='color: #7f8c8d; font-style: italic;'>U najavi</span>";
+            } else {
+                statusStil = "<span style='color: #27ae60; font-weight: bold;'>Završeno</span>";
+            }
+
+            // Ako nema rezultata (prazan string), stavljamo crticu
+            let rezultatPrikaz = mec.rezultat ? mec.rezultat : "—";
+
+            redTablice.innerHTML = "<td>" + igrac1Prikaz + "</td>" +
+                                   "<td>" + igrac2Prikaz + "</td>" +
+                                   "<td style='font-family: monospace; font-size: 15px;'>" + rezultatPrikaz + "</td>" +
+                                   "<td>" + statusStil + "</td>";
+            
+            tbodyRezultati.appendChild(redTablice);
+        });
+    }
+
+	function prikaziPoRedovima(igraci) {
+        // Dohvaćanje sva tri tbody elementa
+        const tbody1_4 = document.getElementById("tablicaRedovi1_4");
+        const tbody5_8 = document.getElementById("tablicaRedovi5_8");
+        const tbody9_10 = document.getElementById("tablicaRedovi9_10");
+
+        // Pražnjenje tablica prije novog punjenja
+        tbody1_4.innerHTML = "";
+        tbody5_8.innerHTML = "";
+        tbody9_10.innerHTML = "";
+
+        if (!igraci) return;
+
+        // Ovdje NE sortiramo po bodovima, nego ostavljamo originalni redoslijed iz JSON-a (po pozicijama)
+        igraci.forEach(stavka => {
+            const redTablice = document.createElement("tr");
+            
+            // Kreiranje sadržaja retka s traženim stupcima: Pozicija, Igrač, Red
+            redTablice.innerHTML = "<td>" + stavka.pozicija + ".</td>" +
+                                   "<td><strong>" + stavka.igrac + "</strong></td>" +
+                                   "<td>" + stavka.red + ". red</td>";
+
+            // Pretvaramo vrijednost 'red' u broj radi lakše provjere uvjeta
+            const brojReda = Number(stavka.red);
+
+            // Razvrstavanje u odgovarajući drop-down ovisno o redu
+            if (brojReda >= 1 && brojReda <= 4) {
+                tbody1_4.appendChild(redTablice);
+            } else if (brojReda >= 5 && brojReda <= 8) {
+                tbody5_8.appendChild(redTablice);
+            } else if (brojReda >= 9 && brojReda <= 10) {
+                tbody9_10.appendChild(redTablice);
+            }
+        });
+    }
+		
+    // SKRIPTA ZA MOBILNI MENU
+    const menuBtn = document.querySelector('.menu-btn');
+    const dropdownContent = document.querySelector('.dropdown-content');
+    menuBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        dropdownContent.classList.toggle('prikazi');
+    });
+    document.addEventListener('click', function(e) {
+        if (!dropdownContent.contains(e.target) && !menuBtn.contains(e.target)) {
+            dropdownContent.classList.remove('prikazi');
+        }
+    });
+
 </script>
