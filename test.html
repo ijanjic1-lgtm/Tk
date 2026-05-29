@@ -244,7 +244,7 @@
                                 <th>Igrač 1</th>
                                 <th>Igrač 2</th>
                                 <th style="text-align: center;">Rezultat</th>
-                                <th style="text-align: center;">Status</th>
+                                <!--<th style="text-align: center;">Status</th>-->
                             </tr>
                         </thead>
                         <tbody id="tablicaRezultata"></tbody>
@@ -265,8 +265,8 @@
                     <li><span class="broj-ikona"></span> U slučaju ozlijede igrača/odustajanja red se popunjava igračem iz prvog nižeg reda koji ima najviše bodova/pobjeda/najbolju gem-razliku.</li>
                     <li><span class="broj-ikona"></span> Igrači su obvezni poštivati pravila teniske igre i sportskog ponašanja na terenu i izvan njega.	</li>
                     <li><span class="broj-ikona"></span>  Igrač dobiva bodove iz onoga reda u kojem se nalazi nakon odigranog kola.</li>
-					<p></p>
                 </ul>
+				<p></p>
                 <div class="table-wrapper">
                     <table>
                         <thead>
@@ -416,12 +416,12 @@
             }
 
             // Određivanje boje/stila za status meča
-            let statusStil = "";
-            if (mec.status === "U najavi") {
-                statusStil = "<span style='color: #7f8c8d; font-style: italic;'>U najavi</span>";
-            } else {
-                statusStil = "<span style='color: #27ae60; font-weight: bold;'>Završeno</span>";
-            }
+            //let statusStil = "";
+            //if (mec.status === "U najavi") {
+            //    statusStil = "<span style='color: #7f8c8d; font-style: italic;'>U najavi</span>";
+            //} else {
+             //   statusStil = "<span style='color: #27ae60; font-weight: bold;'>Završeno</span>";
+           // }
 
             // Ako nema rezultata (prazan string), stavljamo crticu
             let rezultatPrikaz = mec.rezultat ? mec.rezultat : "—";
@@ -429,7 +429,7 @@
             redTablice.innerHTML = "<td>" + igrac1Prikaz + "</td>" +
                                    "<td>" + igrac2Prikaz + "</td>" +
                                    "<td style='font-family: monospace; font-size: 15px;'>" + rezultatPrikaz + "</td>" +
-                                   "<td>" + statusStil + "</td>";
+                                //   "<td>" + statusStil + "</td>";
             
             tbodyRezultati.appendChild(redTablice);
         });
