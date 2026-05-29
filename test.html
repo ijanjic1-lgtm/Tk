@@ -6,7 +6,13 @@
     <title>TK Slatina - Natjecanja</title>
     <link rel="stylesheet" href="stil.css">
     <style>
-	         /* Stilovi za pojedinačne drop-down redove */
+	    /* Stilovi za vizualni efekt piramide */
+        #kontejnerZaRedove {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centrira sve redove kako bi se dobio oblik piramide */
+            width: 100%;
+        }
         .red-dropdown {
             background-color: #f8f9fa;
             border: 1px solid #e2e8f0;
@@ -14,17 +20,29 @@
             padding: 10px;
             margin-bottom: 8px;
             cursor: pointer;
+            box-sizing: border-box;
+            transition: all 0.3s ease; /* Glatki efekt pri otvaranju */
+            text-align: center; /* Centrira tekst naslova reda */
         }
         .red-dropdown summary {
             font-weight: bold;
             color: #2c3e50;
             outline: none;
             padding: 5px;
+            list-style: none; /* Skriva zadanu strelicu radi boljeg izgleda u piramidi */
+        }
+        /* Dodajemo prilagođenu strelicu unutar naslova */
+        .red-dropdown summary::shadow, .red-dropdown summary::-webkit-details-marker {
+            display: none; 
         }
         .red-dropdown[open] summary {
             margin-bottom: 10px;
             border-bottom: 2px solid #3498db;
             color: #3498db;
+        }
+        /* Tablica unutar drop-downa se poravnava nalijevo radi preglednosti */
+        .red-dropdown .table-wrapper {
+            text-align: left; 
         }
 
 		
@@ -146,7 +164,10 @@
 
             <!-- TABLICA 3: TABLICA BODOVANJA NA DNU -->
             <div style="margin-bottom: 20px;">
-                <h3 style="color: #2c3e50;">📊 Sustav bodovanja po redovima</h3>
+                <h3 style="color: #2c3e50;">📊 Sustav bodovanja i pravila</h3>
+				 <p style="margin-bottom: 30px;">
+						 
+				 </p>
                 <div class="table-wrapper">
                     <table>
                         <thead>
@@ -280,7 +301,7 @@
         });
     }
 
-	    function prikaziPoRedovima(igraci) {
+	       function prikaziPoRedovima(igraci) {
         const kontejner = document.getElementById("kontejnerZaRedove");
         kontejner.innerHTML = ""; // Pražnjenje kontejnera prije novog punjenja
 
@@ -298,20 +319,32 @@
         });
 
         // 2. Prolazak kroz svaki pronađeni red i kreiranje drop-down izbornika
-        // Sortiramo ključeve (brojeve redova) od manjeg prema većem (1, 2, 3...)
         Object.keys(grupiraniPoRedovima).sort((a, b) => Number(a) - Number(b)).forEach(brojReda => {
             const igraciURedu = grupiraniPoRedovima[brojReda];
+            const trenutniRed = Number(brojReda);
 
             // Kreiramo glavni <details> element (drop-down)
             const detailsElement = document.createElement("details");
             detailsElement.className = "red-dropdown";
 
-            // Kreiramo <summary> (naslov izbornika koji odgovara redu)
+            // --- LOGIKA ZA OBLIK PIRAMIDE ---
+            // Izračun širine: 1. red počinje od 40%, a svaki idući red je širi za 6%
+            // Na velikim ekranima daje lijep oblik piramide, a na mobitelima ide do max 100%
+            let izracunataSirina = 40 + (trenutniRed - 1) * 6; 
+            if (izracunataSirina > 100) izracunataSirina = 100;
+            
+            // Postavljanje širine elementa (npr. "40%", "46%", "52%"...)
+            detailsElement.style.width = izracunataSirina + "%";
+            // Osiguravamo da na jako malim ekranima (mobitelima) tablice ne budu preuskre
+            detailsElement.style.minWidth = "280px"; 
+            // ---------------------------------
+
+            // Kreiramo <summary> (naslov izbornika)
             const summaryElement = document.createElement("summary");
-            summaryElement.innerHTML = "🔽 " + brojReda + ". Red Piramide";
+            summaryElement.innerHTML = "🔽 Red " + brojReda;
             detailsElement.appendChild(summaryElement);
 
-            // Kreiramo omotač za tablicu (table-wrapper) zbog responzivnosti na mobitelima
+            // Kreiramo omotač za tablicu (table-wrapper)
             const tableWrapper = document.createElement("div");
             tableWrapper.className = "table-wrapper";
 
@@ -345,6 +378,7 @@
             kontejner.appendChild(detailsElement);
         });
     }
+
 
 		
     // SKRIPTA ZA MOBILNI MENU
