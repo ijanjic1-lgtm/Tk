@@ -6,7 +6,7 @@
     <title>TK Slatina - Natjecanja</title>
     <link rel="stylesheet" href="stil.css">
     <style>
-        /* Dodatni stilovi za legendu iznad rangliste */
+        /* Stilovi za legendu iznad rangliste */
         .legend-container {
             display: flex;
             gap: 20px;
@@ -54,7 +54,7 @@
             <div class="tournaments-header">
                 <h2>Piramida Slatina 2026</h2>
                 
-                <!-- Ovdje sami definirate koja kola imate. Value mora odgovarati nazivu .json datoteke! -->
+                <!-- Izbornik kola -->
                 <select id="odabirKola" class="tournament-select" onchange="ucitajPodatkeIzDatoteke()">
                     <option value="kolo1">1. Kolo</option>
                     <option value="kolo2">2. Kolo</option>
@@ -168,8 +168,9 @@
 
     <!-- JAVASCRIPT ZA DOHVAĆANJE VANJSKIH DATOTEKA -->
     <script>
+    // Jedna jedina onload funkcija koja pokreće cijelu skriptu
     window.onload = function() {
-        var select = document.getElementById("odabirKola");
+        const select = document.getElementById("odabirKola");
         select.selectedIndex = select.options.length - 1;
         ucitajPodatkeIzDatoteke();
     };
@@ -177,13 +178,13 @@
     function ucitajPodatkeIzDatoteke() {
         const selectElement = document.getElementById("odabirKola");
         const odabranoKolo = selectElement.value;
-        const putanja = `./Rezultati/${odabranoKolo}.json`;
+        const putanja = "./Rezultati/" + odabranoKolo + ".json";
 
         console.log("Pokušavam učitati:", putanja);
 
         fetch(putanja)
             .then(response => {
-                if (!response.ok) throw new Error(`Datoteka ${putanja} nije pronađena.`);
+                if (!response.ok) throw new Error("Datoteka " + putanja + " nije pronađena.");
                 return response.json();
             })
             .then(podaci => {
@@ -197,7 +198,7 @@
             });
     }
 
-    // AŽURIRANA FUNKCIJA: Bojanje prvih 8 u zeleno, drugih 8 u narančasto
+    // Funkcija za ranglistu: Bojanje prvih 8 u zeleno, drugih 8 u narančasto
     function prikaziRanglistu(igraci) {
         const tbodyRanglista = document.getElementById("tablicaRangliste");
         tbodyRanglista.innerHTML = "";
@@ -210,25 +211,22 @@
         sortiraniIgraci.forEach((stavka, index) => {
             const redTablice = document.createElement("tr");
 
-            // Logika bojanja na temelju pozicije (index kreće od 0)
             if (index < 8) {
-                redTablice.style.backgroundColor = "#d4edda"; // Lagano zelena (Glavni masters)
+                redTablice.style.backgroundColor = "#d4edda"; // Zeleno za Glavni masters
             } else if (index >= 8 && index < 16) {
-                redTablice.style.backgroundColor = "#ffe8cc"; // Lagano narančasta (Utješni masters)
+                redTablice.style.backgroundColor = "#ffe8cc"; // Narančasto za Utješni masters
             } else {
-                // Ako ima više od 16 igrača, ostatak ima klasično alternirajuće bojanje
                 redTablice.style.backgroundColor = (index % 2 === 0) ? "#f9f9f9" : "#ffffff";
             }
 
-            redTablice.innerHTML = `
-                <td>${index + 1}.</td>
-                <td><strong>${stavka.igrac}</strong></td>
-                <td>${stavka.bodovi}</td>
-            `;
+            redTablice.innerHTML = "<td>" + (index + 1) + ".</td>" +
+                                   "<td><strong>" + stavka.igrac + "</strong></td>" +
+                                   "<td>" + stavka.bodovi + "</td>";
             tbodyRanglista.appendChild(redTablice);
         });
     }
 
+    // Funkcija za prikaz rasporeda s grupiranjem na 8 redova
     function prikaziRaspored(igraci) {
         const tbodyRaspored = document.getElementById("tablicaRasporeda");
         tbodyRaspored.innerHTML = "";
@@ -245,54 +243,50 @@
                 redTablice.style.backgroundColor = "#e8f0fe";
             }
 
-            redTablice.innerHTML = `
-                <td>${stavka.pozicija}.</td>
-                <td><strong>${stavka.igrac}</strong></td>
-                <td>${stavka.bodovi}</td>
-            `;
-			tbodyRaspored.appendChild(redTablice);
-			});
-			}
-	
-	function prikaziRezultate(mecevi) {
+            redTablice.innerHTML = "<td>" + stavka.pozicija + ".</td>" +
+                                   "<td><strong>" + stavka.igrac + "</strong></td>" +
+                                   "<td>" + stavka.bodovi + "</td>";
+            tbodyRaspored.appendChild(redTablice);
+        });
+    }
+
+// Funkcija za prikaz rezultata s isticanjem pobjednika
+	 function prikaziRezultate(mecevi) {
 			const tbodyRezultati = document.getElementById("tablicaRezultata");
 			tbodyRezultati.innerHTML = "";
-			
 			if (!mecevi) return;
 			mecevi.forEach((mec, index) => {
 			const redTablice = document.createElement("tr");
+
 			let statusBoja = "#2c3531";
 			if(mec.status === "Završeno") statusBoja = "#3b604b";
 			if(mec.status === "Odgođeno") statusBoja = "#e67e22";
-			const stilIgrac1 = mec.pobjednik === mec.igrac1 ? 'style="background-color: #d4edda; 
+
+			const stilIgrac1 = mec.pobjednik === mec.igrac1 ? 'style="background-color: #d4edda;
 			color: #155724;"' : '';
 			const stilIgrac2 = mec.pobjednik === mec.igrac2 ? 'style="background-color: #d4edda;
 			color: #155724;"' : '';
-			
-			redTablice.innerHTML = <td>${index + 1}.</td> <td ${stilIgrac1}>
-			<strong>${mec.igrac1}</strong></td> <td ${stilIgrac2}><strong>${mec.igrac2}</strong>
-			</td> <td><strong>${mec.rezultat}</strong></td> <td style="color: ${statusBoja};
-			font-weight: bold;">${mec.status}</td>;tbodyRezultati.appendChild(redTablice);
+
+			redTablice.innerHTML = "" + (index + 1) +"." +
+			"<td " + stilIgrac1 + ">" + mec.igrac1 + "" +"
+			<td " + stilIgrac2 + ">" + mec.igrac2 + "" +
+			"" + mec.rezultat + "" +
+			"" + mec.status + "";
+			tbodyRezultati.appendChild(redTablice);
 			});
-	}
-		    // Pokreni učitavanje prve datoteke odmah po dolasku na stranicu
-    window.onload = ucitajPodatkeIzDatoteke;
-    </script>
-    <!-- SKRIPTA ZA MOBILNI MENU -->
-    <script>
-        const menuBtn = document.querySelector('.menu-btn');
-        const dropdownContent = document.querySelector('.dropdown-content');
+		}
 
-        menuBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            dropdownContent.classList.toggle('prikazi');
-        });
-
-        document.addEventListener('click', function(e) {
-            if (!dropdownContent.contains(e.target) && !menuBtn.contains(e.target)) {
-                dropdownContent.classList.remove('prikazi');
-            }
-        });
-    </script>
-</body>
-</html>
+	// SKRIPTA ZA MOBILNI MENU
+		const menuBtn = document.querySelector('.menu-btn');
+		const dropdownContent = document.querySelector('.dropdown-content');
+		menuBtn.addEventListener('click', function(e) {
+			e.stopPropagation();
+			dropdownContent.classList.toggle('prikazi');
+		});
+		document.addEventListener('click', function(e) {
+			if (!dropdownContent.contains(e.target) && !menuBtn.contains(e.target)) {
+				dropdownContent.classList.remove('prikazi');
+			}
+		});
+		
+</script>
