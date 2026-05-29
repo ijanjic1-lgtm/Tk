@@ -80,6 +80,8 @@
 
         /* --- POTPUNA RESPONSIVNOST ZA MOBITELE --- */
         
+                /* --- POTPUNA RESPONSIVNOST ZA MOBITELE --- */
+        
         /* Dropdown meniji sada imaju fiksnu, punu širinu */
         #kontejnerZaRedove {
             display: block;
@@ -94,17 +96,23 @@
             cursor: pointer;
             box-sizing: border-box;
             width: 100% !important; /* Svi redovi su jednaki i idu preko cijelog ekrana */
-            text-align: left; /* Prirodno poravnanje naslova */
+            text-align: center; /* PROMIJENJENO: Centriranje teksta unutar dropdowna */
         }
         .red-dropdown summary {
             font-weight: bold;
             color: #2c3e50;
             outline: none;
+            list-style: none; /* Uklanja zadanu trokutastu strelicu na većini preglednika radi boljeg centriranja */
+        }
+        /* Uklanjanje strelice za Safari preglednik */
+        .red-dropdown summary::-webkit-details-marker {
+            display: none;
         }
         .red-dropdown[open] summary {
             margin-bottom: 10px;
             border-bottom: 2px solid #3498db;
             color: #3498db;
+            padding-bottom: 5px; /* Dodano za ljepši razmak kada je otvoreno */
         }
 
         /* Osiguravanje da sve tablice zauzmu 100% širine svog kontejnera */
