@@ -249,33 +249,30 @@
             });
     }
 
-    function pokreniBrojac(stringDatumaIzJsona) {
-        // Ako već radi brojač od prethodno odabranog kola, ugasit ćemo ga
+        function pokreniBrojac(stringDatumaIzJsona) {
+        // Ako već radi brojač od prethodno odabranog kola, gasimo ga
         if (aktivniIntervalBrojaca) {
             clearInterval(aktivniIntervalBrojaca);
         }
 
-        // Pretvaramo tekstualni datum iz JSON-a (npr. "2026-06-07T23:59:59") u milisekunde
+        // Pretvaramo tekstualni datum iz JSON-a u milisekunde
         const datumZavrsetka = new Date(stringDatumaIzJsona).getTime();
-
-        // Vraćamo zadani izgled sata ako je prethodno kolo bilo završeno
-        document.getElementById("countdownNaslov").innerHTML = "Vrijeme za odigravanje mečeva";
         const satKontejner = document.querySelector(".countdown-sat");
-        
-        // Provjera drži li kontejner poruku o završetku; ako da, vraćamo originalnu HTML strukturu satova
-        if (satKontejner.querySelector('span[style*="color"]')) {
-            satKontejner.innerHTML = `
-                <div class="vrijeme-bloke"><span id="dani">00</span><label>Dana</label></div>
-                <div class="vrijeme-separator">:</div>
-                <div class="vrijeme-bloke"><span id="sati">00</span><label>Sati</label></div>
-                <div class="vrijeme-separator">:</div>
-                <div class="vrijeme-bloke"><span id="minute">00</span><label>Min.</label></div>
-                <div class="vrijeme-separator">:</div>
-                <div class="vrijeme-bloke"><span id="sekunde">00</span><label>Sek.</label></div>
-            `;
-        }
 
-        aktivniIntervalBrojaca = setInterval(function() {
+        // KLJUČNI POPRAVAK: Svaki put kada se brojač pokrene, ponovno stvaramo čistu HTML strukturu satova.
+        // Na ovaj način sprječavamo grešku "Cannot set properties of null" jer elementi sigurno postoje.
+        document.getElementById("countdownNaslov").innerHTML = "Vrijeme za odigravanje mečeva";
+        satKontejner.innerHTML = 
+            '<div class="vrijeme-bloke"><span id="dani">00</span><label>Dana</label></div>' +
+            '<div class="vrijeme-separator">:</div>' +
+            '<div class="vrijeme-bloke"><span id="sati">00</span><label>Sati</label></div>' +
+            '<div class="vrijeme-separator">:</div>' +
+            '<div class="vrijeme-bloke"><span id="minute">00</span><label>Min.</label></div>' +
+            '<div class="vrijeme-separator">:</div>' +
+            '<div class="vrijeme-bloke"><span id="sekunde">00</span><label>Sek.</label></div>';
+
+        // Funkcija koja odmah izračunava i prikazuje vrijeme (da izbjegnemo kašnjenje od 1 sekunde)
+        function azurirajVrijeme() {
             const sada = new Date().getTime();
             const razlika = datumZavrsetka - sada;
 
@@ -283,7 +280,7 @@
             if (razlika < 0) {
                 clearInterval(aktivniIntervalBrojaca);
                 document.getElementById("countdownNaslov").innerHTML = "Kolo je završeno! 🏁";
-                document.querySelector(".countdown-sat").innerHTML = "<span style='color: #ef4444; font-weight: bold; padding: 10px;'>Čeka se unos novog kola...</span>";
+                satKontejner.innerHTML = "<span style='color: #ef4444; font-weight: bold; padding: 10px;'>Čeka se unos novog kola...</span>";
                 return;
             }
 
@@ -293,13 +290,23 @@
             const minute = Math.floor((razlika % (1000 * 60 * 60)) / (1000 * 60));
             const sekunde = Math.floor((razlika % (1000 * 60)) / 1000);
 
-            // Prikaz rezultata u HTML elementima
-            document.getElementById("dani").innerHTML = dani < 10 ? "0" + dani : dani;
-            document.getElementById("sati").innerHTML = sati < 10 ? "0" + sati : sati;
-            document.getElementById("minute").innerHTML = minute < 10 ? "0" + minute : minute;
-            document.getElementById("sekunde").innerHTML = sekunde < 10 ? "0" + sekunde : sekunde;
+            // Provjera postojanja elemenata prije upisa (dodatna dvostruka zaštita)
+            const elDani = document.getElementById("dani");
+            const elSati = document.getElementById("sati");
+            const elMinute = document.getElementById("minute");
+            const elSekunde = document.getElementById("sekunde");
 
-        }, 1000);
+            if (elDani && elSati && elMinute && elSekunde) {
+                elDani.innerHTML = dani < 10 ? "0" + dani : dani;
+                elSati.innerHTML = sati < 10 ? "0" + sati : sati;
+                elMinute.innerHTML = minute < 10 ? "0" + minute : minute;
+                elSekunde.innerHTML = sekunde < 10 ? "0" + sekunde : sekunde;
+            }
+        }
+
+        // Pokrećemo izračun odmah, a zatim ga ponavljamo svake sekunde
+        azurirajVrijeme();
+        aktivniIntervalBrojaca = setInterval(azurirajVrijeme, 1000);
     }
 
 
