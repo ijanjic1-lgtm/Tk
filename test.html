@@ -334,11 +334,7 @@
     </footer>
 
     <!-- JAVASCRIPT LOGIKA -->
-	    <!-- JAVASCRIPT LOGIKA -->
-    <script>
-    // Globalna varijabla koja čuva interval brojača
-    let aktivniIntervalBrojaca;
-
+	<script>
     window.onload = function() {
         var select = document.getElementById("odabirKola");
         select.selectedIndex = select.options.length - 1;
@@ -360,15 +356,7 @@
             .then(podaci => {
                 prikaziRanglistu(podaci.raspored);
                 prikaziRezultate(podaci.rezultati);
-                prikaziPoRedovima(podaci.raspored); // Ova linija sada sigurno pronalazi funkciju niže
-                
-                // Pokreće brojač s datumom iz JSON-a ako taj ključ postoji
-                if (podaci.krajKola) {
-                    pokreniBrojac(podaci.krajKola);
-                } else {
-                    document.getElementById("countdownNaslov").innerHTML = "Vrijeme za odigravanje mečeva";
-                    document.querySelector(".countdown-sat").innerHTML = "<span style='color: #cbd5e1; padding: 10px;'>Datum završetka nije definiran.</span>";
-                }
+                prikaziPoRedovima(podaci.raspored); // NOVA LINIJA: Pokreće punjenje drop-down tablica
             })
             .catch(error => {
                 console.error("Greška detaljno:", error);
@@ -408,43 +396,52 @@
         tbodyRezultati.innerHTML = "";
 
         if (!rezultati || rezultati.length === 0) {
-            tbodyRezultati.innerHTML = "<tr><td colspan='3' style='text-align:center;'>Nema unesenih mečeva za ovo kolo.</td></tr>";
+            tbodyRezultati.innerHTML = "<tr><td colspan='4' style='text-align:center;'>Nema unesenih mečeva za ovo kolo.</td></tr>";
             return;
         }
 
         rezultati.forEach(mec => {
             const redTablice = document.createElement("tr");
 
+            // Isticanje pobjednika podebljanim tekstom ako je meč završen
             let igrac1Prikaz = mec.igrac1;
             let igrac2Prikaz = mec.igrac2;
 
             if (mec.status === "Završeno") {
                 if (mec.pobjednik === mec.igrac1) {
-                    igrac1Prikaz = "<span style='color: #27ae60;'><strong>🏆 " + mec.igrac1 + "</strong></span>";
+                    igrac1Prikaz = "<strong>🏆 " + mec.igrac1 + "</strong>";
                 } else if (mec.pobjednik === mec.igrac2) {
-                    igrac2Prikaz = "<span style='color: #27ae60;'><strong>🏆 " + mec.igrac2 + "</strong></span>";
+                    igrac2Prikaz = "<strong>🏆 " + mec.igrac2 + "</strong>";
                 }
-            } else {
-                igrac1Prikaz = "<span style='color: #4a5568;'>" + mec.igrac1 + "</span>";
-                igrac2Prikaz = "<span style='color: #4a5568;'>" + mec.igrac2 + "</span>";
             }
 
+            // Određivanje boje/stila za status meča
+            let statusStil = "";
+            if (mec.status === "U najavi") {
+                statusStil = "<span style='color: #7f8c8d; font-style: italic;'>U najavi</span>";
+            } else {
+                statusStil = "<span style='color: #27ae60; font-weight: bold;'>Završeno</span>";
+            }
+
+            // Ako nema rezultata (prazan string), stavljamo crticu
             let rezultatPrikaz = mec.rezultat ? mec.rezultat : "—";
 
             redTablice.innerHTML = "<td>" + igrac1Prikaz + "</td>" +
                                    "<td>" + igrac2Prikaz + "</td>" +
-                                   "<td style='font-family: monospace; font-size: 15px; text-align: center; font-weight: bold;'>" + rezultatPrikaz + "</td>";
+                                   "<td style='font-family: monospace; font-size: 15px;'>" + rezultatPrikaz + "</td>" +
+                                   "<td>" + statusStil + "</td>";
             
             tbodyRezultati.appendChild(redTablice);
         });
     }
 
-    function prikaziPoRedovima(igraci) {
+	    function prikaziPoRedovima(igraci) {
         const kontejner = document.getElementById("kontejnerZaRedove");
-        kontejner.innerHTML = ""; 
+        kontejner.innerHTML = ""; // Pražnjenje kontejnera prije novog punjenja
 
         if (!igraci || igraci.length === 0) return;
 
+        // 1. Grupiranje igrača po redovima (od 1 do 10)
         const grupiraniPoRedovima = {};
         
         igraci.forEach(stavka => {
@@ -455,19 +452,24 @@
             grupiraniPoRedovima[brojReda].push(stavka);
         });
 
+        // 2. Prolazak kroz svaki pronađeni red i kreiranje drop-down izbornika
         Object.keys(grupiraniPoRedovima).sort((a, b) => Number(a) - Number(b)).forEach(brojReda => {
             const igraciURedu = grupiraniPoRedovima[brojReda];
 
+            // Kreiramo glavni <details> element (drop-down koji automatski zauzima 100% širine)
             const detailsElement = document.createElement("details");
             detailsElement.className = "red-dropdown";
 
+            // Kreiramo <summary> (naslov izbornika)
             const summaryElement = document.createElement("summary");
             summaryElement.innerHTML = "🔽 Red " + brojReda;
             detailsElement.appendChild(summaryElement);
 
+            // Kreiramo omotač za tablicu (table-wrapper) koji omogućuje skrolanje na mobitelima
             const tableWrapper = document.createElement("div");
             tableWrapper.className = "table-wrapper";
 
+            // Kreiramo samu tablicu s dva stupca (Pozicija i Igrač)
             const tablica = document.createElement("table");
             tablica.innerHTML = 
                 "<thead>" +
@@ -477,8 +479,10 @@
                     "</tr>" +
                 "</thead>";
 
+            // Kreiramo tbody u koji ćemo staviti igrače tog specifičnog reda
             const tbody = document.createElement("tbody");
 
+            // Punimo tbody igračima
             igraciURedu.forEach(stavka => {
                 const redTablice = document.createElement("tr");
                 redTablice.innerHTML = "<td>" + stavka.pozicija + ".</td>" +
@@ -486,6 +490,7 @@
                 tbody.appendChild(redTablice);
             });
 
+            // Sklapamo sve elemente zajedno i dodajemo na stranicu
             tablica.appendChild(tbody);
             tableWrapper.appendChild(tablica);
             detailsElement.appendChild(tableWrapper);
@@ -493,57 +498,8 @@
         });
     }
 
-    function pokreniBrojac(stringDatumaIzJsona) {
-        if (aktivniIntervalBrojaca) {
-            clearInterval(aktivniIntervalBrojaca);
-        }
 
-        const datumZavrsetka = new Date(stringDatumaIzJsona).getTime();
-        const satKontejner = document.querySelector(".countdown-sat");
-
-        document.getElementById("countdownNaslov").innerHTML = "Vrijeme za odigravanje mečeva";
-        satKontejner.innerHTML = 
-            '<div class="vrijeme-bloke"><span id="dani">00</span><label>Dana</label></div>' +
-            '<div class="vrijeme-separator">:</div>' +
-            '<div class="vrijeme-bloke"><span id="sati">00</span><label>Sati</label></div>' +
-            '<div class="vrijeme-separator">:</div>' +
-            '<div class="vrijeme-bloke"><span id="minute">00</span><label>Min.</label></div>' +
-            '<div class="vrijeme-separator">:</div>' +
-            '<div class="vrijeme-bloke"><span id="sekunde">00</span><label>Sek.</label></div>';
-
-        function azurirajVrijeme() {
-            const sada = new Date().getTime();
-            const razlika = datumZavrsetka - sada;
-
-            if (razlika < 0) {
-                clearInterval(aktivniIntervalBrojaca);
-                document.getElementById("countdownNaslov").innerHTML = "Kolo je završeno! 🏁";
-                satKontejner.innerHTML = "<span style='color: #ef4444; font-weight: bold; padding: 10px;'>Čeka se unos novog kola...</span>";
-                return;
-            }
-
-            const dani = Math.floor(razlika / (1000 * 60 * 60 * 24));
-            const sati = Math.floor((razlika % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minute = Math.floor((razlika % (1000 * 60 * 60)) / (1000 * 60));
-            const sekunde = Math.floor((razlika % (1000 * 60)) / 1000);
-
-            const elDani = document.getElementById("dani");
-            const elSati = document.getElementById("sati");
-            const elMinute = document.getElementById("minute");
-            const elSekunde = document.getElementById("sekunde");
-
-            if (elDani && elSati && elMinute && elSekunde) {
-                elDani.innerHTML = dani < 10 ? "0" + dani : dani;
-                elSati.innerHTML = sati < 10 ? "0" + sati : sati;
-                elMinute.innerHTML = minute < 10 ? "0" + minute : minute;
-                elSekunde.innerHTML = sekunde < 10 ? "0" + sekunde : sekunde;
-            }
-        }
-
-        azurirajVrijeme();
-        aktivniIntervalBrojaca = setInterval(azurirajVrijeme, 1000);
-    }
-
+		
     // SKRIPTA ZA MOBILNI MENU
     const menuBtn = document.querySelector('.menu-btn');
     const dropdownContent = document.querySelector('.dropdown-content');
@@ -556,4 +512,5 @@
             dropdownContent.classList.remove('prikazi');
         }
     });
-    </script>
+
+</script>
