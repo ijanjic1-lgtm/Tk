@@ -27,6 +27,49 @@
         }
         .dot-main { background-color: #d4edda; border: 1px solid #c3e6cb; }
         .dot-consolation { background-color: #ffe8cc; border: 1px solid #ffd8a8; }
+
+        /* Stilovi za Dropdown / Harmonika sustav redova piramide */
+        .piramida-red-dropdown {
+            margin-bottom: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .dropdown-header-gumb {
+            width: 100%;
+            background-color: #f1f5f9;
+            color: #1e293b;
+            text-align: left;
+            padding: 12px 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s;
+        }
+        .dropdown-header-gumb:hover {
+            background-color: #e2e8f0;
+        }
+        .dropdown-header-gumb::after {
+            content: "▼";
+            font-size: 12px;
+            transition: transform 0.2s;
+        }
+        .piramida-red-dropdown.otvoreno .dropdown-header-gumb::after {
+            transform: rotate(180deg);
+        }
+        .dropdown-tablica-sadrzaj {
+            display: none;
+            padding: 10px;
+            background-color: #ffffff;
+            border-top: 1px solid #cbd5e1;
+        }
+        .piramida-red-dropdown.otvoreno .dropdown-tablica-sadrzaj {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -70,7 +113,6 @@
             <div style="margin-bottom: 40px;">
                 <h3 style="color: #2c3e50; margin-bottom: 10px;">🥇 Ukupna ranglista igrača po bodovima</h3>
                 
-                <!-- Legenda iznad tablice -->
                 <div class="legend-container">
                     <div class="legend-item">
                         <span class="legend-dot dot-main"></span>
@@ -96,20 +138,11 @@
                 </div>
             </div>
 
-            <!-- TABLICA 1: RASPORED -->
+            <!-- PRIKAZ: DROPDOWN MENIJI ZA REDOVE PIRAMIDE (SVAKI PO 4 IGRAČA) -->
             <div style="margin-bottom: 40px;">
-                <h3 style="color: #2c3e50;">📋 Ljestvica igrača za odabrano kolo</h3>
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Poz.</th>
-                                <th>Igrač</th>
-								<th>Bodovi</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tablicaRasporeda"></tbody>
-                    </table>
+                <h3 style="color: #2c3e50; margin-bottom: 15px;">📋 Ljestvica igrača za odabrano kolo</h3>
+                <div id="kontejnerDropdowna">
+                    <!-- Dinamički ubačeni dropdown izbornici po 4 retka -->
                 </div>
             </div>
 
@@ -188,7 +221,7 @@
             })
             .then(podaci => {
                 prikaziRanglistu(podaci.raspored);
-                prikaziRaspored(podaci.raspored);
+                prikaziRasporedDropdown(podaci.raspored);
                 prikaziRezultate(podaci.rezultati);
             })
             .catch(error => {
@@ -203,89 +236,122 @@
 
         if (!igraci) return;
 
+        // Kopiranje niza kako se sortiranje ne bi odrazilo na ljestvicu kola
         const sortiraniIgraci = [...igraci];
-        sortiraniIgraci.sort((a, b) => Number(b.bodovi) - Number(a.bodovi));
+        
+        // Sortiranje prema bodovima koje povlači iz tvog JSON-a
+        sortiraniIgraci.sort((a, b) => Number(b.bodovi || 0) - Number(a.bodovi || 0));
 
         sortiraniIgraci.forEach((stavka, index) => {
             const redTablice = document.createElement("tr");
 
             if (index < 8) {
-                redTablice.style.backgroundColor = "#d4edda";
+                redTablice.style.backgroundColor = "#d4edda"; // Glavni masters
             } else if (index >= 8 && index < 16) {
-                redTablice.style.backgroundColor = "#ffe8cc";
+                redTablice.style.backgroundColor = "#ffe8cc"; // Utješni masters
             } else {
                 redTablice.style.backgroundColor = (index % 2 === 0) ? "#f9f9f9" : "#ffffff";
             }
 
             redTablice.innerHTML = "<td>" + (index + 1) + ".</td>" +
                                    "<td><strong>" + stavka.igrac + "</strong></td>" +
-                                   "<td>" + stavka.bodovi + "</td>";
-            tbodyRanglista.appendChild(redTablice);
-        });
-    }
-
-    function prikaziRaspored(igraci) {
-        const tbodyRaspored = document.getElementById("tablicaRasporeda");
-        tbodyRaspored.innerHTML = "";
-
-        if (!igraci) return;
-
-        igraci.forEach((stavka, index) => {
-            const redTablice = document.createElement("tr");
-            const brojGrupe = Math.floor(index / 8);
-            
-            if (brojGrupe % 2 === 0) {
-                redTablice.style.backgroundColor = "#f9f9f9";
-            } else {
-                redTablice.style.backgroundColor = "#e8f0fe";
-            }
-
-            redTablice.innerHTML = "<td>" + stavka.pozicija + ".</td>" +
-                                   "<td><strong>" + stavka.igrac + "</strong></td>" +
-                                   "<td>" + stavka.bodovi + "</td>";
-            tbodyRaspored.appendChild(redTablice);
-        });
-    }
-
-    function prikaziRezultate(mecevi) {
-        const tbodyRezultati = document.getElementById("tablicaRezultata");
-        tbodyRezultati.innerHTML = "";
-
-        if (!mecevi) return;
-
-        mecevi.forEach((mec, index) => {
-            const redTablice = document.createElement("tr");
-
-let statusBoja = "#2c3531";
-if (mec.status === "Završeno") statusBoja = "#3b604b";
-if (mec.status === "Odgođeno") statusBoja = "#e67e22";
-// Vraćena izvorna, sigurna provjera stila pobjednika s ispravljenim navodnicima
-let stilIgrac1 = "";
-let stilIgrac2 = "";
-if (mec.pobjednik && mec.pobjednik === mec.igrac1) {
-stilIgrac1 = "style='background-color: #d4edda; color: #155724;'";
-}
-if (mec.pobjednik && mec.pobjednik === mec.igrac2) {
-stilIgrac2 = "style='background-color: #d4edda; color: #155724;'";
-}
-// Svaki stupac  ima čiste i jasno zatvorene HTML oznake
-redTablice.innerHTML = "" + (index + 1) + "." +
-"<td " + stilIgrac1 + ">" + mec.igrac1 + "" +
-"<td " + stilIgrac2 + ">" + mec.igrac2 + "" +
-"" + mec.rezultat + "" +
-"" + mec.status + "";
-tbodyRezultati.appendChild(redTablice);
-});
-}
-// SKRIPTA ZA MOBILNI MENU
-const menuBtn = document.querySelector('.menu-btn');
-const dropdownContent = document.querySelector('.dropdown-content');
-menuBtn.addEventListener('click', function(e) {
-e.stopPropagation();dropdownContent.classList.toggle('prikazi');
-});
-document.addEventListener('click', function(e) {
-if (!dropdownContent.contains(e.target) && !menuBtn.contains(e.target)) {
-dropdownContent.classList.remove('prikazi');
-}
-});
-</script>
+		"" + stavka.bodovi + "";
+		tbodyRanglista.appendChild(redTablice);
+		});
+		}
+		
+		function prikaziRasporedDropdown(igraci) {
+			const kontejner = document.getElementById("kontejnerDropdowna");
+			kontejner.innerHTML = "";
+			
+			if (!igraci || igraci.length === 0) return;
+			
+			const velicinaGrupe = 4;
+			const brojGrupa = Math.ceil(igraci.length / velicinaGrupe);
+			
+			for (let i = 0; i < brojGrupe; i++) {
+			const indeksPocetka = i * velicinaGrupe;
+			const igraciUGrupi = igraci.slice(indeksPocetka, indeksPocetka + velicinaGrupe);
+			const divDropdown = document.createElement("div");
+			divDropdown.className = "piramida-red-dropdown";
+			
+			const gumbNaslov = document.createElement("button");
+			gumbNaslov.className = "dropdown-header-gumb";
+			gumbNaslov.type = "button";
+			gumbNaslov.innerText = (i + 1) + ". Red Piramide";
+			gumbNaslov.onclick = function() {
+			divDropdown.classList.toggle("otvoreno");
+			};
+			const divSadrzaj = document.createElement("div");
+			divSadrzaj.className = "dropdown-tablica-sadrzaj";
+			
+			
+			// Tablica s točno tri stupca: Pozicija, Igrač, Red
+			let tablicaHTML = "" +
+			"" +
+			"" +
+			"Pozicija" +
+			"Igrač" +
+			"Red" +
+			"" +
+			"" +
+			"";
+			
+			igraciUGrupi.forEach(stavka => {
+			tablicaHTML += "" +
+			"" + stavka.pozicija + "." +
+			"" + stavka.igrac + "" +
+			"" + stavka.red + "" +
+			"";
+			});
+			
+			tablicaHTML += "";
+			divSadrzaj.innerHTML = tablicaHTML;
+			divDropdown.appendChild(gumbNaslov);
+			divDropdown.appendChild(divSadrzaj);
+			kontejner.appendChild(divDropdown);
+			}
+			}
+			
+			function prikaziRezultate(mecevi) {
+			const tbodyRezultati = document.getElementById("tablicaRezultata");
+			tbodyRezultati.innerHTML = "";
+			
+			if (!mecevi) return;
+			mecevi.forEach((mec, index) => {
+			const redTablice = document.createElement("tr");
+			
+			let statusBoja = "#2c3531";
+			if (mec.status === "Završeno") statusBoja = "#3b604b";
+			if (mec.status === "Odgođeno") statusBoja = "#e67e22";
+			let stilIgrac1 = "";
+			let stilIgrac2 = "";
+			if (mec.pobjednik && mec.pobjednik === mec.igrac1) {
+				stilIgrac1 = "style='background-color: #d4edda; color: #155724;'";
+			}
+			if (mec.pobjednik && mec.pobjednik === mec.igrac2) {
+				stilIgrac2 = "style='background-color: #d4edda; color: #155724;'";
+			}
+			
+			redTablice.innerHTML = "" + (index + 1) + "." +
+			"<td " + stilIgrac1 + ">" + mec.igrac1 + "" +
+			"<td " + stilIgrac2 + ">" + mec.igrac2 + "" +
+			"" + mec.rezultat + "" +
+			"" + mec.status + "";
+			
+			tbodyRezultati.appendChild(redTablice);
+			});
+			}
+			
+			// SKRIPTA ZA MOBILNI MENU
+			const menuBtn = document.querySelector('.menu-btn');
+			const dropdownContent = document.querySelector('.dropdown-content');
+			menuBtn.addEventListener('click', function(e) {
+			e.stopPropagation();dropdownContent.classList.toggle('prikazi');
+			});
+			document.addEventListener('click', function(e) {
+			if (!dropdownContent.contains(e.target) && !menuBtn.contains(e.target)) {
+			dropdownContent.classList.remove('prikazi');
+			}
+			});
+	</script>
