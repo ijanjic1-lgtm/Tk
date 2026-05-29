@@ -44,9 +44,9 @@
 		{
 		"igrac1": "Ostojić Dragan",
 		"igrac2": "Petrak Kristijan",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "6:3 6:4",
+		"status": "Završeno",
+		"pobjednik": "Ostojić Dragan"
 		},
 		{
 		"igrac1": "Ostojić Bojan",
@@ -121,9 +121,9 @@
 		{
 		"igrac1": "Ostojić Nikola",
 		"igrac2": "Hetrih Josip",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "4:6 6:4 10:6",
+		"status": "Završeno",
+		"pobjednik": "Ostojić Nikola"
 		},
 		{
 		"igrac1": "Makar Marijan",
@@ -142,9 +142,9 @@
 		{
 		"igrac1": "Drokan Ivan",
 		"igrac2": "Mađarić Slavko",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "6:3 6:3",
+		"status": "Završeno",
+		"pobjednik": "Drokan Ivan"
 		},
 		{
 		"igrac1": "Cerovski Dalibor",
