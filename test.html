@@ -247,48 +247,44 @@
         });
     }
 
-    // POTPUNO POPRAVLJENA FUNKCIJA: Bojanje se vrši izravno preko JS objekta, nema tekstualnih stilova
     function prikaziRezultate(mecevi) {
         const tbodyRezultati = document.getElementById("tablicaRezultata");
         tbodyRezultati.innerHTML = "";
 
         if (!mecevi) return;
 
-		mecevi.forEach((mec, index) => {
-			const redTablice = document.createElement("tr");
-			let statusBoja = "#2c3531";
-			if (mec.status === "Završeno") statusBoja = "#3b604b";
-			if (mec.status === "Odgođeno") statusBoja = "#e67e22";
-			// Kreiramo čiste stupce bez ikakvih style atributa unutar stringa
-			redTablice.innerHTML = "" + (index + 1) + "." +
-				"" + mec.igrac1 + "" +
-				"" + mec.igrac2 + "" + 	// Maknut strong s igrača 2 da se lakše uoči pobjednik
-				"" + mec.rezultat + "" +
-				"" + mec.status + "";
+        mecevi.forEach((mec, index) => {
+            const redTablice = document.createElement("tr");
 
-		// Ako postoji pobjednik, bojamo pozadinu izravno na elementu// .children[1] je Igrač 1, a .children[2] je Igrač 2
-			if (mec.pobjednik && mec.pobjednik === mec.igrac1) {
-				redTablice.children[1].style.backgroundColor = "#d4edda";
-				redTablice.children[1].style.color = "#155724";
-				redTablice.children[1].innerHTML = "" + mec.igrac1 + " ★"; // Dodana zvjezdica pobjedniku
-			} else if (mec.pobjednik && mec.pobjednik === mec.igrac2) {
-				redTablice.children[2].style.backgroundColor = "#d4edda";
-				redTablice.children[2].style.color = "#155724";
-				redTablice.children[2].innerHTML = "" + mec.igrac2 + " ★"; // Dodana zvjezdica pobjedniku
-			}
-			tbodyRezultati.appendChild(redTablice);
-		});
-	}
-	// SKRIPTA ZA MOBILNI MENU
-		const menuBtn = document.querySelector('.menu-btn');
-		const dropdownContent = document.querySelector('.dropdown-content');
-		menuBtn.addEventListener('click', function(e) {
-			e.stopPropagation();
-			dropdownContent.classList.toggle('prikazi');
-		});
-		document.addEventListener('click', function(e) {
-			if (!dropdownContent.contains(e.target) && !menuBtn.contains(e.target)) {
-				dropdownContent.classList.remove('prikazi');
-			}
-		});
+let statusBoja = "#2c3531";
+if (mec.status === "Završeno") statusBoja = "#3b604b";
+if (mec.status === "Odgođeno") statusBoja = "#e67e22";
+// Vraćena izvorna, sigurna provjera stila pobjednika s ispravljenim navodnicima
+let stilIgrac1 = "";
+let stilIgrac2 = "";
+if (mec.pobjednik && mec.pobjednik === mec.igrac1) {
+stilIgrac1 = "style='background-color: #d4edda; color: #155724;'";
+}
+if (mec.pobjednik && mec.pobjednik === mec.igrac2) {
+stilIgrac2 = "style='background-color: #d4edda; color: #155724;'";
+}
+redTablice.innerHTML = "" + (index + 1) + "." +
+"<td " + stilIgrac1 + ">" + mec.igrac1 + "" +
+"<td " + stilIgrac2 + ">" + mec.igrac2 + "" +
+"" + mec.rezultat + "" +
+"" + mec.status + "";
+tbodyRezultati.appendChild(redTablice);
+});
+}
+// SKRIPTA ZA MOBILNI MENU
+const menuBtn = document.querySelector('.menu-btn');
+const dropdownContent = document.querySelector('.dropdown-content');
+menuBtn.addEventListener('click', function(e) {
+e.stopPropagation();dropdownContent.classList.toggle('prikazi');
+});
+document.addEventListener('click', function(e) {
+if (!dropdownContent.contains(e.target) && !menuBtn.contains(e.target)) {
+dropdownContent.classList.remove('prikazi');
+}
+});
 </script>
