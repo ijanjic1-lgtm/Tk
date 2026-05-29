@@ -34,59 +34,62 @@
             font-weight: bold;
         }
 
-		
-		        /* Posebni stilovi za tablicu ozlijeđenih */
-        .tablica-ozlijedeni tbody tr {
-            background-color: #fdf2f2 !important; /* Blaga crvena/roza pozadina za suosjećanje */
-            border-bottom: 1px solid #f5c6cb;
-        }
-        .tablica-ozlijedeni tbody tr:hover {
-            background-color: #fbebeb !important;
-        }
-        .tablica-ozlijedeni th {
-            background-color: #cb4335 !important; /* Crvena boja zaglavlja umjesto standardne plave/tamne */
-            color: white;
-        }
 
-	    /* Stilovi za vizualni efekt piramide */
+        /* --- POTPUNA RESPONSIVNOST ZA MOBITELE --- */
+        
+        /* Dropdown meniji sada imaju fiksnu, punu širinu */
         #kontejnerZaRedove {
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Centrira sve redove kako bi se dobio oblik piramide */
+            display: block;
             width: 100%;
         }
         .red-dropdown {
             background-color: #f8f9fa;
             border: 1px solid #e2e8f0;
             border-radius: 6px;
-            padding: 10px;
+            padding: 12px;
             margin-bottom: 8px;
             cursor: pointer;
             box-sizing: border-box;
-            transition: all 0.3s ease; /* Glatki efekt pri otvaranju */
-            text-align: center; /* Centrira tekst naslova reda */
+            width: 100% !important; /* Svi redovi su jednaki i idu preko cijelog ekrana */
+            text-align: left; /* Prirodno poravnanje naslova */
         }
         .red-dropdown summary {
             font-weight: bold;
             color: #2c3e50;
             outline: none;
-            padding: 5px;
-            list-style: none; /* Skriva zadanu strelicu radi boljeg izgleda u piramidi */
-        }
-        /* Dodajemo prilagođenu strelicu unutar naslova */
-        .red-dropdown summary::shadow, .red-dropdown summary::-webkit-details-marker {
-            display: none; 
         }
         .red-dropdown[open] summary {
             margin-bottom: 10px;
             border-bottom: 2px solid #3498db;
             color: #3498db;
         }
-        /* Tablica unutar drop-downa se poravnava nalijevo radi preglednosti */
-        .red-dropdown .table-wrapper {
-            text-align: left; 
+
+        /* Osiguravanje da sve tablice zauzmu 100% širine svog kontejnera */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto; /* Omogućuje glatko vodoravno skrolanje ako je ekran premali */
+            -webkit-overflow-scrolling: touch;
+            margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+        }
+        .table-wrapper table {
+            width: 100%;
+            min-width: 100%; /* Tablica se prisilno rasteže */
+            border-collapse: collapse;
+            table-layout: auto; /* Omogućuje pregledniku da sam pametno rasporedi širinu stupaca */
         }
 
+        /* Sprječavanje lomljenja imena igrača i rezultata u više neurednih redova */
+        .table-wrapper td, .table-wrapper th {
+            white-space: nowrap; /* Tekst ostaje u jednom redu radi preglednosti */
+            padding: 10px 8px;   /* Malo uži padding na mobitelima da stane više teksta */
+        }
+
+        /* Na mobitelima dopuštamo samo stupcu s imenom igrača da se širi, ostali su kompaktni */
+        .table-wrapper td strong {
+            white-space: normal; /* Ako je ime baš predugačko, samo se ono smije prelomiti */
+        }
 		
         /* Stilovi za legendu iznad rangliste */
         .legend-container {
@@ -387,7 +390,7 @@
         });
     }
 
-	function prikaziPoRedovima(igraci) {
+	    function prikaziPoRedovima(igraci) {
         const kontejner = document.getElementById("kontejnerZaRedove");
         kontejner.innerHTML = ""; // Pražnjenje kontejnera prije novog punjenja
 
@@ -407,23 +410,17 @@
         // 2. Prolazak kroz svaki pronađeni red i kreiranje drop-down izbornika
         Object.keys(grupiraniPoRedovima).sort((a, b) => Number(a) - Number(b)).forEach(brojReda => {
             const igraciURedu = grupiraniPoRedovima[brojReda];
-            const trenutniRed = Number(brojReda);
 
-            // Kreiramo glavni <details> element (drop-down)
+            // Kreiramo glavni <details> element (drop-down koji automatski zauzima 100% širine)
             const detailsElement = document.createElement("details");
             detailsElement.className = "red-dropdown";
-
-            // Izračun širine za oblik piramide
-            let izracunataSirina = 65 + (trenutniRed - 1) * 3.8; 
-            if (izracunataSirina > 100) izracunataSirina = 100;
-            detailsElement.style.width = izracunataSirina + "%";
 
             // Kreiramo <summary> (naslov izbornika)
             const summaryElement = document.createElement("summary");
             summaryElement.innerHTML = "🔽 Red " + brojReda;
             detailsElement.appendChild(summaryElement);
 
-            // Kreiramo omotač za tablicu (table-wrapper)
+            // Kreiramo omotač za tablicu (table-wrapper) koji omogućuje skrolanje na mobitelima
             const tableWrapper = document.createElement("div");
             tableWrapper.className = "table-wrapper";
 
@@ -432,7 +429,7 @@
             tablica.innerHTML = 
                 "<thead>" +
                     "<tr>" +
-                        "<th style='width: 100px;'>Pozicija</th>" +
+                        "<th style='width: 70px;'>Pozicija</th>" +
                         "<th>Igrač</th>" +
                     "</tr>" +
                 "</thead>";
@@ -452,8 +449,6 @@
             tablica.appendChild(tbody);
             tableWrapper.appendChild(tablica);
             detailsElement.appendChild(tableWrapper);
-            
-            // POPRAVLJENO: Sada se ispravno koristi varijabla 'kontejner'
             kontejner.appendChild(detailsElement);
         });
     }
