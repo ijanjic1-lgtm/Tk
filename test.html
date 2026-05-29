@@ -166,11 +166,10 @@
         <p>&copy; 2026 Teniski klub Slatina. Sva prava pridržana.</p>
     </footer>
 
-    <!-- JAVASCRIPT ZA DOHVAĆANJE VANJSKIH DATOTEKA -->
+    <!-- JAVASCRIPT LOGIKA -->
     <script>
-    // Jedna jedina onload funkcija koja pokreće cijelu skriptu
     window.onload = function() {
-        const select = document.getElementById("odabirKola");
+        var select = document.getElementById("odabirKola");
         select.selectedIndex = select.options.length - 1;
         ucitajPodatkeIzDatoteke();
     };
@@ -198,7 +197,6 @@
             });
     }
 
-    // Funkcija za ranglistu: Bojanje prvih 8 u zeleno, drugih 8 u narančasto
     function prikaziRanglistu(igraci) {
         const tbodyRanglista = document.getElementById("tablicaRangliste");
         tbodyRanglista.innerHTML = "";
@@ -212,9 +210,9 @@
             const redTablice = document.createElement("tr");
 
             if (index < 8) {
-                redTablice.style.backgroundColor = "#d4edda"; // Zeleno za Glavni masters
+                redTablice.style.backgroundColor = "#d4edda";
             } else if (index >= 8 && index < 16) {
-                redTablice.style.backgroundColor = "#ffe8cc"; // Narančasto za Utješni masters
+                redTablice.style.backgroundColor = "#ffe8cc";
             } else {
                 redTablice.style.backgroundColor = (index % 2 === 0) ? "#f9f9f9" : "#ffffff";
             }
@@ -226,7 +224,6 @@
         });
     }
 
-    // Funkcija za prikaz rasporeda s grupiranjem na 8 redova
     function prikaziRaspored(igraci) {
         const tbodyRaspored = document.getElementById("tablicaRasporeda");
         tbodyRaspored.innerHTML = "";
@@ -250,43 +247,46 @@
         });
     }
 
-// Funkcija za prikaz rezultata s isticanjem pobjednika
-	 function prikaziRezultate(mecevi) {
-			const tbodyRezultati = document.getElementById("tablicaRezultata");
-			tbodyRezultati.innerHTML = "";
-			if (!mecevi) return;
-			mecevi.forEach((mec, index) => {
-			const redTablice = document.createElement("tr");
+function prikaziRezultate(mecevi) {
+        const tbodyRezultati = document.getElementById("tablicaRezultata");
+        tbodyRezultati.innerHTML = "";
 
-			let statusBoja = "#2c3531";
-			if(mec.status === "Završeno") statusBoja = "#3b604b";
-			if(mec.status === "Odgođeno") statusBoja = "#e67e22";
+        if (!mecevi) return;
 
-			const stilIgrac1 = mec.pobjednik === mec.igrac1 ? 'style="background-color: #d4edda;
-			color: #155724;"' : '';
-			const stilIgrac2 = mec.pobjednik === mec.igrac2 ? 'style="background-color: #d4edda;
-			color: #155724;"' : '';
+        mecevi.forEach((mec, index) => {
+            const redTablice = document.createElement("tr");
 
-			redTablice.innerHTML = "" + (index + 1) +"." +
-			"<td " + stilIgrac1 + ">" + mec.igrac1 + "" +"
-			<td " + stilIgrac2 + ">" + mec.igrac2 + "" +
-			"" + mec.rezultat + "" +
-			"" + mec.status + "";
-			tbodyRezultati.appendChild(redTablice);
-			});
-		}
+let statusBoja = "#2c3531";
+if (mec.status === "Završeno") statusBoja = "#3b604b";
+if (mec.status === "Odgođeno") statusBoja = "#e67e22";
 
-	// SKRIPTA ZA MOBILNI MENU
-		const menuBtn = document.querySelector('.menu-btn');
-		const dropdownContent = document.querySelector('.dropdown-content');
-		menuBtn.addEventListener('click', function(e) {
-			e.stopPropagation();
-			dropdownContent.classList.toggle('prikazi');
-		});
-		document.addEventListener('click', function(e) {
-			if (!dropdownContent.contains(e.target) && !menuBtn.contains(e.target)) {
-				dropdownContent.classList.remove('prikazi');
-			}
-		});
-		
+const stilIgrac1 = (mec.pobjednik === mec.igrac1) ? "style='background-color: #d4edda;
+color: #155724;'" : "";
+const stilIgrac2 = (mec.pobjednik === mec.igrac2) ? "style='background-color: #d4edda;
+color: #155724;'" : "";
+
+let htmlSadrzaj = "" + (index + 1) + ".";
+htmlSadrzaj += "<td " + stilIgrac1 + ">" + mec.igrac1 + "";
+htmlSadrzaj += "<td " + stilIgrac2 + ">" + mec.igrac2 + "";
+htmlSadrzaj += "" + mec.rezultat + "";
+htmlSadrzaj += "" + mec.status + "";
+
+redTablice.innerHTML = htmlSadrzaj;
+tbodyRezultati.appendChild(redTablice);
+});
+}
+
+// SKRIPTA ZA MOBILNI MENU
+const menuBtn = document.querySelector('.menu-btn');
+const dropdownContent = document.querySelector('.dropdown-content');
+menuBtn.addEventListener('click', function(e) {
+e.stopPropagation();
+dropdownContent.classList.toggle('prikazi');
+});
+document.addEventListener('click', function(e) {
+if (!dropdownContent.contains(e.target) && !menuBtn.contains(e.target)) {
+dropdownContent.classList.remove('prikazi');
+}
+});
 </script>
+		
