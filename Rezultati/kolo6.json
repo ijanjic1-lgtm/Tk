@@ -43,30 +43,30 @@
 		{
 		"igrac1": "Samir Klement",
 		"igrac2": "Ostojić Bojan",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "4:6 5:7",
+		"status": "Završeno",
+		"pobjednik": "Ostojić Bojan"
 		},
 		{
 		"igrac1": "Cvjetković Miloš",
 		"igrac2": "Ostojić Dragan",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "5:7 1:6",
+		"status": "Završeno",
+		"pobjednik": "Ostojić Dragan"
 		},
 		{
 		"igrac1": "Vida Mario",
 		"igrac2": "Vurdelja Denis",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "3:6 3:6",
+		"status": "Završeno",
+		"pobjednik": "Vurdelja Denis"
 		},
 		{
 		"igrac1": "Janjić Ivan",
 		"igrac2": "Petrak Kristijan",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "3:6 0:6",
+		"status": "Završeno",
+		"pobjednik": "Petrak Kristijan"
 		},
 		{
 		"igrac1": "Ostojić Milan",
@@ -113,9 +113,9 @@
 		{
 		"igrac1": "Marošević Danijel",
 		"igrac2": "Tepeš Boris",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "2:6 7:6 12:14",
+		"status": "Završeno",
+		"pobjednik": "Tepeš Boris"
 		},
 		{
 		"igrac1": "Hmelik Zlatko",
