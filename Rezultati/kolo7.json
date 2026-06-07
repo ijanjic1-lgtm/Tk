@@ -1,0 +1,58 @@
+{
+	"krajKola": "2026-06-31T14:00:00",
+	"raspored": [
+		{ "pozicija":1, "igrac": "Ostojić Dragan", "red": "1", "bodovi":4000},
+		{ "pozicija":2, "igrac": "Vurdelja Denis", "red": "1", "bodovi":3333},
+		{ "pozicija":3, "igrac": "Ostojić Bojan", "red": "1", "bodovi":3333},
+		{ "pozicija":4, "igrac": "Petrak Kristijan", "red": "1", "bodovi":2666},
+		{ "pozicija":5, "igrac": "Samir Klement", "red": "2", "bodovi":1778},
+		{ "pozicija":6, "igrac": "Cvjetković Miloš", "red": "2", "bodovi":1778},
+		{ "pozicija":7, "igrac": "Vida Mario", "red": "2", "bodovi":1482},
+		{ "pozicija":8, "igrac": "Janjić Ivan", "red": "2", "bodovi":1482},
+		{ "pozicija":9, "igrac": "Mikić Mario", "red": "3", "bodovi":1482},
+		{ "pozicija":10, "igrac": "Karl Vlatko", "red": "3", "bodovi":1482},
+		{ "pozicija":11, "igrac": "Ćurić Borna", "red": "3", "bodovi":1186},
+		{ "pozicija":12, "igrac": "Kokorić Marijo", "red": "3", "bodovi":627+Rezkola},
+		{ "pozicija":13, "igrac": "Ostojić Milan", "red": "4", "bodovi":660},
+		{ "pozicija":14, "igrac": "Pavlinić Denis", "red": "4", "bodovi":561},
+		{ "pozicija":15, "igrac": "Majačić Mario", "red": "4", "bodovi":506},
+		{ "pozicija":16, "igrac": "Roštaš Hrvoje", "red": "4", "bodovi":544+rezkola},
+		{ "pozicija":17, "igrac": "Telišman Marko", "red": "5", "bodovi":396+rezkola},
+		{ "pozicija":18, "igrac": "Kligl Matej", "red": "5", "bodovi":396+rezkola},
+		{ "pozicija":19, "igrac": "Tepeš Boris", "red": "5", "bodovi":477},
+		{ "pozicija":20, "igrac": "Hmelik Zlatko", "red": "5", "bodovi":374},
+		{ "pozicija":21, "igrac": "Kolarić Miran", "red": "6", "bodovi":242+rezkola},
+		{ "pozicija":22, "igrac": "Ostojić Nikola", "red": "6", "bodovi":279+rezkola},
+		{ "pozicija":23, "igrac": "Marošević Danijel", "red": "6", "bodovi":293},
+		{ "pozicija":24, "igrac": "Manceta Igor", "red": "6", "bodovi":286},
+		{ "pozicija":25, "igrac": "Hetrih Josip", "red": "7", "bodovi":227},
+		{ "pozicija":26, "igrac": "Marković Filip", "red": "7", "bodovi":212},
+		{ "pozicija":27, "igrac": "Hranić Milan", "red": "7", "bodovi":195},
+		{ "pozicija":28, "igrac": "Drokan Ivan", "red": "7", "bodovi":199},
+		{ "pozicija":29, "igrac": "Cerovski Dalibor", "red": "8", "bodovi":130},
+		{ "pozicija":30, "igrac": "Miklošević Igor", "red": "8", "bodovi":96},
+		{ "pozicija":31, "igrac": "Mađarić Slavko", "red": "8", "bodovi":80},
+		{ "pozicija":32, "igrac": "Štampar Milan", "red": "8", "bodovi":87},
+		{ "pozicija":33, "igrac": "Vujić Antun", "red": "9", "bodovi":35+rezkola},
+		{ "pozicija":34, "igrac": "Jambrešić David", "red": "9", "bodovi":74},
+		{ "pozicija":35, "igrac": "Medved Daniel", "red": "9", "bodovi":48+rezkola},
+		{ "pozicija":36, "igrac": "Srednoselac Ivica", "red": "9", "bodovi":40}
+	],
+	"rezultati": [
+		{
+		"igrac1": "XXXX",
+		"igrac2": "XXXX",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		{
+		"igrac1": "XXXX",
+		"igrac2": "XXXX",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		}
+	]
+	
+}
