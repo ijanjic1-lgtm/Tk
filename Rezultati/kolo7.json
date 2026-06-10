@@ -84,9 +84,9 @@
 		{
 		"igrac1": "Tepeš Boris",
 		"igrac2": "Majačić Mario",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "6:0 6:2",
+		"status": "Završeno",
+		"pobjednik": "Tepeš Boris"
 		},
 		{
 		"igrac1": "Hmelik Zlatko",
@@ -140,9 +140,9 @@
 		{
 		"igrac1": "Vujić Antun",
 		"igrac2": "Cerovski Dalibor",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "BB",
+		"status": "Završeno",
+		"pobjednik": "Vujić Antun"
 		},
 		{
 		"igrac1": "Srednoselac Ivica",
