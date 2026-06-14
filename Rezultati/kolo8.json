@@ -2,8 +2,8 @@
 	"krajKola": "2026-06-31T14:00:00",
 	"raspored": [
 	{ "pozicija":1, "igrac": "Ostojić Dragan", "red": "1", "bodovi":5000},
-	{ "pozicija":2, "igrac": "Vurdelja Denis", "red"", "red": " "1", "bodovi":3666},
-	{ "pozicija":3, "igrac": "Ostojić Bojan", "red": ", "red": "1", "bodovi":	},
+	{ "pozicija":2, "igrac": "Vurdelja Denis", "red": "1", "bodovi":3666},
+	{ "pozicija":3, "igrac": "Ostojić Bojan", "red": "1", "bodovi":	},
 	{ "pozicija":4, "igrac": "Petrak Kristijan", "red": "1", "bodovi":	},
 	{ "pozicija":5, "igrac": "Mikić Mario", "red": "2", "bodovi":2149},
 	{ "pozicija":6, "igrac": "Cvjetković Miloš", "red": "2", "bodovi":2445},
