@@ -105,16 +105,16 @@
 		{
 		"igrac1": "Telišman Marko",
 		"igrac2": "Ostojić Milan",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "6:4 4:6 6:10",
+		"status": "Završeno",
+		"pobjednik": "Ostojić Milan"
 		},
 		{
 		"igrac1": "Marošević Danijel",
 		"igrac2": "Ostojić Nikola",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "6:3 6:3",
+		"status": "Završeno",
+		"pobjednik": "Marošević Danijel"
 		},
 		{
 		"igrac1": "Marković Filip",
@@ -126,9 +126,9 @@
 		{
 		"igrac1": "Vujić Antun",
 		"igrac2": "Hetrih Josip",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "BB",
+		"status": "Završeno",
+		"pobjednik": "Hetrih Josip"
 		},
 		{
 		"igrac1": "Srednoselac Ivica",
