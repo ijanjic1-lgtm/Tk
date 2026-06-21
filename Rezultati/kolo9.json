@@ -33,9 +33,9 @@
 	{ "pozicija":30, "igrac": "Srednoselac Ivica", "red": "8", "bodovi":99},
 	{ "pozicija":31, "igrac": "Mađarić Slavko", "red": "8", "bodovi":158},
 	{ "pozicija":32, "igrac": "Kolarić Miran", "red": "8", "bodovi":334},
-	{ "pozicija":33, "igrac": "Jambrešić David", "red": "9", "bodovi":87},
+	{ "pozicija":33, "igrac": "Jambrešić David", "red": "9", "bodovi":100},
 	{ "pozicija":34, "igrac": "Medved Daniel", "red": "9", "bodovi":139},
-	{ "pozicija":35, "igrac": "Miklošević Igor", "red": "9", "bodovi":109},
+	{ "pozicija":35, "igrac": "Miklošević Igor", "red": "9", "bodovi":148},
 	{ "pozicija":36, "igrac": "Marošević Gabrijel", "red": "9", "bodovi":0}	
 ],
 "rezultati": [
