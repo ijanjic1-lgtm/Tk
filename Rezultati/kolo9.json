@@ -3,7 +3,7 @@
 	"raspored": [
 	{ "pozicija":1, "igrac": "Ostojić Dragan", "red": "1", "bodovi":6000},
 	{ "pozicija":2, "igrac": "Vurdelja Denis", "red": "1", "bodovi":4666},
-	{ "pozicija":3, "igrac": "Ostojić Bojan", "red": "", "bodovi":	5333},
+	{ "pozicija":3, "igrac": "Ostojić Bojan", "red": "1", "bodovi":	5333},
 	{ "pozicija":4, "igrac": "Petrak Kristijan", "red": "1", "bodovi":3999},
 	{ "pozicija":5, "igrac": "Mikić Mario", "red": "2", "bodovi":2371},
 	{ "pozicija":6, "igrac": "Cvjetković Miloš", "red": "2", "bodovi":2667},
