@@ -42,9 +42,9 @@
 		{
 		"igrac1": "Ostojić Dragan",
 		"igrac2": "Ostojić Bojan",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "BB",
+		"status": "Završeno",
+		"pobjednik": "Ostojić Bojan"
 		},
 		{
 		"igrac1": "Vurdelja Denis",
@@ -56,9 +56,9 @@
 		{
 		"igrac1": "Klement Samir",
 		"igrac2": "Cvjetković Miloš",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "3:6 2:6",
+		"status": "Završeno",
+		"pobjednik": "Cvjetković Miloš"
 		},
 		{
 		"igrac1": "Karl Vlatko",
@@ -77,9 +77,9 @@
 		{
 		"igrac1": "Tepeš Boris",
 		"igrac2": "Janjić Ivan",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "3:6 7:6 10:1",
+		"status": "Završeno",
+		"pobjednik": "Tepeš Boris"
 		},
 		{
 		"igrac1": "Marošević Danijel",
