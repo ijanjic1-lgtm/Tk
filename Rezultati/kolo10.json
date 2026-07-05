@@ -70,9 +70,9 @@
 		{
 		"igrac1": "Marošević Danijel",
 		"igrac2": "Pavlinić Denis",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "6:2 6:1",
+		"status": "Završeno",
+		"pobjednik": "Marošević Danijel"
 		},
 		{
 		"igrac1": "Drokan Ivan",
@@ -126,16 +126,16 @@
 		{
 		"igrac1": "Vujić Antun",
 		"igrac2": "Štampar Milan",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "BB",
+		"status": "Završeno",
+		"pobjednik": "Štampar Milan"
 		},
 		{
 		"igrac1": "Srednoselac Ivica",
 		"igrac2": "Hetrih Josip",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "BB",
+		"status": "Završeno",
+		"pobjednik": "Hetrih Josip"
 		},
 		{
 		"igrac1": "Medved Daniel",
