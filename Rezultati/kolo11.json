@@ -2,6 +2,15 @@
 	"krajKola": "2026-06-31T14:00:00",
 	"raspored": [
 		{ "pozicija":1, "igrac": "Ostojić Dragan", "red": "1", "bodovi":6333},
-    { "pozicija":1, "igrac": "Ostojić Dragan", "red": "1", "bodovi":6333}
-  ]
+   	    { "pozicija":1, "igrac": "Ostojić Dragan", "red": "1", "bodovi":6333}
+	],
+"rezultati": [
+		{
+		"igrac1": "Igrač1",
+		"igrac2": "Igrač2",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		}
+	]	
 }
