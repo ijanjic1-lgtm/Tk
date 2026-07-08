@@ -97,16 +97,16 @@
 		{
 		"igrac1": "Telišman Marko",
 		"igrac2": "Roštaš Hrvoje",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "1:6 7:6 5:10",
+		"status": "Završeno",
+		"pobjednik": "Roštaš Hrvoje"
 		},
 		{
 		"igrac1": "Hranić Milan",
 		"igrac2": "Pavlinić Denis",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "BB",
+		"status": "Završeno",
+		"pobjednik": "Hranić Milan"
 		},
 		{
 		"igrac1": "Kligl Matej",
@@ -132,9 +132,9 @@
 		{
 		"igrac1": "Štampar Milan",
 		"igrac2": "Marković Filip",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "5:7 4:6",
+		"status": "Završeno",
+		"pobjednik": "Marković Filip"
 		},
 		{
 		"igrac1": "Mađarić Slavko",
