@@ -39,6 +39,129 @@
 	],
 	"rezultati": [
 		{
+		"igrac1": "Mikić Mario",
+		"igrac2": "Cvjetković Miloš",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		{
+		"igrac1": "Petrak Kristijan",
+		"igrac2": "Ostojić Bojan",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		{
+		"igrac1": "Ćurić Borna",
+		"igrac2": "Klement Samir",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},		
+		{
+		"igrac1": "Vurdelja Denis",
+		"igrac2": "Ostojić Dragan",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		{
+		"igrac1": "Hranić Milan",
+		"igrac2": "Tepeš Boris",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		{
+		"igrac1": "Roštaš Hrvoje",
+		"igrac2": "Karl Vlatko",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		{
+		"igrac1": "Kokorić Marijo",
+		"igrac2": "Marošević Danijel",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		{
+		"igrac1": "Hmelik Zlatko",
+		"igrac2": "Janjić Ivan",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		{
+		"igrac1": "Vida Mario",
+		"igrac2": "Telišman Marko",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		{
+		"igrac1": "Marković Filip",
+		"igrac2": "Pavlinić Denis",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		"igrac1": "Ostojić Milan",
+		"igrac2": "Drokan Ivan",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
 		}
+		"igrac1": "Majačić Mario",
+		"igrac2": "Manceta Igor",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		}
+		"igrac1": "Vujić Antun",
+		"igrac2": "Ostojić Nikola",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		}
+		"igrac1": "Srednoselac Ivica/Mađarić Slavko",
+		"igrac2": "Kligl Matej",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		}
+		"igrac1": "Kolarić Miran",
+		"igrac2": "Hetrih Josip",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		}
+		"igrac1": "Miklošević Igor",
+		"igrac2": "Štampar Milan",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		}
+		"igrac1": "Medved Daniel",
+		"igrac2": "Marošević Gabrijel",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		}
+		"igrac1": "Gubitnik meča Mađarić/Srednoselac",
+		"igrac2": "",
+		"rezultat": "Slobodno kolo",
+		"status": "Završeno",
+		"pobjednik": ""
+		}	
 	]	
 }
