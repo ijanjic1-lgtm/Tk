@@ -55,9 +55,9 @@
 		{
 		"igrac1": "Ćurić Borna",
 		"igrac2": "Klement Samir",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "7:5 2:6 6:10",
+		"status": "Završeno",
+		"pobjednik": "Ćurić Borna"
 		},		
 		{
 		"igrac1": "Vurdelja Denis",
@@ -90,9 +90,9 @@
 		{
 		"igrac1": "Hmelik Zlatko",
 		"igrac2": "Janjić Ivan",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "0:6 4:6",
+		"status": "Završeno",
+		"pobjednik": "Janjić Ivan"
 		},
 		{
 		"igrac1": "Vida Mario",
