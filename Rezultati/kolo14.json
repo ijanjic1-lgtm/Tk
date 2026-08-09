@@ -1,0 +1,171 @@
+{
+	"krajKola": "2026-06-31T14:00:00",
+	"raspored": [
+		{ "pozicija":1, "igrac": "Ćurić Borna", "red": "1", "bodovi":5408},
+		{ "pozicija":2, "igrac": "Ostojić Dragan", "red": "1", "bodovi":9222},
+		{ "pozicija":3, "igrac": "Ostojić Bojan", "red": "1", "bodovi":10333},
+		{ "pozicija":4, "igrac": "Mikić Mario", "red": "1", "bodovi":5260},
+		{ "pozicija":5, "igrac": "Cvjetković Miloš", "red": "2", "bodovi":5556},
+		{ "pozicija":6, "igrac": "Petrak Kristijan", "red": "2", "bodovi":5443},
+		{ "pozicija":7, "igrac": "Vurdelja Denis", "red": "2", "bodovi":8555},
+		{ "pozicija":8, "igrac": "Samir Klement", "red": "2", "bodovi":4520},
+		{ "pozicija":9, "igrac": "Tepeš Boris", "red": "3", "bodovi":2849},
+		{ "pozicija":10, "igrac": "Roštaš Hrvoje", "red": "3", "bodovi":2374},
+		{ "pozicija":11, "igrac": "Kokorić Marijo", "red": "3", "bodovi":2408},
+		{ "pozicija":12, "igrac": "Janjić Ivan", "red": "3", "bodovi":3705},
+		{ "pozicija":13, "igrac": "Vida Mario", "red": "4", "bodovi":2466},
+		{ "pozicija":14, "igrac": "Hmelik Zlatko", "red": "4", "bodovi":1760},
+		{ "pozicija":15, "igrac": "Karl Vlatko", "red": "4", "bodovi":3212},
+		{ "pozicija":16, "igrac": "Marošević Danijel", "red": "4", "bodovi":1909},
+		{ "pozicija":17, "igrac": "Drokan Ivan", "red": "5", "bodovi":1255},
+		{ "pozicija":18, "igrac": "Manceta Igor", "red": "5", "bodovi":1019},
+		{ "pozicija":19, "igrac": "Hranić Milan", "red": "5", "bodovi":1104},
+		{ "pozicija":20, "igrac": "Marković Filip", "red": "5", "bodovi":1048},
+		{ "pozicija":21, "igrac": "Telišman Marko", "red": "6", "bodovi":1144},
+		{ "pozicija":22, "igrac": "Pavlinić Denis", "red": "6", "bodovi":1792},
+		{ "pozicija":23, "igrac": "Ostojić Milan", "red": "6", "bodovi":1342},
+		{ "pozicija":24, "igrac": "Ostojić Nikola", "red": "6", "bodovi":953},
+		{ "pozicija":25, "igrac": "Hetrih Josip", "red": "7", "bodovi":607},
+		{ "pozicija":26, "igrac": "Kligl Matej", "red": "7", "bodovi":967},
+		{ "pozicija":27, "igrac": "Majačić Mario", "red": "7", "bodovi":997},
+		{ "pozicija":28, "igrac": "Štampar Milan", "red": "7", "bodovi":497},
+		{ "pozicija":29, "igrac": "Vujić Antun", "red": "8", "bodovi":301},
+		{ "pozicija":30, "igrac": "Mađarić Slavko", "red": "8", "bodovi":262},
+		{ "pozicija":31, "igrac": "Marošević Gabrijel", "red": "8", "bodovi":163},
+		{ "pozicija":32, "igrac": "Miklošević Igor", "red": "8", "bodovi":304},
+		{ "pozicija":33, "igrac": "Srednoselac Ivica", "red": "9", "bodovi":222},
+		{ "pozicija":34, "igrac": "Medved Daniel", "red": "9", "bodovi":256},
+		{ "pozicija":35, "igrac": "Kolarić Miran", "red": "9", "bodovi":477},
+		{ "pozicija":36, "igrac": "Randelj Marko", "red": "9", "bodovi":0}
+	],
+	"rezultati": [
+		{
+		"igrac1": "Cvjetković Miloš",
+		"igrac2": "Ostojić Bojan",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		{
+		"igrac1": "Vurdelja Denis",
+		"igrac2": "Mikić Mario",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		{
+		"igrac1": "Samir Klement",
+		"igrac2": "Ostojić Dragan",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		{
+		"igrac1": "Ćurića Borna",
+		"igrac2": "Petrak Kristijan/Roštaš Hrvoje",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		{
+		"igrac1": "Hmelik Zlatko",
+		"igrac2": "Kokorić Marijo",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		{
+		"igrac1": "Karl Vlatko",
+		"igrac2": "Tepeš Boris",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		{
+		"igrac1": "Marošević Danijel",
+		"igrac2": "Janjić Ivan",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		{
+		"igrac1": "Vida Mario",
+		"igrac2": "Petrak Kristijan/Roštaš Hrvoje",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		{
+		"igrac1": "Telišman Marko",
+		"igrac2": "Drokan Ivan",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		{
+		"igrac1": "Pavlinić Denis",
+		"igrac2": "Manceta Igor",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		{
+		"igrac1": "Ostojić Milan",
+		"igrac2": "Marković Filip",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		{
+		"igrac1": "Ostojić Nikola",
+		"igrac2": "Hranić Milan",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		{
+		"igrac1": "Vujić Antun",
+		"igrac2": "Majačić Mario",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		{
+		"igrac1": "Mađarić Slavko",
+		"igrac2": "Hetrih Josip",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		{
+		"igrac1": "Marošević Gabrijel",
+		"igrac2": "Štampar Milan",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		{
+		"igrac1": "Randelj Marko/Miklošević Igor",
+		"igrac2": "Kligl Matej",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		{
+		"igrac1": "Srednoselac Ivica",
+		"igrac2": "Medved Daniel",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		},
+		{
+		"igrac1": "Kolarić Miran",
+		"igrac2": "Randelj Marko/Miklošević Igor",
+		"rezultat": "",
+		"status": "U najavi",
+		"pobjednik": ""
+		}
+	]	
+}
+
+
