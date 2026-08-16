@@ -32,11 +32,11 @@
 		{ "pozicija":29, "igrac": "Vujić Antun", "red": "8", "bodovi":301},
 		{ "pozicija":30, "igrac": "Mađarić Slavko", "red": "8", "bodovi":262},
 		{ "pozicija":31, "igrac": "Marošević Gabrijel", "red": "8", "bodovi":163},
-		{ "pozicija":32, "igrac": "Miklošević Igor", "red": "8", "bodovi":304},
+		{ "pozicija":36, "igrac": "Randelj Marko", "red": "8", "bodovi":59},
 		{ "pozicija":33, "igrac": "Srednoselac Ivica", "red": "9", "bodovi":222},
 		{ "pozicija":34, "igrac": "Medved Daniel", "red": "9", "bodovi":256},
 		{ "pozicija":35, "igrac": "Kolarić Miran", "red": "9", "bodovi":477},
-		{ "pozicija":36, "igrac": "Randelj Marko", "red": "9", "bodovi":0}
+		{ "pozicija":32, "igrac": "Miklošević Igor", "red": "9", "bodovi":317}
 	],
 	"rezultati": [
 		{
