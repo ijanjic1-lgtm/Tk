@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TK Slatina - Natjecanja</title>
+    <link rel="stylesheet" href="stil.css">
+    <style>
+		/*Zajebancija sa rezultatima*/
+		        /* --- UKLANJANJE SKROLANJA ZA TABLICU REZULTATA NA MOBITELIMA --- */
+        
+        /* Ciljamo isključivo tablicu rezultata */
+        #tablicaRezultata, 
+        #tablicaRezultataContainer table {
+            table-layout: fixed !important; /* Prisiljava tablicu da poštuje zadane širine stupaca */
+            width: 100% !important;
+            white-space: normal !important; /* Dopušta prelamanje teksta (imena igrača) */
+        }
+
+        /* Precizno definiranje širine stupaca u postocima (ukupno 100%) */
+        #tablicaRezultataContainer th:nth-child(1), #tablicaRezultata td:nth-child(1) { width: 33%; } /* Igrač 1 */
+        #tablicaRezultataContainer th:nth-child(2), #tablicaRezultata td:nth-child(2) { width: 33%; } /* Igrač 2 */
+        #tablicaRezultataContainer th:nth-child(3), #tablicaRezultata td:nth-child(3) { width: 19%; } /* Rezultat */
+        #tablicaRezultataContainer th:nth-child(4), #tablicaRezultata td:nth-child(4) { width: 15%; } /* Status */
+
+        /* Prilagodba unutrašnjeg teksta za male ekrane mobitela */
+        #tablicaRezultata td, #tablicaRezultata th {
+            padding: 8px 4px !important; /* Uži razmak da sve stane bez skrolanja */
+            font-size: 13px !important;  /* Blago smanjen font samo za ovu tablicu na mobitelima */
+            white-space: normal !important; 
+            word-wrap: break-word;
+        }
+
+        /* Posebna prilagodba za brojeve setova (monospace tekst) */
+        #tablicaRezultata td[style*="font-family: monospace"] {
+            font-size: 12px !important;
+            line-height: 1.2;
+        }
+
+        /* Kada ekran postane širi (Desktop / Tablet), vraćamo standardnu veličinu fonta */
+        @media (min-width: 768px) {
+            #tablicaRezultata td, #tablicaRezultata th {
+                font-size: 16px !important;
+                padding: 12px 10px !important;
+            }
+            #tablicaRezultata td[style*="font-family: monospace"] {
+                font-size: 17px !important;
+            }
+        }
+
+		/*Kraj rezultata*/
+        /* Globalno ujednačavanje i povećanje fonta u svim tablicama */
+        .table-wrapper table {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-size: 15px; /* Povećana veličina teksta (standard je bio oko 14px) */
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        /* Povećanje naslova tablica (zaglavlja) */
+        .table-wrapper th {
+            font-size: 15px;
+            font-weight: 600;
+            padding: 12px 10px; /* Veći razmak za ugodniji izgled */
+        }
+
+        /* Povećanje i razmak za obične ćelije */
+        .table-wrapper td {
+            padding: 12px 10px; /* Veći okomiti razmak zbog većeg fonta */
+            vertical-align: middle; /* Centrira tekst i ikone po visini retka */
+        }
+
+        /* Prilagodba monospace fonta za rezultate da prati novu veličinu */
+        .table-wrapper td[style*="font-family: monospace"] {
+            font-family: 'Courier New', Courier, monospace !important;
+            font-size: 17px !important; 
+            font-weight: bold;
+        }
+
+
+        /* --- POTPUNA RESPONSIVNOST ZA MOBITELE --- */
+        
+                /* --- POTPUNA RESPONSIVNOST ZA MOBITELE --- */
+        
+        /* Dropdown meniji sada imaju fiksnu, punu širinu */
+        #kontejnerZaRedove {
+            display: block;
+            width: 100%;
+        }
+        .red-dropdown {
+            background-color: #f8f9fa;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            box-sizing: border-box;
+            width: 100% !important; /* Svi redovi su jednaki i idu preko cijelog ekrana */
+            text-align: center; /* PROMIJENJENO: Centriranje teksta unutar dropdowna */
+        }
+        .red-dropdown summary {
+            font-weight: bold;
+            color: #2c3e50;
+            outline: none;
+            list-style: none; /* Uklanja zadanu trokutastu strelicu na većini preglednika radi boljeg centriranja */
+        }
+        /* Uklanjanje strelice za Safari preglednik */
+        .red-dropdown summary::-webkit-details-marker {
+            display: none;
+        }
+        .red-dropdown[open] summary {
+            margin-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+            color: #3498db;
+            padding-bottom: 5px; /* Dodano za ljepši razmak kada je otvoreno */
+        }
+
+        /* Osiguravanje da sve tablice zauzmu 100% širine svog kontejnera */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto; /* Omogućuje glatko vodoravno skrolanje ako je ekran premali */
+            -webkit-overflow-scrolling: touch;
+            margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+        }
+        .table-wrapper table {
+            width: 100%;
+            min-width: 100%; /* Tablica se prisilno rasteže */
+            border-collapse: collapse;
+            table-layout: auto; /* Omogućuje pregledniku da sam pametno rasporedi širinu stupaca */
+        }
+
+        /* Sprječavanje lomljenja imena igrača i rezultata u više neurednih redova */
+        .table-wrapper td, .table-wrapper th {
+            white-space: nowrap; /* Tekst ostaje u jednom redu radi preglednosti */
+            padding: 10px 8px;   /* Malo uži padding na mobitelima da stane više teksta */
+        }
+
+        /* Na mobitelima dopuštamo samo stupcu s imenom igrača da se širi, ostali su kompaktni */
+        .table-wrapper td strong {
+            white-space: normal; /* Ako je ime baš predugačko, samo se ono smije prelomiti */
+        }
+		
+        /* Stilovi za legendu iznad rangliste */
+        .legend-container {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .legend-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .dot-main { background-color: #d4edda; border: 1px solid #c3e6cb; }
+        .dot-consolation { background-color: #ffe8cc; border: 1px solid #ffd8a8; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="nav-left">
+                <div class="menu-dropdown">
+                    <button class="menu-btn">☰ Izbornik</button>
+                    <div class="dropdown-content">
+                        <a href="index.html">Početna</a>
+                        <a href="galerija.html">Galerija slika</a>
+                        <a href="natjecanja.html">Natjecanja</a>
+                    </div>
+                </div>
+                <a href="index.html" class="logo-area">
+					 <img src="./Slike/logo.png" alt="TK Slatina Logo" class="logo-img">
+			         <span>TK Slatina</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="section">
+            <div class="tournaments-header">
+                <h2>Piramida Slatina 2026</h2>
+                
+                <!-- Izbornik kola -->
+                <select id="odabirKola" class="tournament-select" onchange="ucitajPodatkeIzDatoteke()">
+                    <option value="kolo1">1. Kolo</option>
+                    <option value="kolo2">2. Kolo</option>
+					<option value="kolo3">3. Kolo</option>
+					<option value="kolo4">4. Kolo</option>
+					<option value="kolo5">5. Kolo</option>
+					<option value="kolo6">6. Kolo</option>
+					<option value="kolo7">7. Kolo</option>
+					<option value="kolo8">8. kolo</option>
+					<option value="kolo9">9. kolo</option>
+					<option value="kolo10">10. kolo</option>
+					<option value="kolo11">11. kolo</option>
+					<option value="kolo12">12. kolo</option>
+					<option value="kolo13">13. kolo</option>
+					<option value="kolo14">14. kolo</option>
+					<option value="kolo15">15. kolo</option>
+					<option value="masters" selected>Masters</option>
+				</select>
+            </div>
+            
+            <p style="margin-bottom: 30px;">Odaberite željeno kolo iz izbornika kako biste vidjeli raspored igrača i rezultate odigranih mečeva.</p>
+
+            <!-- TABLICA: RANGLISTA PO BODOVIMA S LEGENDOM -->
+            <div style="margin-bottom: 40px;">
+                <h3 style="color: #2c3e50; margin-bottom: 10px;">🥇 Poredak igrača po bodovima</h3>
+                
+                <!-- Legenda iznad tablice -->
+                <div class="legend-container">
+                    <div class="legend-item">
+                        <span class="legend-dot dot-main"></span>
+                        <span>Glavni masters</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-dot dot-consolation"></span>
+                        <span>Utješni masters</span>
+                    </div>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Igrač</th>
+                                <th>Bodovi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablicaRangliste"></tbody>
+                    </table>
+                </div>
+            </div>
+
+			<!-- SEKCIJA ZA DINAMIČKE DROP-DOWN MENIJE PO REDOVIMA -->
+            <div style="margin-bottom: 40px;">
+                <h3 style="color: #2c3e50; margin-bottom: 15px;">📐 Pregled igrača po redovima piramide</h3>
+                <div id="kontejnerZaRedove"></div>
+            </div>
+
+            </div>
+			
+            <!-- TABLICA 3: TABLICA BODOVANJA NA DNU -->
+            <div style="margin-bottom: 20px;">
+                <h3 style="color: #2c3e50;">📊 Sustav bodovanja i pravila</h3>
+				<ul class="pravila-lista">
+                    <li><span class="broj-ikona"></span> Piramidu organizira teniski klub Slatina.</li>
+                    <li><span class="broj-ikona"></span> Parove određuju organizatori.</li>
+                    <li><span class="broj-ikona"></span> Za svako sljedeće kolo igrači imaju po 7 dana za odigrati meč.</li>
+                    <li><span class="broj-ikona"></span> Igrači nakon odigranog meča moraju javiti rezultat u grupu na viberu.</li>
+                    <li><span class="broj-ikona"></span> Susret se igra na dva dobivena seta (kod 1:1 u setovima kao treći set igra se tie-break do 10)</li>
+                    <li><span class="broj-ikona"></span> Igrač koji je "izazivač" dužan je osigurati loptice za meč.</li>
+                    <li><span class="broj-ikona"></span> U slučaju ozlijede igrača/odustajanja red se popunjava igračem iz prvog nižeg reda koji ima najviše bodova/pobjeda/najbolju gem-razliku.</li>
+                    <li><span class="broj-ikona"></span> Igrači su obvezni poštivati pravila teniske igre i sportskog ponašanja na terenu i izvan njega.	</li>
+                    <li><span class="broj-ikona"></span>  Igrač dobiva bodove iz onoga reda u kojem se nalazi nakon odigranog kola.</li>
+                </ul>
+				<p></p>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Red</th>
+                                <th>Pobjeda</th>
+                                <th>Poraz</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td><strong>1000</strong></td><td>333</td></tr>
+                            <tr><td>2</td><td><strong>667</strong></td><td>222</td></tr>
+                            <tr><td>3</td><td><strong>445</strong></td><td>148</td></tr>
+                            <tr><td>4</td><td><strong>297</strong></td><td>99</td></tr>
+                            <tr><td>5</td><td><strong>198</strong></td><td>66</td></tr>
+                            <tr><td>6</td><td><strong>132</strong></td><td>44</td></tr>
+                            <tr><td>7</td><td><strong>88</strong></td><td>29</td></tr>
+                            <tr><td>8</td><td><strong>59</strong></td><td>19</td></tr>
+                            <tr><td>9</td><td><strong>39</strong></td><td>13</td></tr>
+                            <tr><td>10</td><td><strong>26</strong></td><td>9</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+		               <!-- TABLICA: POPIS OZLIJEĐENIH ČLANOVA (STATIČKA) -->
+            <div style="margin-bottom: 40px; margin-top: 40px;">
+                <h3 style="color: #2c3e50; margin-bottom: 10px;">❤️‍🩹 Lista palih boraca...</h3>
+                <p style="margin-bottom: 15px;">Popis igrača koji su zbog ozljeda morali privremeno ili trajno napustiti ovogodišnju piramidu. Želimo im što brži povratak na terene!</p>
+                
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 60px; text-align: center;">Status</th>
+                                <th>Igrač</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center; font-size: 16px;">🩹</td>
+                                <td><strong>Božidar Kelava Lolić</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; font-size: 16px;">🩹</td>
+                                <td><strong>Marko Randelj</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; font-size: 16px;">🩼</td>
+                                <td><strong>Mario Vučeta</strong></td>
+                            </tr>
+							<tr>
+                                <td style="text-align: center; font-size: 16px;">🩹</td>
+                                <td><strong>Ivan Tomljanović</strong></td>
+                            </tr>
+							<tr>
+                                <td style="text-align: center; font-size: 16px;">🚢</td>
+                                <td><strong>Zvonko Oskomić</strong></td>
+                            </tr>
+							<tr>
+                                <td style="text-align: center; font-size: 16px;">🩹</td>
+                                <td><strong>Marijan Makar</strong></td>
+                            </tr>
+							<tr>
+                                <td style="text-align: center; font-size: 16px;">🩹</td>
+                                <td><strong>Cerovski Dalibor</strong></td>
+                            </tr>
+							<tr>
+                                <td style="text-align: center; font-size: 16px;">🩹</td>
+                                <td><strong>Jambrešić David</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Teniski klub Slatina. Sva prava pridržana.</p>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIKA -->
+	<script>
+    window.onload = function() {
+        var select = document.getElementById("odabirKola");
+        select.selectedIndex = select.options.length - 1;
+        ucitajPodatkeIzDatoteke();
+    };
+
+    function ucitajPodatkeIzDatoteke() {
+        const selectElement = document.getElementById("odabirKola");
+        const odabranoKolo = selectElement.value;
+        const putanja = "./Rezultati/" + odabranoKolo + ".json";
+
+        console.log("Pokušavam učitati:", putanja);
+
+        fetch(putanja)
+            .then(response => {
+                if (!response.ok) throw new Error("Datoteka " + putanja + " nije pronađena.");
+                return response.json();
+            })
+            .then(podaci => {
+                prikaziRanglistu(podaci.raspored);
+                prikaziRezultate(podaci.rezultati);
+                prikaziPoRedovima(podaci.raspored); // NOVA LINIJA: Pokreće punjenje drop-down tablica
+            })
+            .catch(error => {
+                console.error("Greška detaljno:", error);
+                alert("Greška: " + error.message);
+            });
+    }
+
+    function prikaziRanglistu(igraci) {
+        const tbodyRanglista = document.getElementById("tablicaRangliste");
+        tbodyRanglista.innerHTML = "";
+
+        if (!igraci) return;
+
+        const sortiraniIgraci = [...igraci];
+        sortiraniIgraci.sort((a, b) => Number(b.bodovi) - Number(a.bodovi));
+
+        sortiraniIgraci.forEach((stavka, index) => {
+            const redTablice = document.createElement("tr");
+
+            if (index < 8) {
+                redTablice.style.backgroundColor = "#d4edda"; // Glavni masters
+            } else if (index >= 8 && index < 16) {
+                redTablice.style.backgroundColor = "#ffe8cc"; // Utješni masters
+            } else {
+                redTablice.style.backgroundColor = (index % 2 === 0) ? "#f9f9f9" : "#ffffff";
+            }
+
+            redTablice.innerHTML = "<td>" + (index + 1) + ".</td>" +
+                                   "<td><strong>" + stavka.igrac + "</strong></td>" +
+                                   "<td>" + stavka.bodovi + "</td>";
+            tbodyRanglista.appendChild(redTablice);
+        });
+    }
+
+    function prikaziRezultate(rezultati) {
+        const tbodyRezultati = document.getElementById("tablicaRezultata");
+        tbodyRezultati.innerHTML = "";
+
+        if (!rezultati || rezultati.length === 0) {
+            tbodyRezultati.innerHTML = "<tr><td colspan='4' style='text-align:center;'>Nema unesenih mečeva za ovo kolo.</td></tr>";
+            return;
+        }
+
+        rezultati.forEach(mec => {
+            const redTablice = document.createElement("tr");
+
+            // Isticanje pobjednika podebljanim tekstom ako je meč završen
+            let igrac1Prikaz = mec.igrac1;
+            let igrac2Prikaz = mec.igrac2;
+
+            if (mec.status === "Završeno") {
+                if (mec.pobjednik === mec.igrac1) {
+                    igrac1Prikaz = "<strong>🏆 " + mec.igrac1 + "</strong>";
+                } else if (mec.pobjednik === mec.igrac2) {
+                    igrac2Prikaz = "<strong>🏆 " + mec.igrac2 + "</strong>";
+                }
+            }
+
+            // Određivanje boje/stila za status meča
+            //let statusStil = "";
+            //if (mec.status === "U najavi") {
+              //  statusStil = "<span style='color: #7f8c8d; font-style: italic;'>U najavi</span>";
+            //} else {
+             //   statusStil = "<span style='color: #27ae60; font-weight: bold;'>Završeno</span>";
+           // }
+
+            // Ako nema rezultata (prazan string), stavljamo crticu
+            let rezultatPrikaz = mec.rezultat ? mec.rezultat : "—";
+
+            redTablice.innerHTML = "<td>" + igrac1Prikaz + "</td>" +
+                                   "<td>" + igrac2Prikaz + "</td>" +
+                                   "<td style='font-family: monospace; font-size: 15px;'>" + rezultatPrikaz + "</td>" ;
+                                //   "<td>" + statusStil + "</td>";
+            
+            tbodyRezultati.appendChild(redTablice);
+        });
+    }
+
+	    function prikaziPoRedovima(igraci) {
+        const kontejner = document.getElementById("kontejnerZaRedove");
+        kontejner.innerHTML = ""; // Pražnjenje kontejnera prije novog punjenja
+
+        if (!igraci || igraci.length === 0) return;
+
+        // 1. Grupiranje igrača po redovima (od 1 do 10)
+        const grupiraniPoRedovima = {};
+        
+        igraci.forEach(stavka => {
+            const brojReda = stavka.red;
+            if (!grupiraniPoRedovima[brojReda]) {
+                grupiraniPoRedovima[brojReda] = [];
+            }
+            grupiraniPoRedovima[brojReda].push(stavka);
+        });
+
+        // 2. Prolazak kroz svaki pronađeni red i kreiranje drop-down izbornika
+        Object.keys(grupiraniPoRedovima).sort((a, b) => Number(a) - Number(b)).forEach(brojReda => {
+            const igraciURedu = grupiraniPoRedovima[brojReda];
+
+            // Kreiramo glavni <details> element (drop-down koji automatski zauzima 100% širine)
+            const detailsElement = document.createElement("details");
+            detailsElement.className = "red-dropdown";
+
+            // Kreiramo <summary> (naslov izbornika)
+            const summaryElement = document.createElement("summary");
+            summaryElement.innerHTML = "🔽 Red " + brojReda;
+            detailsElement.appendChild(summaryElement);
+
+            // Kreiramo omotač za tablicu (table-wrapper) koji omogućuje skrolanje na mobitelima
+            const tableWrapper = document.createElement("div");
+            tableWrapper.className = "table-wrapper";
+
+            // Kreiramo samu tablicu s dva stupca (Pozicija i Igrač)
+            const tablica = document.createElement("table");
+            tablica.innerHTML = 
+                "<thead>" +
+                    "<tr>" +
+                        "<th style='width: 70px;'>Pozicija</th>" +
+                        "<th>Igrač</th>" +
+                    "</tr>" +
+                "</thead>";
+
+            // Kreiramo tbody u koji ćemo staviti igrače tog specifičnog reda
+            const tbody = document.createElement("tbody");
+
+            // Punimo tbody igračima
+            igraciURedu.forEach(stavka => {
+                const redTablice = document.createElement("tr");
+                redTablice.innerHTML = "<td>" + stavka.pozicija + ".</td>" +
+                                       "<td><strong>" + stavka.igrac + "</strong></td>";
+                tbody.appendChild(redTablice);
+            });
+
+            // Sklapamo sve elemente zajedno i dodajemo na stranicu
+            tablica.appendChild(tbody);
+            tableWrapper.appendChild(tablica);
+            detailsElement.appendChild(tableWrapper);
+            kontejner.appendChild(detailsElement);
+        });
+    }
+
+
+		
+    // SKRIPTA ZA MOBILNI MENU
+    const menuBtn = document.querySelector('.menu-btn');
+    const dropdownContent = document.querySelector('.dropdown-content');
+    menuBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        dropdownContent.classList.toggle('prikazi');
+    });
+    document.addEventListener('click', function(e) {
+        if (!dropdownContent.contains(e.target) && !menuBtn.contains(e.target)) {
+            dropdownContent.classList.remove('prikazi');
+        }
+    });
+
+</script>
