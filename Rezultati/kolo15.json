@@ -56,9 +56,9 @@
 		{
 		"igrac1": "Tepeš Boris",
 		"igrac2": "Ćurić Borna",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "1:6 1:6",
+		"status": "Završeno",
+		"pobjednik": "Ćurić Borna"
 		},
 		{
 		"igrac1": "Vida Mario",
@@ -105,9 +105,9 @@
 		{
 		"igrac1": "Ostojić Milan",
 		"igrac2": "Hmelik Zlatko",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "6:1 7:6",
+		"status": "Završeno",
+		"pobjednik": "Ostojić Milan"
 		},
 		{
 		"igrac1": "Hetrih Josip",
@@ -140,9 +140,9 @@
 		{
 		"igrac1": "Srednoselac Ivica",
 		"igrac2": "Mađarić Slavko",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "6:4 7:6",
+		"status": "Završeno",
+		"pobjednik": "Srednoselac Ivica"
 		},
 		{
 		"igrac1": "Medved Daniel",
@@ -161,9 +161,9 @@
 		{
 		"igrac1": "Miklošević Igor",
 		"igrac2": "Marošević Gabrijel",
-		"rezultat": "",
-		"status": "U najavi",
-		"pobjednik": ""
+		"rezultat": "6:1 3:6 10:7",
+		"status": "Završeno",
+		"pobjednik": "Miklošević Igor"
 		}		
 	]	
 }
